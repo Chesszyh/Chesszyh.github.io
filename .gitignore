@@ -18,3 +18,11 @@ Thumbs.db
 
 # node.js
 node_modules/
+
+/open-webui/
+
+# Cookies
+*.cookie
+
+# Env
+*.env

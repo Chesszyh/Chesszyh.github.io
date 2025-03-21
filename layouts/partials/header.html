@@ -1,4 +1,5 @@
 <header class="flex flex-col w-full items-center justify-center text-white pt-8 pb-8">
+    <!-- 标题和口号 -->
     <div class="w-full">
         <div class="flex flex-1 flex-row justify-between">
             <h2 class="w-full text-center text-3xl sm:text-5xl font-crimson font-bold tracking-tight text-gray-300">
@@ -9,31 +10,48 @@
             class="w-full text-center pl-1 pb-4 sm:pt-3 sm:pb-0 font-crimson font-normal text-xl sm:text-2xl leading-8 text-gray-500">
             {{ i18n "siteslogan" }}</p>
     </div>
-
+    
+    <!-- 搜索框 -->
     <div class="relative w-9/12 lg:w-1/2 h-12 my-5">
+        <!-- 表单提交到/{{.Lang}}/search路径，表明网站支持多语言 -->
         <form action="/{{.Lang}}/search" method="get">
+            <!-- 搜索框使用深灰色背景，圆形边框，带有国际化的占位符文本 -->
             <input
                 class="bg-gray-800 placeholder:italic placeholder:text-gray-600 w-full h-12 rounded-full mt-1 pl-5 pr-5 border border-gray-800 text-gray-100"
                 placeholder='{{ i18n "searchplaceholder" }}' type="text" name="q" id="search-query" />
-
+            
+            <!-- 搜索按钮位于输入框右侧，悬停时从深灰色变为红色，文字从灰色变为白色 -->
             <button
                 class="absolute inset-y-2 right-1 w-28 h-10 font-light bg-gray-900 hover:bg-red-500 text-gray-500 hover:text-gray-100 rounded-full cursor-pointer"
                 type="submit">{{ i18n "search" }}</button>
         </form>
     </div>
 
+    <!-- 面包屑导航，非首页时采用 -->
     {{ if not .IsHome }}
+
+    <!--    Style:
+            w-full: 占满父容器宽度
+            flex: 使用弹性布局，子元素水平排列并靠左对齐
+            px-1: 左右内边距1rem
+            border-l-4 border-l-red-500：左侧有一个4像素宽的红色边框，作为视觉标识
+    -->
+
     <div class="w-full flex flex-row justify-start text-gray-500 text-lg px-1 border-l-4 border-l-red-500">
+        <!-- 列表项 -->
         <ul class="flex flex-row gap-x-2">
+            <!-- 第一个列表项：指向首页 -->
             <li class="">
                 <a href="/" class="hover:text-gray-100">{{ i18n "home" }}</a>
             </li>
+            <!-- 后续列表项：只在特定页面类型显示 -->
             {{ if or (eq .Kind "taxonomy") (eq .Kind "term") (eq .Kind "section") (.IsPage) }}
             <li>
                 &gt;&nbsp;&nbsp;<a href="{{ .Page.RelPermalink }}" class="hover:text-gray-100">{{ .Page.Name }}</a>
             </li>
             {{ end }}
         </ul>
+    <!-- 底部半透明(50%透明度)的灰色虚线分割线 -->
     </div>
     <div class="w-full h-2 border-b border-b-gray-600/50 border-dashed font-light text-gray-300">
     </div>

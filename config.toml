@@ -1,5 +1,5 @@
 baseURL = "https://Chesszyh.github.io/"
-defaultContentLanguage = "en"
+defaultContentLanguage = "zh"
 defaultContentLanguageInSubdir = true
 
 staticDir = ["static"]  
@@ -30,6 +30,12 @@ weight = 3
 name = 'Contact'
 pageRef = '/contact'
 weight = 4
+[[languages.en.menus.main]]
+name = 'Play Chess'
+pageRef = '/chess'
+weight = 5
+
+
 [languages.zh]
 title = "CodeTrace"
 languageCode = "zh-cn"
@@ -52,6 +58,10 @@ weight = 3
 name = '联系我'
 pageRef = '/contact'
 weight = 4
+[[languages.zh.menus.main]]
+name = '和我下棋'
+pageRef = '/chess'
+weight = 5
 
 [params]
 [params.google]

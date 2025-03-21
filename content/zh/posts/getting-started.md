@@ -20,3 +20,15 @@ tags: ["Hugo", "GitHub Pages", "Web"]
 [参考demo](https://www.angularcorp.com/en/)
 
 [参考扩展](https://themes.gohugo.io/themes/niello/)
+
+## Extensions
+
+- [评论系统参考](https://sspai.com/post/73412)
+  - 没弄明白
+- [Github Issues评论系统](https://jw1.dev/2022/10/23/a01/)
+  - 后续有需要再看
+
+- [Google Analytics 4](https://analytics.google.com/analytics/web/provision/?authuser=0#/provision/create)
+
+- [Chess](https://github.com/oakmac/chessboardjs)
+  - [Demo](https://chessboardjs.com/examples#5005)

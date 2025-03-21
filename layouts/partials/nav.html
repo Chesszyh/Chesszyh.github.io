@@ -1,15 +1,19 @@
-<div x-data="{ openMenu: false }" class="relative">
+<div x-data="{ openMenu: false }" class="relative"> <!-- 顶层容器设置为相对定位，便于移动端菜单按钮的绝对定位放置。-->
     <nav class="flex flex-1 flex-col lg:flex-row items-center justify-between">
         <a href="/">
-            <img src="/image/logo.jpg?v={{ now.Unix }}" alt="site logo"
+            <!-- 网站logo：点击可跳转到首页，图片URL带有时间戳参数({{ now.Unix }})以防止缓存问题 -->
+            <img src="/image/logo.jpg?v={{ now.Unix }}" alt="site logo" 
                 class="w-16 h-16 my-5 p-1 bg-gray-100 rounded-full cursor-pointer hover:scale-110" />
         </a>
+        <!-- 菜单部分：在大屏幕(lg)下默认显示，小屏幕下根据openMenu状态决定是否显示 -->
         <div class="hidden lg:block" :class="{'hidden': !openMenu}">
             {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
         </div>
     </nav>
-    <div class="absolute top-8 right-5 flex items-center lg:hidden">
+    <div class="absolute top-8 right-5 flex items-center lg:hidden"> <!-- 移动端：仅在小屏幕下显示菜单按钮 -->
         <!-- Mobile menu button-->
+
+        <!-- 两个SVG图标，分别表示菜单打开和关闭状态，通过x-show指令根据openMenu状态动态显示 -->
         <button @click="openMenu = !openMenu" type="button"
             class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-800 hover:text-gray-100 focus:outline-hidden focus:ring-2 focus:ring-inset focus:ring-white"
             aria-controls="mobile-menu" aria-expanded="openMenu">
@@ -18,10 +22,25 @@
 
       Menu open: "hidden", Menu closed: "block"
     -->
+
+    <!--    x-show: Alpine.js指令，控制svg显示逻辑
+            class：高和宽
+            fill：填充颜色
+            viewBox：SVG视窗大小，(0, 0)为起点的24x24大小
+            stroke-width：描边宽度
+            stroke：描边颜色
+            aria-hidden：辅助功能，屏幕阅读器忽略此元素
+            <path>：SVG路径，表示菜单按钮的三条横线
+                stroke-linecap：线段末端样式：圆角
+                stroke-linejoin：线段连接处样式：圆角
+                d：SVG路径数据，M表示移动到，h表示水平移动，m表示相对移动
+                    例：M3.75 6.75h16.5：移动到(3.75, 6.75)，从这里自左而右画一条长度为16.5的水平线
+        -->
             <svg x-show="!openMenu" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
             </svg>
+
             <!--
       Icon when menu is open.
 
