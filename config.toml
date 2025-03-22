@@ -67,11 +67,14 @@ weight = 5
 [params.google]
 google_ad_client = ""
 ga4 = "G-KRJ7MGKP6J"
+# Banner展示区展示的主题
 [params.bannershowcase]
-categories = ["AI"]
-limit = 2
+categories = ["LLM", "Web", "Chess", "Deep-Learning", "Python"]
+# 最多展示几篇
+limit = 5
 [params.email]
 contact = "chesszyh987@gmail.com"
+# 忽略的分类：可能是留给自己看的？
 [params.ignore]
 categories = ["privacy", "terms", "archives", "cookie"]
 [params.license]

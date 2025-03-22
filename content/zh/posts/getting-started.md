@@ -4,6 +4,8 @@ date: 2025-02-28T11:55:00+08:00
 draft: false
 categories: ["Web"]
 tags: ["Hugo", "GitHub Pages", "Web"]
+featuredImage: "/image/neuro_cat.jpg"
+
 ---
 
 ## Hugo

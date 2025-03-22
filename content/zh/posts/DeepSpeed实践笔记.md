@@ -4,6 +4,7 @@ date: 2025-02-28T11:55:00+08:00
 draft: false
 categories: ["LLM"]
 tags: ["LLM", "DeepSpeed", "AI", "Huggingface"]
+featuredImage: "/image/deepspeed.png"
 ---
 
 # DeepSpeed实践笔记

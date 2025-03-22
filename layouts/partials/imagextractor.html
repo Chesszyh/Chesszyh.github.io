@@ -20,12 +20,14 @@
 {{ end }}
 
 <!-- Check if the Markdown file contains a featured image in the front matter -->
+<!-- 前置元数据中的特色图片：检查文章的featuredImage参数 -->
 {{ with $page.Params.featuredImage }}
-{{ $image := . | absURL }}
+{{ $image = . | absURL }}
 {{ end }}
 
-{{ if eq $image "" }}
 <!-- Local image eg: ./abc.jpeg or /abc.png -->
+<!-- 文章内容中的图片标签：通过正则表达式查找<img alt="..." src="...">格式的HTML标签 -->
+{{ if eq $image "" }}
 {{ $regex := `img[\s]+alt="([^"]+)"[\s]+src="([^"]+)"` }}
 {{ $matches := findRESubmatch $regex $page.Content }}
 {{ with index $matches 0 }}
@@ -34,8 +36,9 @@
 {{ end }}
 {{ end }}
 
-{{ if eq $image "" }}
 <!-- Local image eg: ./abc.jpeg or /abc.png -->
+<!-- 文章内容中的图片标签（反向属性）：查找<img src="..." alt="...">格式的HTML标签 -->
+{{ if eq $image "" }}
 {{ $regex := `img[\s]+src="([^"]+)"[\s]+alt="([^"]+)"` }}
 {{ $matches := findRESubmatch $regex $page.Content }}
 {{ with index $matches 0 }}
@@ -44,8 +47,9 @@
 {{ end }}
 {{ end }}
 
-{{ if eq $image "" }}
 <!-- Inline image eg: data:image/jpeg;base64,... -->
+<!-- 内联base64编码图片：查找data:image/jpeg;base64,...等格式的内联图片 -->
+{{ if eq $image "" }}
 {{ $regex := `(data:image\/[a-z]+;base64,[^\"]+)` }}
 {{ $images := findRE $regex $page.Content }}
 {{ with index $images 0 }}
@@ -53,8 +57,8 @@
 {{ end }}
 {{ end }}
 
-{{ if eq $image "" }}
 <!-- Remote image eg: https://xxx.com/abc.jpeg -->
+{{ if eq $image "" }}
 {{ $regex := `https:\/\/[^\s]+\.(jpg|jpeg|png|webp)` }}
 {{ $images := findRE $regex $page.Content }}
 {{ with index $images 0 }}
@@ -63,6 +67,7 @@
 {{ end }}
 
 <!-- Return a placeholder image if no images -->
+<!-- 默认图片：如果以上都未找到，使用默认占位图 -->
 {{ if eq $image "" }}
 {{ $image = "/image/common-writing-empty.jpg" }}
 {{ end }}

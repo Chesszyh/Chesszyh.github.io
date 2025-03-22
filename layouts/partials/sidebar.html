@@ -10,6 +10,7 @@
         {{ i18n "intro" }}
     </div>
 
+    <!-- 为图片URL添加一个基于当前时间戳的查询参数（?v=时间戳）。这是一种常用的缓存破坏（cache busting）技术，通过在URL后添加不断变化的参数，确保浏览器每次都会加载最新版本的图片，而不是使用缓存的版本。 -->
     <img src="/image/logo.jpg?v={{ now.Unix }}" class="w-80 self-center" alt="Logo" />
 
     <p class="leading-8 text-center text-lg font-light mt-3">
