@@ -27,7 +27,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          submodules: true  
+          submodules: true  # NOTE 添加子模块时，需要注意这里的配置 
           fetch-depth: 0
           
       - name: Setup Hugo

@@ -1,6 +1,12 @@
+<!-- 文章预览卡片：左侧图片，右侧文章信息；
+    移动视图下（小屏幕）：垂直排列；
+    大屏幕下：水平排列；
+    if mod .index ...：偶数行添加半透明深灰色背景
+-->
 <article class="flex flex-col lg:flex-row items-center {{ if mod .index 2 }}bg-gray-800/50{{ end}} px-1 rounded-md">
     <div class="flex-none w-full lg:w-64 h-48 rounded-lg shadow-md bg-gray-900 shadow-gray-800">
         {{ $image := partial "imagextractor.html" . }}
+        <!-- 非data url的图片，添加时间戳 -->
         {{ if not (hasPrefix $image.url "data:image/") }}
         <img src="{{ $image.url }}?v={{ now.Unix }}" alt="{{ $image.alt }}"
             class="w-full h-48 rounded-2xl object-cover" />

@@ -89,7 +89,7 @@ class LavaLamp {
     initAudioPool() {
         for (let i = 0; i < this.audioPoolSize; i++) {
             const audio = new Audio(this.audioSrc);
-            audio.preload = 'auto';
+            audio.preload = 'none'; // 不预加载，避免老是被IDM检测并弹出下载窗口；或者也可使用 Base64 编码内联音频/修改成不容易被IDM检测到的音频路径
             audio.volume = 0.7;
             this.audioPool.push(audio);
         }

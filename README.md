@@ -1,19 +1,32 @@
-# CodeTrace - Personal Blog
+# CodeTrace
 
-This is the repository for my personal blog built with Hugo and deployed on GitHub Pages.
+## AI搜索集成说明
 
-## Local Development
+TODO: 集成AI问答功能，可以通过在搜索栏输入特定前缀激活不同的AI提供商：
 
-1. Install Hugo (Extended version): <https://gohugo.io/installation/>
-2. Clone this repository
-3. Run `hugo server -D` to start the development server
-4. Visit <http://localhost:1313/> to see the site
+- `@deepseek ` - 使用DeepSeek AI
+- `@gemini ` - 使用Google Gemini
+- `@openai ` - 使用OpenAI ChatGPT
 
-## Adding Content
+### 在GitHub Pages部署AI功能
 
-- Create a new post: `hugo new content/[language]/posts/new-post.md`
-- Edit the front matter and content as needed
+由于GitHub Pages是纯静态托管，无法直接运行服务器端代码或存储API密钥，因此需要使用外部服务来处理AI API调用：
 
-## Deployment
+#### 方案1：使用Cloudflare Workers (推荐)
 
-The site automatically deploys to GitHub Pages when changes are pushed to the main branch.
+1. 注册[Cloudflare Workers](https://workers.cloudflare.com/)账号
+2. 创建新的Worker项目
+3. 复制`static/api/ai/deepseek.js`的代码到Worker，并根据Cloudflare环境调整
+4. 在Cloudflare Workers设置中添加环境变量`DEEPSEEK_API_KEY`、`GEMINI_API_KEY`和`OPENAI_API_KEY`
+5. 在`search.html`文件中更新`apiEndpoint`变量为您的Cloudflare Worker URL
+
+```javascript
+// 修改search.html中的callAiApi函数
+if (window.location.hostname.includes('github.io')) {
+  apiEndpoint = `https://your-worker.your-username.workers.dev/api/${provider}`;
+}
+```
+
+#### 方案2：使用其他无服务器函数服务
+
+可以使用Netlify Functions、Vercel Edge Functions或AWS Lambda等服务。
