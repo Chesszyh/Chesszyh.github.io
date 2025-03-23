@@ -86,13 +86,13 @@
     ],
   };
 
-  // AI模式相关配置
-  var aiConfig = {
+  // 从全局AI配置中获取
+  var aiConfig = window.aiConfig || {
     deepseek: {
       prefix: "@deepseek ",
       logo: "/image/deepseek-logo.svg",
       name: "Ask DeepSeek",
-      endpoint: "/api/ai/deepseek", // 后端代理接口
+      endpoint: "/api/ai/deepseek",
       apiVersion: "v1",
     },
     // 添加更多AI提供商
@@ -112,8 +112,9 @@
     },
   };
 
-  var isAiMode = false;
-  var currentAiProvider = null;
+  // 确保定义这些变量
+  var isAiMode = window.isAiMode || false;
+  var currentAiProvider = window.currentAiProvider || null;
 
   // =============================
   // Search
@@ -124,8 +125,17 @@
     var searchQuery = param("q");
     if (searchQuery) {
       inputBox.value = searchQuery || "";
-      // 检查是否是AI模式
-      checkAiMode(searchQuery);
+
+      // 使用window.checkAiMode如果存在，否则使用本地函数
+      if (window.checkAiMode) {
+        isAiMode = window.checkAiMode(searchQuery);
+        currentAiProvider = window.currentAiProvider;
+      } else {
+        checkAiMode(searchQuery);
+      }
+
+      console.log("Search Page: AI Mode = ", isAiMode ? "ON" : "OFF");
+
       if (isAiMode) {
         executeAiSearch(searchQuery);
       } else {
@@ -153,7 +163,7 @@
     });
   }
 
-  // 检查是否处于AI模式
+  // 检查是否处于AI模式 (本地函数，优先使用全局版本)
   function checkAiMode(query) {
     isAiMode = false;
     currentAiProvider = null;
@@ -219,23 +229,33 @@
 
     if (!userQuestion.trim()) return;
 
-    // 隐藏搜索结果，显示AI容器
+    // 准备UI
     document.getElementById("search-results").innerHTML = "";
     document.getElementById("search-results").classList.add("hidden");
     document.getElementById("ai-response-container").classList.remove("hidden");
+
+    // 更新AI提供商信息
+    document.getElementById("ai-logo").src = config.logo;
+    document.getElementById("ai-provider").textContent = config.name;
+
+    // 显示加载
     show(document.querySelector(".ai-loading"));
 
-    // GitHub Pages环境下，使用本地模拟API或重定向到外部API服务
+    console.log("执行AI搜索:", currentAiProvider, userQuestion);
+
+    // 开发环境vs生产环境
     if (
       window.location.hostname === "localhost" ||
       window.location.hostname === "127.0.0.1"
     ) {
       // 本地开发环境 - 使用模拟数据
+      console.log("使用模拟AI响应");
       simulateAiResponse(currentAiProvider, userQuestion)
         .then(handleAiResponse)
         .catch(handleAiError);
     } else {
       // 生产环境 - 使用实际API
+      console.log("调用实际AI API");
       callAiApi(currentAiProvider, userQuestion)
         .then(handleAiResponse)
         .catch(handleAiError);
@@ -245,8 +265,9 @@
   // 处理AI响应
   function handleAiResponse(response) {
     hide(document.querySelector(".ai-loading"));
+    console.log("AI返回响应");
 
-    // 使用DOMPurify清理并渲染markdown回答
+    // 渲染markdown回答
     const aiResponseElement = document.getElementById("ai-response");
     const markedContent = marked.parse(response);
     aiResponseElement.innerHTML = DOMPurify.sanitize(markedContent);
@@ -260,12 +281,13 @@
   // 处理AI错误
   function handleAiError(error) {
     hide(document.querySelector(".ai-loading"));
+    console.error("AI API 错误:", error);
+
     document.getElementById(
       "ai-response"
     ).innerHTML = `<p class="text-red-500">Error: ${
       error.message || "无法获取AI回答"
     }</p>`;
-    console.error("AI API Error:", error);
   }
 
   // 本地开发环境的模拟AI响应
@@ -314,24 +336,34 @@ async function callAI(question) {
     });
   }
 
-  // 调用AI API的函数
+  // 调用AI API的函数 (AWS适配版本)
   async function callAiApi(provider, question) {
     const config = aiConfig[provider];
 
-    // GitHub Pages环境下，重定向到外部服务
+    // 确定API端点
     let apiEndpoint = config.endpoint;
 
-    // 如果是GitHub Pages环境，使用外部服务
+    // 如果是GitHub Pages环境，使用AWS API Gateway
     if (window.location.hostname.includes("github.io")) {
-      // 可以替换为您设置的实际外部API服务
-      apiEndpoint = `https://your-api-proxy.example.com/api/${provider}`;
+      // AWS API Gateway URL格式
+      apiEndpoint = `https://your-api-id.execute-api.your-region.amazonaws.com/stage/ai/${provider}`;
+
+      // 如果已配置实际URL，则使用实际URL
+      const awsApiUrl = "您的AWS API Gateway URL"; // 在部署后替换为实际URL
+      if (awsApiUrl && awsApiUrl !== "您的AWS API Gateway URL") {
+        apiEndpoint = `${awsApiUrl}/ai/${provider}`;
+      }
     }
+
+    console.log("调用API:", apiEndpoint);
 
     try {
       const response = await fetch(apiEndpoint, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          // AWS API Gateway可能需要额外的认证头
+          // "x-api-key": "yourApiKey", // 如果您使用API密钥授权
         },
         body: JSON.stringify({
           question: question,
@@ -354,7 +386,11 @@ async function callAI(question) {
   // 执行搜索操作，获取索引数据并使用 Fuse.js 进行搜索
   function executeSearch(searchQuery) {
     // 检查是否是AI模式
-    if (checkAiMode(searchQuery)) {
+    if (
+      window.checkAiMode
+        ? window.checkAiMode(searchQuery)
+        : checkAiMode(searchQuery)
+    ) {
       executeAiSearch(searchQuery);
       return;
     }

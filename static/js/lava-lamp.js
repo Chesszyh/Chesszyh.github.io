@@ -31,7 +31,7 @@ class LavaLamp {
 
         // 音频播放器池初始化
         this.audioPool = [];
-        this.audioPoolSize = 5; // 允许5个音效同时播放
+        this.audioPoolSize = 10; // 允许10个音效同时播放
         this.currentAudioIndex = 0;
         this.initAudioPool();
 
