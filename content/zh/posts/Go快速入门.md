@@ -1,7 +1,7 @@
 ---
 title: 'Go快速入门'
 date: 2025-03-22T23:30:42+08:00
-draft: true
+draft: false
 categories: ["Programming", "Go"]
 tags: []
 ---

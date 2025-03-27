@@ -1,7 +1,7 @@
 ---
 title: 'AWS云服务器配置'
 date: 2025-03-23T16:55:36+08:00
-draft: true
+draft: false
 categories: ["Cloud Server", "Web"]
 tags: ["AWS", "Linux", "Server"]
 ---
