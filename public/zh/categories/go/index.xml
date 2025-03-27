@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Go on CodeTrace</title>
+    <link>http://localhost:1313/zh/categories/go/</link>
+    <description>Recent content in Go on CodeTrace</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 22 Mar 2025 23:30:42 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/zh/categories/go/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Go快速入门</title>
+      <link>http://localhost:1313/zh/posts/go%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/</link>
+      <pubDate>Sat, 22 Mar 2025 23:30:42 +0800</pubDate>
+      <guid>http://localhost:1313/zh/posts/go%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/</guid>
+      <description>&lt;p&gt;Also TODO&lt;/p&gt;&#xA;&lt;p&gt;为什么要学go呢，一是因为hugo是用go写的，template虽然看着有些丑，但是不得不学；二是因为我很喜欢github给go分配的天蓝色。&lt;/p&gt;&#xA;&lt;p&gt;除此之外，C的灰色和Assembly的棕色都非常朴实(大佬颜色)，因为喜欢C/C++，所以也连带喜欢了C#。下面表格里语言的颜色我都挺喜欢的。&lt;/p&gt;&#xA;&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th&gt;Language&lt;/th&gt;&#xA;          &lt;th&gt;Color&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;Go&lt;/td&gt;&#xA;          &lt;td&gt;#00ADD8&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;C&lt;/td&gt;&#xA;          &lt;td&gt;#555555&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;Assembly&lt;/td&gt;&#xA;          &lt;td&gt;#6E4C13&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;C#&lt;/td&gt;&#xA;          &lt;td&gt;#178600&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;JavaScript&lt;/td&gt;&#xA;          &lt;td&gt;#f1e05a&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;TypeScript&lt;/td&gt;&#xA;          &lt;td&gt;#2b7489&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;Rust&lt;/td&gt;&#xA;          &lt;td&gt;#dea584&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;</description>
+    </item>
+  </channel>
+</rss>

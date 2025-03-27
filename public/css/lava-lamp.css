@@ -1,0 +1,263 @@
+.lava-lamp-container {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 120px;
+    height: 200px;
+    z-index: 9999;
+    cursor: pointer;
+    border-radius: 60px 60px 30px 30px;
+    box-shadow: 0 5px 25px rgba(128, 0, 128, 0.4);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    background-color: rgba(20, 10, 30, 0.7);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+/* 拖动手柄 */
+.lava-lamp-drag-handle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 80%;
+    height: 40px;
+    cursor: move;
+    z-index: 10000;
+}
+
+/* 添加拖动时的样式 */
+.lava-lamp-container.dragging {
+    opacity: 0.8;
+    box-shadow: 0 8px 35px rgba(180, 0, 255, 0.8);
+    transform: scale(1.02);
+}
+
+/* 控制面板样式 */
+.lava-lamp-controls {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 10001;
+}
+
+.lava-lamp-controls.show {
+    opacity: 1;
+}
+
+/* 控制按钮样式 */
+.lava-lamp-minimize,
+.lava-lamp-close {
+    background: rgba(60, 30, 80, 0.6);
+    color: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    font-size: 16px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: all 0.2s ease;
+}
+
+.lava-lamp-minimize:hover,
+.lava-lamp-close:hover {
+    background: rgba(100, 50, 150, 0.8);
+    color: white;
+    transform: scale(1.1);
+}
+
+.lava-lamp-close:hover {
+    background: rgba(200, 50, 50, 0.8);
+}
+
+/* 恢复按钮样式 */
+.lava-lamp-restore {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(80, 40, 120, 0.8);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-size: 14px;
+    z-index: 9999;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(80, 40, 120, 0.3);
+}
+
+.lava-lamp-restore:hover {
+    background: rgba(100, 50, 150, 0.9);
+    transform: scale(1.05);
+    box-shadow: 0 5px 20px rgba(100, 50, 150, 0.5);
+}
+
+/* 提示工具提示 */
+.lava-lamp-tooltip {
+    position: absolute;
+    top: 45px;
+    right: 5px;
+    background: rgba(40, 20, 60, 0.9);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    white-space: nowrap;
+    line-height: 1.3;
+    text-align: center;
+    z-index: 10001;
+}
+
+.lava-lamp-tooltip.show {
+    opacity: 0.8;
+}
+
+/* 爆炸效果 */
+@keyframes explode-animation {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 5px 25px rgba(128, 0, 128, 0.4);
+    }
+
+    30% {
+        transform: scale(1.15);
+        box-shadow: 0 5px 40px rgba(255, 100, 255, 0.9);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 5px 25px rgba(128, 0, 128, 0.4);
+    }
+}
+
+.explode {
+    animation: explode-animation 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 关闭动画 */
+@keyframes closing-animation {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+}
+
+.closing {
+    animation: closing-animation 0.5s forwards;
+    pointer-events: none;
+}
+
+/* 调试信息 */
+.lava-lamp-debug {
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    right: 0;
+    font-size: 9px;
+    color: rgba(255, 255, 255, 0.5);
+    text-align: center;
+    pointer-events: none;
+}
+
+.lava-lamp-container:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 35px rgba(170, 0, 255, 0.6);
+}
+
+.lava-lamp-container:active {
+    transform: scale(0.95);
+}
+
+.lava-lamp-canvas {
+    width: 100%;
+    height: 100%;
+    border-radius: 60px 60px 30px 30px;
+    display: block;
+}
+
+.lava-lamp-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 60px 60px 30px 30px;
+}
+
+/* 点击动画效果 */
+@keyframes pulse-animation {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 5px 25px rgba(128, 0, 128, 0.4);
+    }
+
+    30% {
+        transform: scale(1.1);
+        box-shadow: 0 5px 30px rgba(170, 0, 255, 0.8);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 5px 25px rgba(128, 0, 128, 0.4);
+    }
+}
+
+.pulse {
+    animation: pulse-animation 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 移动设备适配 */
+@media (max-width: 768px) {
+    .lava-lamp-container {
+        width: 100px;
+        height: 160px;
+        bottom: 20px;
+        right: 20px;
+    }
+}
+
+/* 添加玻璃质感 */
+.lava-lamp-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            rgba(255, 255, 255, 0.15),
+            rgba(255, 255, 255, 0.05));
+    pointer-events: none;
+}
+
+/* 添加底座高光 */
+.lava-lamp-container::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 15%;
+    background: linear-gradient(0deg,
+            rgba(80, 20, 100, 0.9),
+            rgba(40, 20, 60, 0.5));
+    border-radius: 0 0 30px 30px;
+    pointer-events: none;
+}

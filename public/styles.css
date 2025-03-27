@@ -1,0 +1,40 @@
+/* 搜索框和下拉菜单的样式 */
+.search-box {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#search-input {
+    flex-grow: 1;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px 0 0 4px;
+    font-size: 16px;
+}
+
+#search-mode-selector {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-left: none;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#search-button {
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-left: none;
+    border-radius: 0 4px 4px 0;
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
+#search-button:hover {
+    background-color: #e0e0e0;
+}
+
+/* Gemini 聊天页面的样式会在单独的文件中定义 */

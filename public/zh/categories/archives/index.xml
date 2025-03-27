@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Archives on idk.</title>
+    <link>http://localhost:1313/zh/categories/archives/</link>
+    <description>Recent content in Archives on idk.</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 25 Oct 2023 09:16:03 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/zh/categories/archives/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>文章归档</title>
+      <link>http://localhost:1313/zh/archives/</link>
+      <pubDate>Wed, 25 Oct 2023 09:16:03 +0800</pubDate>
+      <guid>http://localhost:1313/zh/archives/</guid>
+      <description>&lt;p&gt;按时间顺序浏览所有文章。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

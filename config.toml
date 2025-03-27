@@ -69,7 +69,7 @@ google_ad_client = ""
 ga4 = "G-KRJ7MGKP6J"
 # Banner展示区展示的主题
 [params.bannershowcase]
-categories = ["LLM", "Web", "Chess", "Deep-Learning", "Python"]
+categories = ["LLM", "Web", "Chess", "Deep-Learning", "Python", "Cloud Server"]
 # 最多展示几篇
 limit = 5
 [params.email]

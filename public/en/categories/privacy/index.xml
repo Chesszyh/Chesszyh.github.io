@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Privacy on {CodeTrace} - Discover Issues, Share Solutions.</title>
+    <link>http://localhost:1313/en/categories/privacy/</link>
+    <description>Recent content in Privacy on {CodeTrace} - Discover Issues, Share Solutions.</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 25 Oct 2023 10:00:00 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/en/categories/privacy/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Privacy Policy</title>
+      <link>http://localhost:1313/en/privacy/</link>
+      <pubDate>Wed, 25 Oct 2023 10:00:00 +0800</pubDate>
+      <guid>http://localhost:1313/en/privacy/</guid>
+      <description>&lt;h1 id=&#34;privacy-policy&#34;&gt;Privacy Policy&lt;/h1&gt;&#xA;&lt;p&gt;Last updated: [Current Date]&lt;/p&gt;&#xA;&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;&#xA;&lt;p&gt;Welcome to CodeTrace. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website.&lt;/p&gt;&#xA;&lt;h2 id=&#34;information-we-collect&#34;&gt;Information We Collect&lt;/h2&gt;&#xA;&lt;p&gt;We may collect information about you in a variety of ways including:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Personal Data&lt;/strong&gt;: Voluntarily provided information which may include your name, email address, and other contact details.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Derivative Data&lt;/strong&gt;: Information our servers automatically collect when you access our website, such as your IP address, browser type, operating system, access times, and the pages you viewed.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;Cookies and Web Beacons&lt;/strong&gt;: We may use cookies and web beacons to help customize your experience.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;how-we-use-your-information&#34;&gt;How We Use Your Information&lt;/h2&gt;&#xA;&lt;p&gt;We may use the information we collect in various ways, including to:&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
