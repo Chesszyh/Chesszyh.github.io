@@ -20,7 +20,7 @@
     <meta name="keywords" content="Computer Science, AI, LLM, Deep Learning, C&#43;&#43;">
     <meta name="description" content="Chesszyh&#39;s Blog，提供CS/LLM等领域的学习笔记与技术分享。">
     <link rel="canonical" href="http://localhost:1313/zh/posts/aws%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE/" />
-    <link rel="icon" href="/favicon.ico?v=1743048018" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico?v=1743058929" type="image/x-icon">
     
 <link rel="stylesheet" href="/css/app.css">
     
@@ -59,7 +59,7 @@
     <nav class="flex flex-1 flex-col lg:flex-row items-center justify-between">
         <a href="/">
             
-            <img src="/image/logo.jpg?v=1743048018" alt="site logo" 
+            <img src="/image/logo.jpg?v=1743058929" alt="site logo" 
                 class="w-16 h-16 my-5 p-1 bg-gray-100 rounded-full cursor-pointer hover:scale-110" />
         </a>
         
@@ -237,7 +237,7 @@
         </h1>
         <time datetime="2025-03-16" class="flex items-center py-2 text-xl text-gray-600">golang</time>
             2025-03-23 16:55
-            &nbsp;&nbsp;|&nbsp;&nbsp;3 minute read 
+            &nbsp;&nbsp;|&nbsp;&nbsp;4 minute read 
         </time>
         
         
@@ -284,6 +284,12 @@
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>icacls <span style="color:#e6db74">&#34;D:\下载\AWS-Cloudserver.pem&#34;</span> /inheritance<span style="color:#960050;background-color:#1e0010">:</span>r
 </span></span><span style="display:flex;"><span>icacls <span style="color:#e6db74">&#34;D:\下载\AWS-Cloudserver.pem&#34;</span> /grant<span style="color:#960050;background-color:#1e0010">:</span>r <span style="color:#e6db74">&#34;</span>$($env:USERNAME)<span style="color:#e6db74">:(R,W)&#34;</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 或者chmod 600：只有文件所有者有读写权限</span>
+</span></span></code></pre></div><h2 id="network">Network</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># nginx</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># cloudflare</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ssh</span>
 </span></span></code></pre></div><h2 id="shell">Shell</h2>
 <h3 id="zsh-shell"><a href="https://github.com/fish-shell/fish-shell">Zsh shell</a></h3>
 <ul>
@@ -401,6 +407,11 @@
 </span></span></code></pre></div><h2 id="其他工具">其他工具</h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># ncdu: headless下磁盘空间占用查看，类似Windows的WiZTree</span>
 </span></span><span style="display:flex;"><span>sudo apt install ncdu
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># bat: cat的替代品，带有语法高亮和Git集成</span>
+</span></span><span style="display:flex;"><span>sudo apt install bat
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 设置别名</span>
+</span></span><span style="display:flex;"><span>mkdir -p ~/.local/bin
+</span></span><span style="display:flex;"><span>ln -s /usr/bin/batcat ~/.local/bin/bat
 </span></span></code></pre></div><h2 id="service">Service</h2>
 <h3 id="open-webui">Open-webui</h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># Run Open-webui for OpenAI API Usage Only</span>
@@ -472,7 +483,7 @@
     </div>
 
     
-    <img src="/image/logo.jpg?v=1743048018" class="w-80 self-center" alt="Logo" />
+    <img src="/image/logo.jpg?v=1743058929" class="w-80 self-center" alt="Logo" />
 
     <p class="leading-8 text-center text-lg font-light mt-3">
         
@@ -547,15 +558,6 @@
         
         
         <li class="mb-1 border-b border-b-gray-900 border-dashed font-light">
-            <a href="/zh/categories/cloud-server/" class="hover:text-gray-300">Cloud Server <span
-                    class="ml-2 px-2 bg-gray-800 rounded-full text-gray-500">1</span></a>
-        </li>
-        
-        
-        
-        
-        
-        <li class="mb-1 border-b border-b-gray-900 border-dashed font-light">
             <a href="/zh/categories/go/" class="hover:text-gray-300">Go <span
                     class="ml-2 px-2 bg-gray-800 rounded-full text-gray-500">1</span></a>
         </li>
@@ -581,6 +583,15 @@
         
         
         
+        
+        <li class="mb-1 border-b border-b-gray-900 border-dashed font-light">
+            <a href="/zh/categories/cloud-server/" class="hover:text-gray-300">Cloud Server <span
+                    class="ml-2 px-2 bg-gray-800 rounded-full text-gray-500">1</span></a>
+        </li>
+        
+        
+        
+        
 
     </ul>
 
@@ -596,21 +607,6 @@
     </div>
     <div class="flex flex-wrap gap-2 text-lg leading-8 pt-3 pl-1">
         
-        
-        
-        
-        <a href="/zh/tags/deepspeed/"><span
-                class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">DeepSpeed&nbsp;&nbsp;1</span></a>
-        
-        
-        
-        <a href="/zh/tags/huggingface/"><span
-                class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">Huggingface&nbsp;&nbsp;1</span></a>
-        
-        
-        
-        <a href="/zh/tags/linux/"><span
-                class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">Linux&nbsp;&nbsp;1</span></a>
         
         
         
@@ -631,6 +627,21 @@
         
         <a href="/zh/tags/aws/"><span
                 class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">AWS&nbsp;&nbsp;1</span></a>
+        
+        
+        
+        <a href="/zh/tags/deepspeed/"><span
+                class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">DeepSpeed&nbsp;&nbsp;1</span></a>
+        
+        
+        
+        <a href="/zh/tags/huggingface/"><span
+                class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">Huggingface&nbsp;&nbsp;1</span></a>
+        
+        
+        
+        <a href="/zh/tags/linux/"><span
+                class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">Linux&nbsp;&nbsp;1</span></a>
         
         
         

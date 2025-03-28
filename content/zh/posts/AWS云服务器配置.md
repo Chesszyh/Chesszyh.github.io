@@ -66,6 +66,16 @@ icacls "D:\下载\AWS-Cloudserver.pem" /grant:r "$($env:USERNAME):(R,W)"
 # 或者chmod 600：只有文件所有者有读写权限
 ```
 
+## Network
+
+```shell
+# nginx
+
+# cloudflare
+
+# ssh
+```
+
 ## Shell
 
 ### [Zsh shell](https://github.com/fish-shell/fish-shell)
@@ -171,7 +181,9 @@ wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 
 ## Docker
 
-[Reference](https://docs.docker.com/engine/install/ubuntu/)
+### 国外服务器
+
+秒下，直接参考[Official Reference](https://docs.docker.com/engine/install/ubuntu/)即可。
 
 ```shell
 # 1. Set up Docker's apt repository.
@@ -198,12 +210,53 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 docker run hello-world
 ```
 
+### 国内服务器
+
+我自己测试时会出现源问题，所以参考这篇[知乎教程](https://zhuanlan.zhihu.com/p/588264423)，使用阿里镜像下载。
+
+```shell
+# 添加阿里的 Docker 镜像仓库证书
+curl -fsSL https://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/aliyun-docker.gpg
+# 添加仓库
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/aliyun-docker.gpg] https://mirrors.aliyun.com/docker-ce/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# 安装docker-ce
+sudo apt update
+sudo apt install -y docker-ce
+
+# 设置自启动
+sudo systemctl enable docker
+sudo systemctl start docker
+
+# 验证
+sudo docker info
+```
+
+### 其他Docker命令
+
+```shell
+docker ps -a # 查看所有容器
+docker log <container_id> # 查看指定容器日志
+```
+
 ## 其他工具
 
 ```shell
 # ncdu: headless下磁盘空间占用查看，类似Windows的WiZTree
 sudo apt install ncdu
 
+# bat: cat的替代品，带有语法高亮和Git集成
+sudo apt install bat
+# 设置别名
+mkdir -p ~/.local/bin
+ln -s /usr/bin/batcat ~/.local/bin/bat
+
+# thefuck：命令拼写错误自动修正
+# 例：puthon main.py -> fuck -> python main.py -> Enter
+# 这个仓库的依赖最近出现了一些问题，修复的PR还没merge进来
+# pip install thefuck
 ```
 
 ## Service
@@ -213,6 +266,9 @@ sudo apt install ncdu
 ```shell
 # Run Open-webui for OpenAI API Usage Only
 docker run -d -p 3000:8080 -e OPENAI_API_KEY="..." -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main
+
+# 启动后不要着急访问localhost:3000，容器需要一定时间初始化、下载hf模型等等
+# 有一个从unhealthy变为healthy的过程
 ```
 
 ## Check
