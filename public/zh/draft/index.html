@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1">
     <title>
     
-    Huggingface - CodeTrace
+    Drafts - CodeTrace
     
 </title>
     
@@ -19,7 +19,7 @@
     
     <meta name="keywords" content="Computer Science, AI, LLM, Deep Learning, C&#43;&#43;">
     <meta name="description" content="Chesszyh&#39;s Blog，提供CS/LLM等领域的学习笔记与技术分享。">
-    <link rel="canonical" href="http://localhost:1313/zh/tags/huggingface/" />
+    <link rel="canonical" href="http://localhost:1313/zh/draft/" />
     <link rel="icon" href="/favicon.ico?v=1743146542" type="image/x-icon">
     
 <link rel="stylesheet" href="/css/app.css">
@@ -208,7 +208,7 @@
             
             
             <li>
-                &gt;&nbsp;&nbsp;<a href="/zh/tags/huggingface/" class="hover:text-gray-100">Huggingface</a>
+                &gt;&nbsp;&nbsp;<a href="/zh/draft/" class="hover:text-gray-100">Drafts</a>
             </li>
             
         </ul>
@@ -228,13 +228,10 @@
           
 
 
-
-
-
 <div class="list-container">
-    
 
     
+
     
     
 <article class="flex flex-col lg:flex-row items-center  px-1 rounded-md">
@@ -242,31 +239,39 @@
         
         
         
-        <img src="http://localhost:1313/image/deepspeed.png?v=1743146542" alt=""
+        <img src="/image/common-writing-empty.jpg?v=1743146542" alt=""
             class="w-full h-48 rounded-2xl object-cover" />
         
 
     </div>
     <div class="w-full lg:p-5 overflow-auto">
         <h3 class="pt-2 lg:pt-0 line-clamp-1 text-2xl font-medium leading-10 text-gray-400 hover:text-gray-300">
-            <a href="/zh/posts/deepspeed%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/">
-                DeepSpeed实践笔记
+            <a href="/zh/draft/aws-ssh-connection-timeout-issue/">
+                AWS Ssh Connection Timeout Issue
             </a>
         </h3>
         <div class="flex flex-row items-center justify-start py-1 text-lg">
             
-            <time datetime="2025-03-16" class="text-gray-600">2025-02-28 11:55
+            <time datetime="2025-03-16" class="text-gray-600">2025-03-27 17:10
                 |
-                1 minute read</time>
+                2 minute read</time>
             
         </div>
-        <div class="line-clamp-3 text-xl font-light leading-8 lg:leading-9 text-gray-500">DeepSpeed实践笔记 简介 DeepSpeed是微软开源的深度学习训练库，用于提高大规模模型训练的效率和速度。 DeepSpeedExamples提供了DeepSpeed的各种代码示例，包括训练、推理、压缩、基准测试和应用程序等。 本次使用的是DeepSpeed-Chat，可以帮助我们在预训练模型基础上快速训练一个高质量的聊天模型。
-TODO&hellip;
+        <div class="line-clamp-3 text-xl font-light leading-8 lg:leading-9 text-gray-500">问题 AWS实例通过SSH无法连接，ping ip也ping不通(后来发现可能是AWS禁用了用户Ping)，控制台也检测到异常。
+解决 重启 重启实例，然后就能连了。
+确实，我寻思入站规则我也没动啊，怎么隔了一天就连不上了。
+玄学问题。
+逐步排查思路 翻译：
+我的常用检查清单：
+在 AWS 控制台上：
+实例是否已启动且健康？ 它是否位于公共子网中？ 它是否具有公共 IP 地址？ VPC 是否有关联的 Internet 网关？ 它是否具有通往 Internet 网关的路由表？（已附加到子网？） 网络 ACL 规则是否为默认规则？ 安全组是否允许 ping？如果允许，ping 是否有效？ 安全组是否允许 SSH 入站？ 如果仍然没有线索，那么在同一个 VPC 中启动一个新实例（从基础 AMI 镜像）。通过 SSH 连接到它。如果成功，尝试从该实例 SSH 连接到目标实例。
+思路解释：
+这个人解决 AWS EC2 实例无法连接问题的思路是系统性的、逐步排除故障的方法。 他的思路可以概括为以下几个步骤：
+基础检查 (AWS 控制台): 首先，他从 AWS 控制台入手，检查实例的基本状态和配置，确保实例本身是健康的，并且具备连接到互联网的基本条件。
+实例状态: 确认实例已启动且通过了健康检查。 网络配置: 确认实例位于公共子网，拥有公共 IP 地址，并且 VPC 配置了 Internet 网关。 路由配置: 确认 VPC 的路由表配置正确，允许流量通过 Internet 网关路由到互联网。 网络访问控制检查: 接下来，他检查网络访问控制列表 (ACL) 和安全组，确保网络流量没有被意外阻止。
 </div>
     </div>
 </article>
-    
-
 
     
     
@@ -366,15 +371,6 @@ TODO&hellip;
         
         
         <li class="mb-1 border-b border-b-gray-900 border-dashed font-light">
-            <a href="/zh/categories/cloud-server/" class="hover:text-gray-300">Cloud Server <span
-                    class="ml-2 px-2 bg-gray-800 rounded-full text-gray-500">1</span></a>
-        </li>
-        
-        
-        
-        
-        
-        <li class="mb-1 border-b border-b-gray-900 border-dashed font-light">
             <a href="/zh/categories/go/" class="hover:text-gray-300">Go <span
                     class="ml-2 px-2 bg-gray-800 rounded-full text-gray-500">1</span></a>
         </li>
@@ -400,6 +396,15 @@ TODO&hellip;
         
         
         
+        
+        <li class="mb-1 border-b border-b-gray-900 border-dashed font-light">
+            <a href="/zh/categories/cloud-server/" class="hover:text-gray-300">Cloud Server <span
+                    class="ml-2 px-2 bg-gray-800 rounded-full text-gray-500">1</span></a>
+        </li>
+        
+        
+        
+        
 
     </ul>
 
@@ -415,6 +420,21 @@ TODO&hellip;
     </div>
     <div class="flex flex-wrap gap-2 text-lg leading-8 pt-3 pl-1">
         
+        
+        
+        
+        <a href="/zh/tags/linux/"><span
+                class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">Linux&nbsp;&nbsp;1</span></a>
+        
+        
+        
+        <a href="/zh/tags/llm/"><span
+                class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">LLM&nbsp;&nbsp;1</span></a>
+        
+        
+        
+        <a href="/zh/tags/server/"><span
+                class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">Server&nbsp;&nbsp;1</span></a>
         
         
         
@@ -435,21 +455,6 @@ TODO&hellip;
         
         <a href="/zh/tags/huggingface/"><span
                 class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">Huggingface&nbsp;&nbsp;1</span></a>
-        
-        
-        
-        <a href="/zh/tags/linux/"><span
-                class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">Linux&nbsp;&nbsp;1</span></a>
-        
-        
-        
-        <a href="/zh/tags/llm/"><span
-                class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">LLM&nbsp;&nbsp;1</span></a>
-        
-        
-        
-        <a href="/zh/tags/server/"><span
-                class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">Server&nbsp;&nbsp;1</span></a>
         
         
         

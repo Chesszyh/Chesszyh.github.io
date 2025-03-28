@@ -20,7 +20,7 @@
     <meta name="keywords" content="Computer Science, AI, LLM, Deep Learning, C&#43;&#43;">
     <meta name="description" content="Chesszyh&#39;s Blog，提供CS/LLM等领域的学习笔记与技术分享。">
     <link rel="canonical" href="http://localhost:1313/zh/categories/web/" />
-    <link rel="icon" href="/favicon.ico?v=1743058929" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico?v=1743146542" type="image/x-icon">
     
 <link rel="stylesheet" href="/css/app.css">
     
@@ -59,7 +59,7 @@
     <nav class="flex flex-1 flex-col lg:flex-row items-center justify-between">
         <a href="/">
             
-            <img src="/image/logo.jpg?v=1743058929" alt="site logo" 
+            <img src="/image/logo.jpg?v=1743146542" alt="site logo" 
                 class="w-16 h-16 my-5 p-1 bg-gray-100 rounded-full cursor-pointer hover:scale-110" />
         </a>
         
@@ -242,7 +242,7 @@
         
         
         
-        <img src="/image/common-writing-empty.jpg?v=1743058929" alt=""
+        <img src="/image/common-writing-empty.jpg?v=1743146542" alt=""
             class="w-full h-48 rounded-2xl object-cover" />
         
 
@@ -257,14 +257,15 @@
             
             <time datetime="2025-03-16" class="text-gray-600">2025-03-23 16:55
                 |
-                4 minute read</time>
+                5 minute read</time>
             
         </div>
         <div class="line-clamp-3 text-xl font-light leading-8 lg:leading-9 text-gray-500">我手头有一堆Linux设备，WSL2-Ubuntu24.04/Thinkpad-X270-Ubuntu22.04/AWS和阿里云服务器/Kali-Linux虚拟机，每次换新的都得重新配环境，有点烦
 之前记过的笔记也是乱七八糟不知道去哪找，还是发在博客比较好。
-命令全是针对Ubuntu系统的，别的系统不熟。
+安装命令主要针对Ubuntu(apt)和Amazon Linux(dnf)。
+Content {{ .TableOfContents }}
 Amazon Web Services (AWS) Storage AWS Free Tier 通过 Amazon Elastic Block Store (EBS) 提供 30 GB 的存储、200 万 I/O 以及 1 GB 的快照存储。默认8G实在是太少了，想扩容发现控制台页面有点看不懂，参考了一下YouTube视频：How to increase EBS volume size in AWS EC2，该视频主要参考了AWS的官方文档。
-# 安装必要的工具 sudo apt install cloud-guest-utils gdisk -y # Ubuntu/Debian # 扩展分区 sudo growpart /dev/xvda 1 # 扩展文件系统 sudo resize2fs /dev/xvda1 # 对于 ext4 # 或 sudo xfs_growfs / # 对于 xfs # 验证扩展结果 df -h Connect 通常我使用ssh -i &quot;AWS-Cloudserver.pem&quot; ubuntu@ec2-3-14-128-59.us-east-2.compute.amazonaws.com，自动登录到ubuntu普通用户。
+# 安装必要的工具 sudo apt install cloud-guest-utils gdisk -y # Ubuntu/Debian # 扩展分区 sudo growpart /dev/xvda 1 # 扩展文件系统 sudo resize2fs /dev/xvda1 # 对于 ext4 # 或 sudo xfs_growfs / # 对于 xfs # 验证扩展结果 df -h Connect SSH 通常我使用ssh -i &quot;AWS-Cloudserver.pem&quot; ubuntu@ec2-3-14-128-59.us-east-2.compute.amazonaws.com，自动登录到ubuntu普通用户。
 </div>
     </div>
 </article>
@@ -281,7 +282,7 @@ Amazon Web Services (AWS) Storage AWS Free Tier 通过 Amazon Elastic Block Stor
         
         
         
-        <img src="http://localhost:1313/image/neuro_cat.jpg?v=1743058929" alt=""
+        <img src="http://localhost:1313/image/neuro_cat.jpg?v=1743146542" alt=""
             class="w-full h-48 rounded-2xl object-cover" />
         
 
@@ -335,7 +336,7 @@ Demo 只用于静态页面演示，后续会超链接跳转至装配了Stockfish
     </div>
 
     
-    <img src="/image/logo.jpg?v=1743058929" class="w-80 self-center" alt="Logo" />
+    <img src="/image/logo.jpg?v=1743146542" class="w-80 self-center" alt="Logo" />
 
     <p class="leading-8 text-center text-lg font-light mt-3">
         
@@ -352,6 +353,12 @@ Demo 只用于静态页面演示，后续会超链接跳转至装配了Stockfish
     </div>
 
     <ul class="text-lg">
+        
+        
+        <li class="leading-10 line-clamp-1 mb-3 font-light border-b border-b-white/10 border-dashed">
+            <a href="/zh/draft/aws-ssh-connection-timeout-issue/" class="py-5 hover:text-gray-300">AWS Ssh Connection Timeout Issue</a>
+        </li>
+        
         
         
         <li class="leading-10 line-clamp-1 mb-3 font-light border-b border-b-white/10 border-dashed">
@@ -374,12 +381,6 @@ Demo 只用于静态页面演示，后续会超链接跳转至装配了Stockfish
         
         <li class="leading-10 line-clamp-1 mb-3 font-light border-b border-b-white/10 border-dashed">
             <a href="/zh/posts/%E6%9C%AC%E7%AB%99%E7%AE%80%E4%BB%8B/" class="py-5 hover:text-gray-300">本站简介</a>
-        </li>
-        
-        
-        
-        <li class="leading-10 line-clamp-1 mb-3 font-light border-b border-b-white/10 border-dashed">
-            <a href="/zh/posts/deepspeed%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/" class="py-5 hover:text-gray-300">DeepSpeed实践笔记</a>
         </li>
         
         
@@ -462,21 +463,6 @@ Demo 只用于静态页面演示，后续会超链接跳转至装配了Stockfish
         
         
         
-        <a href="/zh/tags/ai/"><span
-                class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">AI&nbsp;&nbsp;1</span></a>
-        
-        
-        
-        <a href="/zh/tags/aws/"><span
-                class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">AWS&nbsp;&nbsp;1</span></a>
-        
-        
-        
-        <a href="/zh/tags/deepspeed/"><span
-                class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">DeepSpeed&nbsp;&nbsp;1</span></a>
-        
-        
-        
         <a href="/zh/tags/huggingface/"><span
                 class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">Huggingface&nbsp;&nbsp;1</span></a>
         
@@ -494,6 +480,21 @@ Demo 只用于静态页面演示，后续会超链接跳转至装配了Stockfish
         
         <a href="/zh/tags/server/"><span
                 class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">Server&nbsp;&nbsp;1</span></a>
+        
+        
+        
+        <a href="/zh/tags/ai/"><span
+                class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">AI&nbsp;&nbsp;1</span></a>
+        
+        
+        
+        <a href="/zh/tags/aws/"><span
+                class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">AWS&nbsp;&nbsp;1</span></a>
+        
+        
+        
+        <a href="/zh/tags/deepspeed/"><span
+                class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">DeepSpeed&nbsp;&nbsp;1</span></a>
         
         
         
@@ -520,7 +521,7 @@ Demo 只用于静态页面演示，后续会超链接跳转至装配了Stockfish
         
         <li class="mb-1 border-b border-b-white/10 border-dashed">
             <a href="/zh/archives">2025年03月<span
-                    class="ml-2 px-2 bg-gray-800 rounded-full text-gray-500">4</span></a>
+                    class="ml-2 px-2 bg-gray-800 rounded-full text-gray-500">5</span></a>
         </li>
         
         

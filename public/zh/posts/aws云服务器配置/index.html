@@ -20,7 +20,7 @@
     <meta name="keywords" content="Computer Science, AI, LLM, Deep Learning, C&#43;&#43;">
     <meta name="description" content="Chesszyh&#39;s Blog，提供CS/LLM等领域的学习笔记与技术分享。">
     <link rel="canonical" href="http://localhost:1313/zh/posts/aws%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE/" />
-    <link rel="icon" href="/favicon.ico?v=1743058929" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico?v=1743146542" type="image/x-icon">
     
 <link rel="stylesheet" href="/css/app.css">
     
@@ -59,7 +59,7 @@
     <nav class="flex flex-1 flex-col lg:flex-row items-center justify-between">
         <a href="/">
             
-            <img src="/image/logo.jpg?v=1743058929" alt="site logo" 
+            <img src="/image/logo.jpg?v=1743146542" alt="site logo" 
                 class="w-16 h-16 my-5 p-1 bg-gray-100 rounded-full cursor-pointer hover:scale-110" />
         </a>
         
@@ -237,7 +237,7 @@
         </h1>
         <time datetime="2025-03-16" class="flex items-center py-2 text-xl text-gray-600">golang</time>
             2025-03-23 16:55
-            &nbsp;&nbsp;|&nbsp;&nbsp;4 minute read 
+            &nbsp;&nbsp;|&nbsp;&nbsp;5 minute read 
         </time>
         
         
@@ -245,7 +245,9 @@
             class="mt-1 lg:pb-10 px-2 text-2xl leading-10 font-thin text-gray-500 overflow-hidden break-words article-body">
             <p>我手头有一堆Linux设备，WSL2-Ubuntu24.04/Thinkpad-X270-Ubuntu22.04/AWS和阿里云服务器/Kali-Linux虚拟机，每次换新的都得重新配环境，有点烦</p>
 <p>之前记过的笔记也是乱七八糟不知道去哪找，还是发在博客比较好。</p>
-<p>命令全是针对Ubuntu系统的，别的系统不熟。</p>
+<p>安装命令主要针对Ubuntu(apt)和Amazon Linux(dnf)。</p>
+<h2 id="content">Content</h2>
+<p>{{ .TableOfContents }}</p>
 <h2 id="amazon-web-services-aws">Amazon Web Services (AWS)</h2>
 <h3 id="storage">Storage</h3>
 <p>AWS Free Tier 通过 Amazon Elastic Block Store (EBS) 提供 30 GB 的存储、200 万 I/O 以及 1 GB 的快照存储。默认8G实在是太少了，想扩容发现控制台页面有点看不懂，参考了一下YouTube视频：<a href="https://www.youtube.com/watch?v=jVffXZc4tf8">How to increase EBS volume size in AWS EC2</a>，该视频主要参考了<a href="https://docs.aws.amazon.com/ebs/latest/userguide/recognize-expanded-volume-linux.html">AWS的官方文档</a>。</p>
@@ -263,6 +265,7 @@
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 验证扩展结果</span>
 </span></span><span style="display:flex;"><span>df -h
 </span></span></code></pre></div><h3 id="connect">Connect</h3>
+<h4 id="ssh">SSH</h4>
 <p>通常我使用<code>ssh -i &quot;AWS-Cloudserver.pem&quot; ubuntu@ec2-3-14-128-59.us-east-2.compute.amazonaws.com</code>，自动登录到ubuntu普通用户。</p>
 <p>AWS提供了四种连接方式，我懒得去深入了解，就让AI简单解释了一下：</p>
 <ol>
@@ -284,53 +287,64 @@
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>icacls <span style="color:#e6db74">&#34;D:\下载\AWS-Cloudserver.pem&#34;</span> /inheritance<span style="color:#960050;background-color:#1e0010">:</span>r
 </span></span><span style="display:flex;"><span>icacls <span style="color:#e6db74">&#34;D:\下载\AWS-Cloudserver.pem&#34;</span> /grant<span style="color:#960050;background-color:#1e0010">:</span>r <span style="color:#e6db74">&#34;</span>$($env:USERNAME)<span style="color:#e6db74">:(R,W)&#34;</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 或者chmod 600：只有文件所有者有读写权限</span>
-</span></span></code></pre></div><h2 id="network">Network</h2>
+</span></span></code></pre></div><h4 id="connection-issues">Connection Issues</h4>
+<p>前天开始，AWS的ssh一直连不上去，不管是EC2 Instance Connect还是直接ssh。文档翻了一堆，入站规则也检查了半天，系统日志也翻了，都没看到问题。我SSH是免密登录+0.0.0.0/0开放访问，猜测可能是端口被大流量扫死了？但是监控里又显示只有非常短的一段时间内CPU占用是100%，那段时间好像我在用服务器，总之这个也不太可能。</p>
+<p>今天换了台AWS服务器，还是登不上去，猜测是国内网络问题或者AWS哪里没配置对，就租了台阿里云服务器，结果非常顺利地就连上去了。对比两台服务器的配置，最终才发现问题：**Aliyun和AWS侧边导航栏定义的“安全组”是针对全局的，每个服务器必须手动绑定到特定的规则上，才能应用出入站规则。**我AWS的服务器只绑定了默认允许所有HTTPS流量进站的规则，没绑定SSH，所以当然连不上去了。</p>
+<p>挺蠢的问题，但还好没困扰太长时间，也就几个小时吧hh。</p>
+<h2 id="network">Network</h2>
+<h3 id="dns">DNS</h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># nginx</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># cloudflare</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># ssh</span>
 </span></span></code></pre></div><h2 id="shell">Shell</h2>
-<h3 id="zsh-shell"><a href="https://github.com/fish-shell/fish-shell">Zsh shell</a></h3>
-<ul>
-<li>配置参考：
+<h3 id="zsh">Zsh</h3>
+<p>之前安装的是fish，但fish似乎不太兼容bash语法，所以就换成了zsh。fish安装：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo apt-add-repository ppa:fish-shell/release-4
+</span></span><span style="display:flex;"><span>sudo apt update
+</span></span><span style="display:flex;"><span>sudo apt install fish
+</span></span></code></pre></div><ul>
+<li>Zsh配置参考：
 <ul>
 <li><a href="https://www.hackerneo.com/blog/dev-tools/better-use-terminal-with-zsh">zsh</a></li>
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 之前安装的是fish，但fish似乎不太兼容bash语法？所以就换成了zsh</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 这是fish的安装命令</span>
-</span></span><span style="display:flex;"><span>sudo apt-add-repository ppa:fish-shell/release-4
-</span></span><span style="display:flex;"><span>sudo apt update
-</span></span><span style="display:flex;"><span>sudo apt install fish
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># Zsh</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># ---------------------------------------------------------</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 安装git(Amazon Linux需要)</span>
+</span></span><span style="display:flex;"><span>sudo yum install git -y
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># zsh</span>
-</span></span><span style="display:flex;"><span>sudo apt install zsh
+</span></span><span style="display:flex;"><span>sudo apt install zsh <span style="color:#75715e"># or sudo yum install zsh</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># oh-my-zsh</span>
 </span></span><span style="display:flex;"><span>sh -c <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 修改主题：[powerlevel10k](https://github.com/romkatv/powerlevel10k)</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 然后根据提示进行配置即可</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 下载主题：[powerlevel10k](https://github.com/romkatv/powerlevel10k)</span>
 </span></span><span style="display:flex;"><span>git clone --depth<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> https://github.com/romkatv/powerlevel10k.git <span style="color:#e6db74">${</span>ZSH_CUSTOM<span style="color:#66d9ef">:-</span>$HOME/.oh-my-zsh/custom<span style="color:#e6db74">}</span>/themes/powerlevel10k
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 安装插件：autosuggestions, syntax-highlighting, z(文件夹快捷跳转)</span>
+</span></span><span style="display:flex;"><span>git clone https://github.com/zsh-users/zsh-autosuggestions <span style="color:#e6db74">${</span>ZSH_CUSTOM<span style="color:#66d9ef">:-</span>~/.oh-my-zsh/custom<span style="color:#e6db74">}</span>/plugins/zsh-autosuggestions
+</span></span><span style="display:flex;"><span>git clone https://github.com/zsh-users/zsh-syntax-highlighting.git <span style="color:#e6db74">${</span>ZSH_CUSTOM<span style="color:#66d9ef">:-</span>~/.oh-my-zsh/custom<span style="color:#e6db74">}</span>/plugins/zsh-syntax-highlighting
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 修改~/.zshrc文件中的ZSH_THEME和plugins</span>
 </span></span><span style="display:flex;"><span>vim ~/.zshrc
 </span></span><span style="display:flex;"><span>ZSH_THEME<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;powerlevel10k/powerlevel10k&#34;</span>
 </span></span><span style="display:flex;"><span>plugins<span style="color:#f92672">=(</span>
+</span></span><span style="display:flex;"><span>    git
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e"># other plugins...</span>
 </span></span><span style="display:flex;"><span>    zsh-autosuggestions
 </span></span><span style="display:flex;"><span>    zsh-syntax-highlighting
 </span></span><span style="display:flex;"><span>    z
 </span></span><span style="display:flex;"><span><span style="color:#f92672">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 安装插件</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># autosuggestions, syntax-highlighting, z(文件夹快捷跳转)</span>
-</span></span><span style="display:flex;"><span>git clone https://github.com/zsh-users/zsh-autosuggestions <span style="color:#e6db74">${</span>ZSH_CUSTOM<span style="color:#66d9ef">:-</span>~/.oh-my-zsh/custom<span style="color:#e6db74">}</span>/plugins/zsh-autosuggestions
-</span></span><span style="display:flex;"><span>git clone https://github.com/zsh-users/zsh-syntax-highlighting.git <span style="color:#e6db74">${</span>ZSH_CUSTOM<span style="color:#66d9ef">:-</span>~/.oh-my-zsh/custom<span style="color:#e6db74">}</span>/plugins/zsh-syntax-highlighting
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 使修改生效</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 使修改生效，同时开始自动配置powerlevel10k</span>
 </span></span><span style="display:flex;"><span>source ~/.zshrc
 </span></span></code></pre></div><h3 id="copilotvim"><a href="https://github.com/github/copilot.vim">copilot.vim</a></h3>
+<p>Copilot.vim需要：</p>
+<p>Nodejs 20.x or Later</p>
+<p>Vim 9+</p>
+<p>Amazon Linux默认yum下来的nodejs</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 安装unzip(如果没有)</span>
 </span></span><span style="display:flex;"><span>apt install -y unzip
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 安装nodejs</span>
@@ -381,7 +395,9 @@
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 下载</span>
 </span></span><span style="display:flex;"><span>wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 </span></span></code></pre></div><h2 id="docker">Docker</h2>
-<p><a href="https://docs.docker.com/engine/install/ubuntu/">Reference</a></p>
+<h3 id="国外服务器">国外服务器</h3>
+<p>基本秒下，参考文档：<a href="https://docs.docker.com/engine/install/ubuntu/">Ubuntu</a>、<a href="https://docs.aws.amazon.com/zh_cn/serverless-application-model/latest/developerguide/install-docker.html">Amazon Linux</a>和<a href="https://docs.docker.com/engine/install/fedora/">Fedora</a>。</p>
+<h4 id="ubuntu">Ubuntu</h4>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 1. Set up Docker&#39;s apt repository.</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Add Docker&#39;s official GPG key:</span>
@@ -404,18 +420,80 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 3. Verify that Docker Engine is installed correctly by running the hello-world image.</span>
 </span></span><span style="display:flex;"><span>docker run hello-world
+</span></span></code></pre></div><h4 id="amazon-linux">Amazon Linux</h4>
+<p>虽然Amazon Linux 2023基于Fedora，但安装Docker时似乎无需根据Docker官方Fedora文档来，而是参考<a href="https://docs.aws.amazon.com/zh_cn/serverless-application-model/latest/developerguide/install-docker.html">Amazon Linux</a>自己的文档。</p>
+<p>不知道两种方式是否有区别，后续有时间再测试。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo yum update -y
+</span></span><span style="display:flex;"><span>sudo yum install -y docker
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 添加ec2-user到docker组</span>
+</span></span><span style="display:flex;"><span>sudo usermod -a -G docker ec2-user
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 启动Docker</span>
+</span></span><span style="display:flex;"><span>sudo service docker start
+</span></span></code></pre></div><h4 id="fedora">Fedora</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 1. Uninstall old versions</span>
+</span></span><span style="display:flex;"><span>sudo dnf remove docker <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>                  docker-client <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>                  docker-client-latest <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>                  docker-common <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>                  docker-latest <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>                  docker-latest-logrotate <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>                  docker-logrotate <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>                  docker-selinux <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>                  docker-engine-selinux <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>                  docker-engine
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 2. Set up the repository</span>
+</span></span><span style="display:flex;"><span>sudo dnf -y install dnf-plugins-core
+</span></span><span style="display:flex;"><span>sudo dnf-3 config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 3. Install Docker Engine</span>
+</span></span><span style="display:flex;"><span>sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 4. Start Docker</span>
+</span></span><span style="display:flex;"><span>sudo systemctl enable --now docker
+</span></span></code></pre></div><h3 id="国内服务器自己电脑">国内服务器/自己电脑</h3>
+<p>阿里云允许预装Docker，图省事的话直接在控制台安装就行。</p>
+<p>我自己测试时会出现源问题，所以参考这篇<a href="https://zhuanlan.zhihu.com/p/588264423">知乎教程</a>，使用阿里镜像下载。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 添加阿里的 Docker 镜像仓库证书</span>
+</span></span><span style="display:flex;"><span>curl -fsSL https://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/aliyun-docker.gpg
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 添加仓库</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  <span style="color:#e6db74">&#34;deb [arch=</span><span style="color:#66d9ef">$(</span>dpkg --print-architecture<span style="color:#66d9ef">)</span><span style="color:#e6db74"> signed-by=/etc/apt/keyrings/aliyun-docker.gpg] https://mirrors.aliyun.com/docker-ce/linux/ubuntu \
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  </span><span style="color:#66d9ef">$(</span>lsb_release -cs<span style="color:#66d9ef">)</span><span style="color:#e6db74"> stable&#34;</span> | sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 安装docker-ce</span>
+</span></span><span style="display:flex;"><span>sudo apt update
+</span></span><span style="display:flex;"><span>sudo apt install -y docker-ce
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 设置自启动</span>
+</span></span><span style="display:flex;"><span>sudo systemctl enable docker
+</span></span><span style="display:flex;"><span>sudo systemctl start docker
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 验证</span>
+</span></span><span style="display:flex;"><span>sudo docker info
+</span></span></code></pre></div><h3 id="其他docker命令">其他Docker命令</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker ps -a <span style="color:#75715e"># 查看所有容器</span>
+</span></span><span style="display:flex;"><span>docker log &lt;container_id&gt; <span style="color:#75715e"># 查看指定容器日志</span>
 </span></span></code></pre></div><h2 id="其他工具">其他工具</h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># ncdu: headless下磁盘空间占用查看，类似Windows的WiZTree</span>
 </span></span><span style="display:flex;"><span>sudo apt install ncdu
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># bat: cat的替代品，带有语法高亮和Git集成</span>
 </span></span><span style="display:flex;"><span>sudo apt install bat
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 设置别名</span>
 </span></span><span style="display:flex;"><span>mkdir -p ~/.local/bin
 </span></span><span style="display:flex;"><span>ln -s /usr/bin/batcat ~/.local/bin/bat
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># thefuck：命令拼写错误自动修正</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 例：puthon main.py -&gt; fuck -&gt; python main.py -&gt; Enter</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 这个仓库的依赖最近出现了一些问题，修复的PR还没merge进来</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># pip install thefuck</span>
 </span></span></code></pre></div><h2 id="service">Service</h2>
 <h3 id="open-webui">Open-webui</h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># Run Open-webui for OpenAI API Usage Only</span>
 </span></span><span style="display:flex;"><span>docker run -d -p 3000:8080 -e OPENAI_API_KEY<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;...&#34;</span> -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 启动后不要着急访问localhost:3000，容器需要一定时间初始化、下载hf模型等等</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 有一个从unhealthy变为healthy的过程</span>
 </span></span></code></pre></div><h2 id="check">Check</h2>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 系统信息</span>
 </span></span><span style="display:flex;"><span>uname -a                    <span style="color:#75715e"># 内核版本</span>
@@ -483,7 +561,7 @@
     </div>
 
     
-    <img src="/image/logo.jpg?v=1743058929" class="w-80 self-center" alt="Logo" />
+    <img src="/image/logo.jpg?v=1743146542" class="w-80 self-center" alt="Logo" />
 
     <p class="leading-8 text-center text-lg font-light mt-3">
         
@@ -500,6 +578,12 @@
     </div>
 
     <ul class="text-lg">
+        
+        
+        <li class="leading-10 line-clamp-1 mb-3 font-light border-b border-b-white/10 border-dashed">
+            <a href="/zh/draft/aws-ssh-connection-timeout-issue/" class="py-5 hover:text-gray-300">AWS Ssh Connection Timeout Issue</a>
+        </li>
+        
         
         
         <li class="leading-10 line-clamp-1 mb-3 font-light border-b border-b-white/10 border-dashed">
@@ -522,12 +606,6 @@
         
         <li class="leading-10 line-clamp-1 mb-3 font-light border-b border-b-white/10 border-dashed">
             <a href="/zh/posts/%E6%9C%AC%E7%AB%99%E7%AE%80%E4%BB%8B/" class="py-5 hover:text-gray-300">本站简介</a>
-        </li>
-        
-        
-        
-        <li class="leading-10 line-clamp-1 mb-3 font-light border-b border-b-white/10 border-dashed">
-            <a href="/zh/posts/deepspeed%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/" class="py-5 hover:text-gray-300">DeepSpeed实践笔记</a>
         </li>
         
         
@@ -558,24 +636,6 @@
         
         
         <li class="mb-1 border-b border-b-gray-900 border-dashed font-light">
-            <a href="/zh/categories/go/" class="hover:text-gray-300">Go <span
-                    class="ml-2 px-2 bg-gray-800 rounded-full text-gray-500">1</span></a>
-        </li>
-        
-        
-        
-        
-        
-        <li class="mb-1 border-b border-b-gray-900 border-dashed font-light">
-            <a href="/zh/categories/llm/" class="hover:text-gray-300">LLM <span
-                    class="ml-2 px-2 bg-gray-800 rounded-full text-gray-500">1</span></a>
-        </li>
-        
-        
-        
-        
-        
-        <li class="mb-1 border-b border-b-gray-900 border-dashed font-light">
             <a href="/zh/categories/programming/" class="hover:text-gray-300">Programming <span
                     class="ml-2 px-2 bg-gray-800 rounded-full text-gray-500">1</span></a>
         </li>
@@ -586,6 +646,24 @@
         
         <li class="mb-1 border-b border-b-gray-900 border-dashed font-light">
             <a href="/zh/categories/cloud-server/" class="hover:text-gray-300">Cloud Server <span
+                    class="ml-2 px-2 bg-gray-800 rounded-full text-gray-500">1</span></a>
+        </li>
+        
+        
+        
+        
+        
+        <li class="mb-1 border-b border-b-gray-900 border-dashed font-light">
+            <a href="/zh/categories/go/" class="hover:text-gray-300">Go <span
+                    class="ml-2 px-2 bg-gray-800 rounded-full text-gray-500">1</span></a>
+        </li>
+        
+        
+        
+        
+        
+        <li class="mb-1 border-b border-b-gray-900 border-dashed font-light">
+            <a href="/zh/categories/llm/" class="hover:text-gray-300">LLM <span
                     class="ml-2 px-2 bg-gray-800 rounded-full text-gray-500">1</span></a>
         </li>
         
@@ -610,21 +688,6 @@
         
         
         
-        <a href="/zh/tags/llm/"><span
-                class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">LLM&nbsp;&nbsp;1</span></a>
-        
-        
-        
-        <a href="/zh/tags/server/"><span
-                class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">Server&nbsp;&nbsp;1</span></a>
-        
-        
-        
-        <a href="/zh/tags/ai/"><span
-                class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">AI&nbsp;&nbsp;1</span></a>
-        
-        
-        
         <a href="/zh/tags/aws/"><span
                 class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">AWS&nbsp;&nbsp;1</span></a>
         
@@ -642,6 +705,21 @@
         
         <a href="/zh/tags/linux/"><span
                 class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">Linux&nbsp;&nbsp;1</span></a>
+        
+        
+        
+        <a href="/zh/tags/llm/"><span
+                class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">LLM&nbsp;&nbsp;1</span></a>
+        
+        
+        
+        <a href="/zh/tags/server/"><span
+                class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">Server&nbsp;&nbsp;1</span></a>
+        
+        
+        
+        <a href="/zh/tags/ai/"><span
+                class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">AI&nbsp;&nbsp;1</span></a>
         
         
         
@@ -668,7 +746,7 @@
         
         <li class="mb-1 border-b border-b-white/10 border-dashed">
             <a href="/zh/archives">2025年03月<span
-                    class="ml-2 px-2 bg-gray-800 rounded-full text-gray-500">4</span></a>
+                    class="ml-2 px-2 bg-gray-800 rounded-full text-gray-500">5</span></a>
         </li>
         
         

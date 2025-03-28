@@ -6,17 +6,27 @@ categories: ["Cloud Server", "Web"]
 tags: ["AWS", "Linux", "Server"]
 ---
 
-我手头有一堆Linux设备，WSL2-Ubuntu24.04/Thinkpad-X270-Ubuntu22.04/AWS和阿里云服务器/Kali-Linux虚拟机，每次换新的都得重新配环境，有点烦
+我手头有一堆Linux设备，WSL2-Ubuntu24.04/Thinkpad-X270-Ubuntu22.04/AWS和阿里云服务器/Kali-Linux虚拟机，每次换新的都得重新配环境，有点烦。
 
 之前记过的笔记也是乱七八糟不知道去哪找，还是发在博客比较好。
 
-命令全是针对Ubuntu系统的，别的系统不熟。
+安装命令主要针对Ubuntu(apt)和Amazon Linux(dnf)。
 
-## Amazon Web Services (AWS)
+## Content
 
-### Storage
+- [Storage](AWS云服务器配置.md#storage)
+- [Connect](AWS云服务器配置.md#ssh-connect)
+- [Network](AWS云服务器配置.md#network)
+- [Shell](AWS云服务器配置.md#shell)
+- [Language](AWS云服务器配置.md#language)
+- [Docker](AWS云服务器配置.md#docker)
+- [Check](AWS云服务器配置.md#check)
 
-AWS Free Tier 通过 Amazon Elastic Block Store (EBS) 提供 30 GB 的存储、200 万 I/O 以及 1 GB 的快照存储。默认8G实在是太少了，想扩容发现控制台页面有点看不懂，参考了一下YouTube视频：[How to increase EBS volume size in AWS EC2](https://www.youtube.com/watch?v=jVffXZc4tf8)，该视频主要参考了[AWS的官方文档](https://docs.aws.amazon.com/ebs/latest/userguide/recognize-expanded-volume-linux.html)。
+## Storage
+
+> AWS免费额度：在开设 AWS 账户的第一年，与免费套餐 AMI、每月 750 小时的公有 IPv4 地址用量、30 GiB 的 EBS 存储、200 万个 I/O、1 GB 快照和 100 GB 互联网带宽一起使用时，您每月可获得 750 小时的 t2.micro 实例用量（如果没有 t2.micro，则使用 t3.micro）。
+
+默认磁盘空间8G实在是太少了，想扩容发现控制台页面有点看不懂，参考了一下YouTube视频：[How to increase EBS volume size in AWS EC2](https://www.youtube.com/watch?v=jVffXZc4tf8)，该视频主要参考了[AWS的官方文档](https://docs.aws.amazon.com/ebs/latest/userguide/recognize-expanded-volume-linux.html)。
 
 ```shell
 # 安装必要的工具
@@ -34,7 +44,7 @@ sudo xfs_growfs /          # 对于 xfs
 df -h
 ```
 
-### Connect
+## SSH Connect
 
 通常我使用`ssh -i "AWS-Cloudserver.pem" ubuntu@ec2-3-14-128-59.us-east-2.compute.amazonaws.com`，自动登录到ubuntu普通用户。
 
@@ -66,7 +76,27 @@ icacls "D:\下载\AWS-Cloudserver.pem" /grant:r "$($env:USERNAME):(R,W)"
 # 或者chmod 600：只有文件所有者有读写权限
 ```
 
+### SSH Issues
+
+#### 实例可到达性检查失败
+
+前天开始，AWS的ssh一直连不上去，不管是EC2 Instance Connect还是直接ssh。文档翻了一堆，入站规则也检查了半天，系统日志也翻了，都没看到问题。我SSH是免密登录+0.0.0.0/0开放访问，猜测可能是端口被大流量扫死了？但是监控里又显示只有非常短的一段时间内CPU占用是100%，那段时间好像我在用服务器，总之这个也不太可能。
+
+今天换了台AWS服务器，还是登不上去，猜测是国内网络问题或者AWS哪里没配置对，就租了台阿里云服务器，结果非常顺利地就连上去了。对比两台服务器的配置，最终才发现问题：**Aliyun和AWS侧边导航栏定义的“安全组”是针对全局的，每个服务器必须手动绑定到特定的规则上，才能应用出入站规则。**我AWS的服务器只绑定了默认允许所有HTTPS流量进站的规则，没绑定SSH，所以当然连不上去了。
+
+挺蠢的问题，但还好没困扰太长时间，也就几个小时吧hh。
+
+#### SSH 连接不稳定
+
+将以上配置改好之后，依然会出现SSH老是断线/根本连不上的问题。不像是网络的事，而是服务器性能太差、open-webui-docker占用CPU负载过高导致SSH直接挂掉的。
+
+之前我用阿里云2核2G服务器试着启动过open-webui的服务，结果也是直接卡死。刚才新租了一个AWS服务器，什么服务都没启动，秒连。
+
+看来只能想想**内网穿透**，用本地Ubuntu PC来做open-webui的后端了……
+
 ## Network
+
+### DNS
 
 ```shell
 # nginx
@@ -78,46 +108,60 @@ icacls "D:\下载\AWS-Cloudserver.pem" /grant:r "$($env:USERNAME):(R,W)"
 
 ## Shell
 
-### [Zsh shell](https://github.com/fish-shell/fish-shell)
+### Zsh
 
-- 配置参考：
-  - [zsh](https://www.hackerneo.com/blog/dev-tools/better-use-terminal-with-zsh)
+之前安装的是fish，但fish似乎不太兼容bash语法，所以就换成了zsh。fish安装：
 
 ```shell
-# 之前安装的是fish，但fish似乎不太兼容bash语法？所以就换成了zsh
-# 这是fish的安装命令
 sudo apt-add-repository ppa:fish-shell/release-4
 sudo apt update
 sudo apt install fish
+```
 
-# ---------------------------------------------------------
+- Zsh配置参考：
+  - [zsh](https://www.hackerneo.com/blog/dev-tools/better-use-terminal-with-zsh)
+
+```shell
+# Zsh
+
+# 安装git(Amazon Linux需要)
+sudo yum install git -y
 # zsh
-sudo apt install zsh
+sudo apt install zsh # or sudo yum install zsh
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-# 修改主题：[powerlevel10k](https://github.com/romkatv/powerlevel10k)
-# 然后根据提示进行配置即可
+
+# 下载主题：[powerlevel10k](https://github.com/romkatv/powerlevel10k)
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+
+# 安装插件：autosuggestions, syntax-highlighting, z(文件夹快捷跳转)
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
 # 修改~/.zshrc文件中的ZSH_THEME和plugins
 vim ~/.zshrc
 ZSH_THEME="powerlevel10k/powerlevel10k"
 plugins=(
+    git
     # other plugins...
     zsh-autosuggestions
     zsh-syntax-highlighting
     z
 )
-# 安装插件
-# autosuggestions, syntax-highlighting, z(文件夹快捷跳转)
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
-# 使修改生效
+# 使修改生效，同时开始自动配置powerlevel10k
 source ~/.zshrc
 ```
 
 ### [copilot.vim](https://github.com/github/copilot.vim)
+
+Copilot.vim需要：
+
+Nodejs 20.x or Later
+
+Vim 9+
+
+Amazon Linux默认yum下来的nodejs
 
 ```shell
 # 安装unzip(如果没有)
@@ -183,7 +227,9 @@ wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 
 ### 国外服务器
 
-秒下，直接参考[Official Reference](https://docs.docker.com/engine/install/ubuntu/)即可。
+基本秒下，参考文档：[Ubuntu](https://docs.docker.com/engine/install/ubuntu/)、[Amazon Linux](https://docs.aws.amazon.com/zh_cn/serverless-application-model/latest/developerguide/install-docker.html)和[Fedora](https://docs.docker.com/engine/install/fedora/)。
+
+#### Ubuntu
 
 ```shell
 # 1. Set up Docker's apt repository.
@@ -210,7 +256,49 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 docker run hello-world
 ```
 
-### 国内服务器
+#### Amazon Linux
+
+虽然Amazon Linux 2023基于Fedora，但安装Docker时似乎无需根据Docker官方Fedora文档来，而是参考[Amazon Linux](https://docs.aws.amazon.com/zh_cn/serverless-application-model/latest/developerguide/install-docker.html)自己的文档。
+
+不知道两种方式是否有区别，后续有时间再测试。
+
+```shell
+sudo yum update -y
+sudo yum install -y docker
+# 添加ec2-user到docker组
+sudo usermod -a -G docker ec2-user
+# 启动Docker
+sudo service docker start
+```
+
+#### Fedora
+
+```shell
+# 1. Uninstall old versions
+sudo dnf remove docker \
+                  docker-client \
+                  docker-client-latest \
+                  docker-common \
+                  docker-latest \
+                  docker-latest-logrotate \
+                  docker-logrotate \
+                  docker-selinux \
+                  docker-engine-selinux \
+                  docker-engine
+# 2. Set up the repository
+sudo dnf -y install dnf-plugins-core
+sudo dnf-3 config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+
+# 3. Install Docker Engine
+sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# 4. Start Docker
+sudo systemctl enable --now docker
+```
+
+### 国内服务器/自己电脑
+
+阿里云允许预装Docker，图省事的话直接在控制台安装就行。
 
 我自己测试时会出现源问题，所以参考这篇[知乎教程](https://zhuanlan.zhihu.com/p/588264423)，使用阿里镜像下载。
 
@@ -257,18 +345,6 @@ ln -s /usr/bin/batcat ~/.local/bin/bat
 # 例：puthon main.py -> fuck -> python main.py -> Enter
 # 这个仓库的依赖最近出现了一些问题，修复的PR还没merge进来
 # pip install thefuck
-```
-
-## Service
-
-### Open-webui
-
-```shell
-# Run Open-webui for OpenAI API Usage Only
-docker run -d -p 3000:8080 -e OPENAI_API_KEY="..." -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main
-
-# 启动后不要着急访问localhost:3000，容器需要一定时间初始化、下载hf模型等等
-# 有一个从unhealthy变为healthy的过程
 ```
 
 ## Check

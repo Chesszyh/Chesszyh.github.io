@@ -18,7 +18,7 @@
     <meta name="keywords" content="Computer Science, AI, LLM, Deep Learning, C&#43;&#43;">
     <meta name="description" content="Chesszyh&#39;s Blog，提供CS/LLM等领域的学习笔记与技术分享。">
     <link rel="canonical" href="http://localhost:1313/zh/" />
-    <link rel="icon" href="/favicon.ico?v=1743058929" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico?v=1743146542" type="image/x-icon">
     
 <link rel="stylesheet" href="/css/app.css">
     
@@ -57,7 +57,7 @@
     <nav class="flex flex-1 flex-col lg:flex-row items-center justify-between">
         <a href="/">
             
-            <img src="/image/logo.jpg?v=1743058929" alt="site logo" 
+            <img src="/image/logo.jpg?v=1743146542" alt="site logo" 
                 class="w-16 h-16 my-5 p-1 bg-gray-100 rounded-full cursor-pointer hover:scale-110" />
         </a>
         
@@ -418,25 +418,37 @@
         
         
         
-        <img src="/image/common-writing-empty.jpg?v=1743058929" alt=""
+        <img src="/image/common-writing-empty.jpg?v=1743146542" alt=""
             class="w-full h-48 rounded-2xl object-cover" />
         
 
     </div>
     <div class="w-full lg:p-5 overflow-auto">
         <h3 class="pt-2 lg:pt-0 line-clamp-1 text-2xl font-medium leading-10 text-gray-400 hover:text-gray-300">
-            <a href="/zh/posts/change_log/">
-                Change_log
+            <a href="/zh/draft/aws-ssh-connection-timeout-issue/">
+                AWS Ssh Connection Timeout Issue
             </a>
         </h3>
         <div class="flex flex-row items-center justify-start py-1 text-lg">
             
-            <time datetime="2025-03-16" class="text-gray-600">2025-03-27 12:00
+            <time datetime="2025-03-16" class="text-gray-600">2025-03-27 17:10
                 |
-                0 minute read</time>
+                2 minute read</time>
             
         </div>
-        <div class="line-clamp-3 text-xl font-light leading-8 lg:leading-9 text-gray-500"></div>
+        <div class="line-clamp-3 text-xl font-light leading-8 lg:leading-9 text-gray-500">问题 AWS实例通过SSH无法连接，ping ip也ping不通(后来发现可能是AWS禁用了用户Ping)，控制台也检测到异常。
+解决 重启 重启实例，然后就能连了。
+确实，我寻思入站规则我也没动啊，怎么隔了一天就连不上了。
+玄学问题。
+逐步排查思路 翻译：
+我的常用检查清单：
+在 AWS 控制台上：
+实例是否已启动且健康？ 它是否位于公共子网中？ 它是否具有公共 IP 地址？ VPC 是否有关联的 Internet 网关？ 它是否具有通往 Internet 网关的路由表？（已附加到子网？） 网络 ACL 规则是否为默认规则？ 安全组是否允许 ping？如果允许，ping 是否有效？ 安全组是否允许 SSH 入站？ 如果仍然没有线索，那么在同一个 VPC 中启动一个新实例（从基础 AMI 镜像）。通过 SSH 连接到它。如果成功，尝试从该实例 SSH 连接到目标实例。
+思路解释：
+这个人解决 AWS EC2 实例无法连接问题的思路是系统性的、逐步排除故障的方法。 他的思路可以概括为以下几个步骤：
+基础检查 (AWS 控制台): 首先，他从 AWS 控制台入手，检查实例的基本状态和配置，确保实例本身是健康的，并且具备连接到互联网的基本条件。
+实例状态: 确认实例已启动且通过了健康检查。 网络配置: 确认实例位于公共子网，拥有公共 IP 地址，并且 VPC 配置了 Internet 网关。 路由配置: 确认 VPC 的路由表配置正确，允许流量通过 Internet 网关路由到互联网。 网络访问控制检查: 接下来，他检查网络访问控制列表 (ACL) 和安全组，确保网络流量没有被意外阻止。
+</div>
     </div>
 </article>
     
@@ -452,30 +464,25 @@
         
         
         
-        <img src="/image/common-writing-empty.jpg?v=1743058929" alt=""
+        <img src="/image/common-writing-empty.jpg?v=1743146542" alt=""
             class="w-full h-48 rounded-2xl object-cover" />
         
 
     </div>
     <div class="w-full lg:p-5 overflow-auto">
         <h3 class="pt-2 lg:pt-0 line-clamp-1 text-2xl font-medium leading-10 text-gray-400 hover:text-gray-300">
-            <a href="/zh/posts/aws%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE/">
-                AWS云服务器配置
+            <a href="/zh/posts/change_log/">
+                Change_log
             </a>
         </h3>
         <div class="flex flex-row items-center justify-start py-1 text-lg">
             
-            <time datetime="2025-03-16" class="text-gray-600">2025-03-23 16:55
+            <time datetime="2025-03-16" class="text-gray-600">2025-03-27 12:00
                 |
-                4 minute read</time>
+                1 minute read</time>
             
         </div>
-        <div class="line-clamp-3 text-xl font-light leading-8 lg:leading-9 text-gray-500">我手头有一堆Linux设备，WSL2-Ubuntu24.04/Thinkpad-X270-Ubuntu22.04/AWS和阿里云服务器/Kali-Linux虚拟机，每次换新的都得重新配环境，有点烦
-之前记过的笔记也是乱七八糟不知道去哪找，还是发在博客比较好。
-命令全是针对Ubuntu系统的，别的系统不熟。
-Amazon Web Services (AWS) Storage AWS Free Tier 通过 Amazon Elastic Block Store (EBS) 提供 30 GB 的存储、200 万 I/O 以及 1 GB 的快照存储。默认8G实在是太少了，想扩容发现控制台页面有点看不懂，参考了一下YouTube视频：How to increase EBS volume size in AWS EC2，该视频主要参考了AWS的官方文档。
-# 安装必要的工具 sudo apt install cloud-guest-utils gdisk -y # Ubuntu/Debian # 扩展分区 sudo growpart /dev/xvda 1 # 扩展文件系统 sudo resize2fs /dev/xvda1 # 对于 ext4 # 或 sudo xfs_growfs / # 对于 xfs # 验证扩展结果 df -h Connect 通常我使用ssh -i &quot;AWS-Cloudserver.pem&quot; ubuntu@ec2-3-14-128-59.us-east-2.compute.amazonaws.com，自动登录到ubuntu普通用户。
-</div>
+        <div class="line-clamp-3 text-xl font-light leading-8 lg:leading-9 text-gray-500">3.28</div>
     </div>
 </article>
     
@@ -491,7 +498,47 @@ Amazon Web Services (AWS) Storage AWS Free Tier 通过 Amazon Elastic Block Stor
         
         
         
-        <img src="/image/common-writing-empty.jpg?v=1743058929" alt=""
+        <img src="/image/common-writing-empty.jpg?v=1743146542" alt=""
+            class="w-full h-48 rounded-2xl object-cover" />
+        
+
+    </div>
+    <div class="w-full lg:p-5 overflow-auto">
+        <h3 class="pt-2 lg:pt-0 line-clamp-1 text-2xl font-medium leading-10 text-gray-400 hover:text-gray-300">
+            <a href="/zh/posts/aws%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE/">
+                AWS云服务器配置
+            </a>
+        </h3>
+        <div class="flex flex-row items-center justify-start py-1 text-lg">
+            
+            <time datetime="2025-03-16" class="text-gray-600">2025-03-23 16:55
+                |
+                5 minute read</time>
+            
+        </div>
+        <div class="line-clamp-3 text-xl font-light leading-8 lg:leading-9 text-gray-500">我手头有一堆Linux设备，WSL2-Ubuntu24.04/Thinkpad-X270-Ubuntu22.04/AWS和阿里云服务器/Kali-Linux虚拟机，每次换新的都得重新配环境，有点烦
+之前记过的笔记也是乱七八糟不知道去哪找，还是发在博客比较好。
+安装命令主要针对Ubuntu(apt)和Amazon Linux(dnf)。
+Content {{ .TableOfContents }}
+Amazon Web Services (AWS) Storage AWS Free Tier 通过 Amazon Elastic Block Store (EBS) 提供 30 GB 的存储、200 万 I/O 以及 1 GB 的快照存储。默认8G实在是太少了，想扩容发现控制台页面有点看不懂，参考了一下YouTube视频：How to increase EBS volume size in AWS EC2，该视频主要参考了AWS的官方文档。
+# 安装必要的工具 sudo apt install cloud-guest-utils gdisk -y # Ubuntu/Debian # 扩展分区 sudo growpart /dev/xvda 1 # 扩展文件系统 sudo resize2fs /dev/xvda1 # 对于 ext4 # 或 sudo xfs_growfs / # 对于 xfs # 验证扩展结果 df -h Connect SSH 通常我使用ssh -i &quot;AWS-Cloudserver.pem&quot; ubuntu@ec2-3-14-128-59.us-east-2.compute.amazonaws.com，自动登录到ubuntu普通用户。
+</div>
+    </div>
+</article>
+    
+
+
+    
+
+    
+    
+    
+<article class="flex flex-col lg:flex-row items-center bg-gray-800/50 px-1 rounded-md">
+    <div class="flex-none w-full lg:w-64 h-48 rounded-lg shadow-md bg-gray-900 shadow-gray-800">
+        
+        
+        
+        <img src="/image/common-writing-empty.jpg?v=1743146542" alt=""
             class="w-full h-48 rounded-2xl object-cover" />
         
 
@@ -523,12 +570,12 @@ Language Color Go #00ADD8 C #555555 Assembly #6E4C13 C# #178600 JavaScript #f1e0
     
     
     
-<article class="flex flex-col lg:flex-row items-center bg-gray-800/50 px-1 rounded-md">
+<article class="flex flex-col lg:flex-row items-center  px-1 rounded-md">
     <div class="flex-none w-full lg:w-64 h-48 rounded-lg shadow-md bg-gray-900 shadow-gray-800">
         
         
         
-        <img src="http://localhost:1313/image/neuro_cat.jpg?v=1743058929" alt=""
+        <img src="http://localhost:1313/image/neuro_cat.jpg?v=1743146542" alt=""
             class="w-full h-48 rounded-2xl object-cover" />
         
 
@@ -564,12 +611,12 @@ Demo 只用于静态页面演示，后续会超链接跳转至装配了Stockfish
     
     
     
-<article class="flex flex-col lg:flex-row items-center  px-1 rounded-md">
+<article class="flex flex-col lg:flex-row items-center bg-gray-800/50 px-1 rounded-md">
     <div class="flex-none w-full lg:w-64 h-48 rounded-lg shadow-md bg-gray-900 shadow-gray-800">
         
         
         
-        <img src="http://localhost:1313/image/deepspeed.png?v=1743058929" alt=""
+        <img src="http://localhost:1313/image/deepspeed.png?v=1743146542" alt=""
             class="w-full h-48 rounded-2xl object-cover" />
         
 
@@ -617,7 +664,7 @@ TODO&hellip;
     </div>
 
     
-    <img src="/image/logo.jpg?v=1743058929" class="w-80 self-center" alt="Logo" />
+    <img src="/image/logo.jpg?v=1743146542" class="w-80 self-center" alt="Logo" />
 
     <p class="leading-8 text-center text-lg font-light mt-3">
         
@@ -634,6 +681,12 @@ TODO&hellip;
     </div>
 
     <ul class="text-lg">
+        
+        
+        <li class="leading-10 line-clamp-1 mb-3 font-light border-b border-b-white/10 border-dashed">
+            <a href="/zh/draft/aws-ssh-connection-timeout-issue/" class="py-5 hover:text-gray-300">AWS Ssh Connection Timeout Issue</a>
+        </li>
+        
         
         
         <li class="leading-10 line-clamp-1 mb-3 font-light border-b border-b-white/10 border-dashed">
@@ -656,12 +709,6 @@ TODO&hellip;
         
         <li class="leading-10 line-clamp-1 mb-3 font-light border-b border-b-white/10 border-dashed">
             <a href="/zh/posts/%E6%9C%AC%E7%AB%99%E7%AE%80%E4%BB%8B/" class="py-5 hover:text-gray-300">本站简介</a>
-        </li>
-        
-        
-        
-        <li class="leading-10 line-clamp-1 mb-3 font-light border-b border-b-white/10 border-dashed">
-            <a href="/zh/posts/deepspeed%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/" class="py-5 hover:text-gray-300">DeepSpeed实践笔记</a>
         </li>
         
         
@@ -802,7 +849,7 @@ TODO&hellip;
         
         <li class="mb-1 border-b border-b-white/10 border-dashed">
             <a href="/zh/archives">2025年03月<span
-                    class="ml-2 px-2 bg-gray-800 rounded-full text-gray-500">4</span></a>
+                    class="ml-2 px-2 bg-gray-800 rounded-full text-gray-500">5</span></a>
         </li>
         
         
