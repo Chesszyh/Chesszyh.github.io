@@ -328,12 +328,9 @@ sudo docker info
 
 经常需要更新，比如可参考[Github](https://github.com/dongyubin/DockerHub)。直接google搜"docker最新可用镜像源"就行。
 
-### 其他Docker命令
+### Docker具体使用
 
-```shell
-docker ps -a # 查看所有容器
-docker log <container_id> # 查看指定容器日志
-```
+可参考[Docker](../Server/Docker.md)。
 
 ## 其他工具
 
