@@ -4,6 +4,7 @@ date: 2025-03-23T16:55:36+08:00
 draft: false
 categories: ["Cloud Server", "Web"]
 tags: ["AWS", "Linux", "Server"]
+featuredImage: "/image/aws.png"
 ---
 
 我手头有一堆Linux设备，WSL2-Ubuntu24.04/Thinkpad-X270-Ubuntu22.04/AWS和阿里云服务器/Kali-Linux虚拟机，每次换新的都得重新配环境，有点烦。
@@ -92,18 +93,21 @@ icacls "D:\下载\AWS-Cloudserver.pem" /grant:r "$($env:USERNAME):(R,W)"
 
 之前我用阿里云2核2G服务器试着启动过open-webui的服务，结果也是直接卡死。刚才新租了一个AWS服务器，什么服务都没启动，秒连。
 
-看来只能想想**内网穿透**，用本地Ubuntu PC来做open-webui的后端了……
-
 ## Network
 
-### DNS
+### nodejs安装/升级
+
+通过`nvm`(Node Version Manager)安装。nvm可以在多个不同nodejs版本之间切换，便于管理项目。
 
 ```shell
-# nginx
-
-# cloudflare
-
-# ssh
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+source ~/.zshrc # or ~/.bashrc
+nvm --version
+nvm install 20 # or nvm install node
+nvm use 20   # or nvm use node
+node -v
+# 如有需要。继续安装pnpm
+npm install -g pnpm
 ```
 
 ## Shell

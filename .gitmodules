@@ -2,10 +2,6 @@
     path = copilot/copilot-RE
     url = https://github.com/rohitaryal/copilot-RE
 
-[submodule "copilot/copilot-metrics-viewer"]
-    path = copilot/copilot-metrics-viewer
-    url = https://github.com/github-copilot-resources/copilot-metrics-viewer
-
 [submodule "open-webui"]
     path = open-webui
     url = https://github.com/Chesszyh/open-webui

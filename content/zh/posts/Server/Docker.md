@@ -4,12 +4,57 @@ date: 2025-03-29T13:22:49+08:00
 draft: false
 categories: []
 tags: []
+featuredImage: "/image/docker.png"
 ---
 
 <!-- 文章内容开始 -->
 # Docker
 
 ## Content
+
+## 基础
+
+### Images && Containers
+
+**Images**: **镜像**是一个只读的模板，用于创建容器。可以基于一个镜像启动多个容器。
+**Containers**: **容器**是镜像的一个实例。容器是一个轻量级、可执行的独立软件包，包含运行某个软件所需的所有代码、运行时、系统工具、库和设置。
+
+```shell
+# Images
+docker pull <image_id_or_name>  # 拉取镜像
+docker run -d -p 80:80 <image_id_or_name> # 运行镜像：-d表示后台运行，-p表示端口映射
+docker images # 查看镜像
+docker images --filter reference=<image_id_or_name> # 查看镜像
+docker rmi -f <image_id_or_name>  # 删除镜像：如果镜像正在被使用，则需要加-f强制删除
+# Containers
+docker containers ls -a # 查看所有容器，包括停止的容器
+docker start/stop/rm <container_id_or_name>
+docker exec -it <container_id_or_name> bash # 进入容器：-it表示交互式终端
+```
+
+## Openai API Proxy
+
+参考仓库：[chatgptProxyAPI](https://github.com/x-dr/chatgptProxyAPI)(已经被Archive了)
+
+使用Cloudflare的方法，在我这里似乎有些问题；所以我就采用了作者不推荐的Docker部署。我没有**VPS(Virtual Private Server)**，所以就同样使用了一年免费的AWS EC2，并在开放端口上做了限制，即用即开。更好的解决方案应该是只对我的IP开放端口，但我没法长期稳定使用一个节点，IP老是变，所以就暂时设的是使用时开放0.0.0.0/0，使用完后关闭。此外还有一个不推荐的原因是**不支持SSE**(Server-Sent Events，实时聊天常用)，原因我也不是很清楚，目前自用好像也没啥问题，所以暂时先不管了。
+
+```shell
+# 将容器内3000端口映射到主机的4000端口
+# README里都是3000，但我3000被open-webui占用了，所以改成4000
+docker run -itd --name openaiproxy \
+            -p 4000:3000 \
+            --restart=always \
+           gindex/openaiproxy:latest
+
+# 使用：
+curl --location 'http://[YOUR_SERVER_IP]:4000/proxy/v1/chat/completions' \
+--header 'Authorization: Bearer sk-xxxxxxxxxxxxxxx' \
+--header 'Content-Type: application/json' \
+--data '{
+   "model": "gpt-3.5-turbo",
+  "messages": [{"role": "user", "content": "Hello!"}]
+ }'
+```
 
 ## AWS Docker Private Registry
 

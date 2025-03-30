@@ -20,7 +20,7 @@
     <meta name="keywords" content="Computer Science, AI, LLM, Deep Learning, C&#43;&#43;">
     <meta name="description" content="Chesszyh&#39;s Blog，提供CS/LLM等领域的学习笔记与技术分享。">
     <link rel="canonical" href="http://localhost:1313/zh/tags/linux/" />
-    <link rel="icon" href="/favicon.ico?v=1743146542" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico?v=1743346669" type="image/x-icon">
     
 <link rel="stylesheet" href="/css/app.css">
     
@@ -59,7 +59,7 @@
     <nav class="flex flex-1 flex-col lg:flex-row items-center justify-between">
         <a href="/">
             
-            <img src="/image/logo.jpg?v=1743146542" alt="site logo" 
+            <img src="/image/logo.jpg?v=1743346669" alt="site logo" 
                 class="w-16 h-16 my-5 p-1 bg-gray-100 rounded-full cursor-pointer hover:scale-110" />
         </a>
         
@@ -242,14 +242,14 @@
         
         
         
-        <img src="/image/common-writing-empty.jpg?v=1743146542" alt=""
+        <img src="http://localhost:1313/image/aws.png?v=1743346669" alt=""
             class="w-full h-48 rounded-2xl object-cover" />
         
 
     </div>
     <div class="w-full lg:p-5 overflow-auto">
         <h3 class="pt-2 lg:pt-0 line-clamp-1 text-2xl font-medium leading-10 text-gray-400 hover:text-gray-300">
-            <a href="/zh/posts/aws%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE/">
+            <a href="/zh/posts/server/aws%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE/">
                 AWS云服务器配置
             </a>
         </h3>
@@ -260,12 +260,12 @@
                 5 minute read</time>
             
         </div>
-        <div class="line-clamp-3 text-xl font-light leading-8 lg:leading-9 text-gray-500">我手头有一堆Linux设备，WSL2-Ubuntu24.04/Thinkpad-X270-Ubuntu22.04/AWS和阿里云服务器/Kali-Linux虚拟机，每次换新的都得重新配环境，有点烦
+        <div class="line-clamp-3 text-xl font-light leading-8 lg:leading-9 text-gray-500">我手头有一堆Linux设备，WSL2-Ubuntu24.04/Thinkpad-X270-Ubuntu22.04/AWS和阿里云服务器/Kali-Linux虚拟机，每次换新的都得重新配环境，有点烦。
 之前记过的笔记也是乱七八糟不知道去哪找，还是发在博客比较好。
 安装命令主要针对Ubuntu(apt)和Amazon Linux(dnf)。
-Content {{ .TableOfContents }}
-Amazon Web Services (AWS) Storage AWS Free Tier 通过 Amazon Elastic Block Store (EBS) 提供 30 GB 的存储、200 万 I/O 以及 1 GB 的快照存储。默认8G实在是太少了，想扩容发现控制台页面有点看不懂，参考了一下YouTube视频：How to increase EBS volume size in AWS EC2，该视频主要参考了AWS的官方文档。
-# 安装必要的工具 sudo apt install cloud-guest-utils gdisk -y # Ubuntu/Debian # 扩展分区 sudo growpart /dev/xvda 1 # 扩展文件系统 sudo resize2fs /dev/xvda1 # 对于 ext4 # 或 sudo xfs_growfs / # 对于 xfs # 验证扩展结果 df -h Connect SSH 通常我使用ssh -i &quot;AWS-Cloudserver.pem&quot; ubuntu@ec2-3-14-128-59.us-east-2.compute.amazonaws.com，自动登录到ubuntu普通用户。
+Content Storage Connect Network Shell Language Docker Check Storage AWS免费额度：在开设 AWS 账户的第一年，与免费套餐 AMI、每月 750 小时的公有 IPv4 地址用量、30 GiB 的 EBS 存储、200 万个 I/O、1 GB 快照和 100 GB 互联网带宽一起使用时，您每月可获得 750 小时的 t2.micro 实例用量（如果没有 t2.micro，则使用 t3.micro）。
+默认磁盘空间8G实在是太少了，想扩容发现控制台页面有点看不懂，参考了一下YouTube视频：How to increase EBS volume size in AWS EC2，该视频主要参考了AWS的官方文档。
+# 安装必要的工具 sudo apt install cloud-guest-utils gdisk -y # Ubuntu/Debian # 扩展分区 sudo growpart /dev/xvda 1 # 扩展文件系统 sudo resize2fs /dev/xvda1 # 对于 ext4 # 或 sudo xfs_growfs / # 对于 xfs # 验证扩展结果 df -h SSH Connect 通常我使用ssh -i &quot;AWS-Cloudserver.pem&quot; ubuntu@ec2-3-14-128-59.us-east-2.compute.amazonaws.com，自动登录到ubuntu普通用户。
 </div>
     </div>
 </article>
@@ -295,7 +295,7 @@ Amazon Web Services (AWS) Storage AWS Free Tier 通过 Amazon Elastic Block Stor
     </div>
 
     
-    <img src="/image/logo.jpg?v=1743146542" class="w-80 self-center" alt="Logo" />
+    <img src="/image/logo.jpg?v=1743346669" class="w-80 self-center" alt="Logo" />
 
     <p class="leading-8 text-center text-lg font-light mt-3">
         
@@ -315,31 +315,31 @@ Amazon Web Services (AWS) Storage AWS Free Tier 通过 Amazon Elastic Block Stor
         
         
         <li class="leading-10 line-clamp-1 mb-3 font-light border-b border-b-white/10 border-dashed">
-            <a href="/zh/draft/aws-ssh-connection-timeout-issue/" class="py-5 hover:text-gray-300">AWS Ssh Connection Timeout Issue</a>
+            <a href="/zh/posts/server/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%A8%B3%E5%AE%9A%E6%80%A7%E9%85%8D%E7%BD%AE/" class="py-5 hover:text-gray-300">云服务器稳定性配置</a>
+        </li>
+        
+        
+        
+        <li class="leading-10 line-clamp-1 mb-3 font-light border-b border-b-white/10 border-dashed">
+            <a href="/zh/posts/server/docker/" class="py-5 hover:text-gray-300">Docker</a>
+        </li>
+        
+        
+        
+        <li class="leading-10 line-clamp-1 mb-3 font-light border-b border-b-white/10 border-dashed">
+            <a href="/zh/posts/security/ddos/" class="py-5 hover:text-gray-300">Ddos</a>
+        </li>
+        
+        
+        
+        <li class="leading-10 line-clamp-1 mb-3 font-light border-b border-b-white/10 border-dashed">
+            <a href="/zh/posts/llm/open-webui/" class="py-5 hover:text-gray-300">Open Webui</a>
         </li>
         
         
         
         <li class="leading-10 line-clamp-1 mb-3 font-light border-b border-b-white/10 border-dashed">
             <a href="/zh/posts/change_log/" class="py-5 hover:text-gray-300">Change_log</a>
-        </li>
-        
-        
-        
-        <li class="leading-10 line-clamp-1 mb-3 font-light border-b border-b-white/10 border-dashed">
-            <a href="/zh/posts/aws%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE/" class="py-5 hover:text-gray-300">AWS云服务器配置</a>
-        </li>
-        
-        
-        
-        <li class="leading-10 line-clamp-1 mb-3 font-light border-b border-b-white/10 border-dashed">
-            <a href="/zh/posts/go%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" class="py-5 hover:text-gray-300">Go快速入门</a>
-        </li>
-        
-        
-        
-        <li class="leading-10 line-clamp-1 mb-3 font-light border-b border-b-white/10 border-dashed">
-            <a href="/zh/posts/%E6%9C%AC%E7%AB%99%E7%AE%80%E4%BB%8B/" class="py-5 hover:text-gray-300">本站简介</a>
         </li>
         
         
@@ -422,6 +422,11 @@ Amazon Web Services (AWS) Storage AWS Free Tier 通过 Amazon Elastic Block Stor
         
         
         
+        <a href="/zh/tags/llm/"><span
+                class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">LLM&nbsp;&nbsp;1</span></a>
+        
+        
+        
         <a href="/zh/tags/server/"><span
                 class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">Server&nbsp;&nbsp;1</span></a>
         
@@ -452,11 +457,6 @@ Amazon Web Services (AWS) Storage AWS Free Tier 通过 Amazon Elastic Block Stor
         
         
         
-        <a href="/zh/tags/llm/"><span
-                class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">LLM&nbsp;&nbsp;1</span></a>
-        
-        
-        
         
     </div>
 
@@ -480,7 +480,7 @@ Amazon Web Services (AWS) Storage AWS Free Tier 通过 Amazon Elastic Block Stor
         
         <li class="mb-1 border-b border-b-white/10 border-dashed">
             <a href="/zh/archives">2025年03月<span
-                    class="ml-2 px-2 bg-gray-800 rounded-full text-gray-500">5</span></a>
+                    class="ml-2 px-2 bg-gray-800 rounded-full text-gray-500">8</span></a>
         </li>
         
         

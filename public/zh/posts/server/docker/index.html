@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html
+  lang="zh-cn"
+  dir="ltr"
+><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1">
+    <title>
+    
+    Docker - CodeTrace
+    
+</title>
+    
+    
+    
+    
+    
+    
+    <meta name="keywords" content="Computer Science, AI, LLM, Deep Learning, C&#43;&#43;">
+    <meta name="description" content="Chesszyh&#39;s Blog，提供CS/LLM等领域的学习笔记与技术分享。">
+    <link rel="canonical" href="http://localhost:1313/zh/posts/server/docker/" />
+    <link rel="icon" href="/favicon.ico?v=1743346669" type="image/x-icon">
+    
+<link rel="stylesheet" href="/css/app.css">
+    
+<script src="/js/main.js"></script>
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.10/dist/cdn.min.js"></script>
+
+    
+    <link rel="prefetch" href="/audio/vine-boom.mp3" as="audio">
+    <link rel="prefetch" href="/image/lavalamp.png" as="image">
+
+    
+    
+
+    
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-KRJ7MGKP6J');
+    </script>
+    
+
+    
+    
+</head><body>
+    <div
+      class="mx-auto max-w-[calc(120rem)] min-h-screen 2xl:px-[calc(16rem)] xl:px-24 md:px-8 px-4"
+    >
+      
+      <div x-data="{ openMenu: false }" class="relative"> 
+    <nav class="flex flex-1 flex-col lg:flex-row items-center justify-between">
+        <a href="/">
+            
+            <img src="/image/logo.jpg?v=1743346669" alt="site logo" 
+                class="w-16 h-16 my-5 p-1 bg-gray-100 rounded-full cursor-pointer hover:scale-110" />
+        </a>
+        
+        <div class="hidden lg:block" :class="{'hidden': !openMenu}">
+            
+
+
+
+
+
+
+<ul
+    class="flex flex-col lg:flex-row justify-end mt-2 sm:mt-5 mb-5 pb-2 font-light text-xl lg:text-2xl gap-5 lg:gap-1 text-center">
+    
+
+
+
+
+
+
+
+
+<li>
+    <a    class="px-5 lg:px-10 py-3 font-light hover:border-b-2 hover:border-red-500"     href="/zh/"  >首页</a>
+    
+</li>
+
+
+
+
+
+
+
+<li>
+    <a    class="px-5 lg:px-10 py-3 font-light hover:border-b-2 hover:border-red-500"     href="/zh/categories/"  >文章分类</a>
+    
+</li>
+
+
+
+
+
+
+
+<li>
+    <a    class="px-5 lg:px-10 py-3 font-light hover:border-b-2 hover:border-red-500"     href="/zh/tags/"  >标签</a>
+    
+</li>
+
+
+
+
+
+
+
+<li>
+    <a    class="px-5 lg:px-10 py-3 font-light hover:border-b-2 hover:border-red-500"    >联系我</a>
+    
+</li>
+
+
+
+
+
+
+
+<li>
+    <a    class="px-5 lg:px-10 py-3 font-light hover:border-b-2 hover:border-red-500"    >和我下棋</a>
+    
+</li>
+
+
+</ul>
+
+
+
+
+        </div>
+    </nav>
+    <div class="absolute top-8 right-5 flex items-center lg:hidden"> 
+        
+
+        
+        <button @click="openMenu = !openMenu" type="button"
+            class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-800 hover:text-gray-100 focus:outline-hidden focus:ring-2 focus:ring-inset focus:ring-white"
+            aria-controls="mobile-menu" aria-expanded="openMenu">
+            
+
+    
+            <svg x-show="!openMenu" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+
+            
+            <svg x-show="openMenu" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+    </div>
+</div>
+
+      
+      <header class="flex flex-col w-full items-center justify-center text-white pt-8 pb-8">
+    
+    <div class="w-full">
+        <div class="flex flex-1 flex-row justify-between">
+            <h2 class="w-full text-center text-3xl sm:text-5xl font-crimson font-bold tracking-tight text-gray-300">
+                <a href="http://localhost:1313/">CodeTrace</a>
+            </h2>
+        </div>
+        <p
+            class="w-full text-center pl-1 pb-4 sm:pt-3 sm:pb-0 font-crimson font-normal text-xl sm:text-2xl leading-8 text-gray-500">
+            Chesszyh&#39;s Personal Blog</p>
+    </div>
+    
+    
+    <div class="relative w-9/12 lg:w-1/2 h-12 my-5">
+        
+        <form action="/zh/search" method="get">
+            
+            <input
+                class="bg-gray-800 placeholder:italic placeholder:text-gray-600 w-full h-12 rounded-full mt-1 pl-5 pr-5 border border-gray-800 text-gray-100"
+                placeholder='输入关键词...' type="text" name="q" id="search-query" />
+            
+            
+            <button
+                class="absolute inset-y-2 right-1 w-28 h-10 font-light bg-gray-900 hover:bg-red-500 text-gray-500 hover:text-gray-100 rounded-full cursor-pointer"
+                type="submit">搜索</button>
+        </form>
+    </div>
+
+    
+    
+
+    
+
+    <div class="w-full flex flex-row justify-start text-gray-500 text-lg px-1 border-l-4 border-l-red-500">
+        
+        <ul class="flex flex-row gap-x-2">
+            
+            <li class="">
+                <a href="/" class="hover:text-gray-100">首页</a>
+            </li>
+            
+            
+            <li>
+                &gt;&nbsp;&nbsp;<a href="/zh/posts/server/docker/" class="hover:text-gray-100">Docker</a>
+            </li>
+            
+        </ul>
+    
+    </div>
+    <div class="w-full h-2 border-b border-b-gray-600/50 border-dashed font-light text-gray-300">
+    </div>
+    
+
+</header>
+
+
+      <div
+        class="flex flex-col overflow-hidden xl:px-0 lg:flex-row lg:space-x-8"
+      >
+        <main class="w-full overflow-hidden">
+          
+
+<article class="single-article">
+    <div class="group relative">
+        
+        <h1 class="text-xl font-medium leading-10 text-gray-400 hover:text-gray-100">
+            <a href="/zh/posts/server/docker/">
+                Docker
+            </a>
+        </h1>
+        <time datetime="2025-03-16" class="flex items-center py-2 text-lg text-gray-600">golang</time>
+            2025-03-29 13:22
+            &nbsp;&nbsp;|&nbsp;&nbsp;3 minute read 
+        </time>
+        
+        
+        <div
+            class="mt-1 lg:pb-10 px-2 text-xl leading-10 font-thin text-gray-500 overflow-hidden break-words article-body">
+            <h1 id="docker">Docker</h1>
+<h2 id="content">Content</h2>
+<h2 id="基础">基础</h2>
+<h3 id="images--containers">Images &amp;&amp; Containers</h3>
+<p><strong>Images</strong>: <strong>镜像</strong>是一个只读的模板，用于创建容器。可以基于一个镜像启动多个容器。
+<strong>Containers</strong>: <strong>容器</strong>是镜像的一个实例。容器是一个轻量级、可执行的独立软件包，包含运行某个软件所需的所有代码、运行时、系统工具、库和设置。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># Images</span>
+</span></span><span style="display:flex;"><span>docker pull &lt;image_id_or_name&gt;  <span style="color:#75715e"># 拉取镜像</span>
+</span></span><span style="display:flex;"><span>docker run -d -p 80:80 &lt;image_id_or_name&gt; <span style="color:#75715e"># 运行镜像：-d表示后台运行，-p表示端口映射</span>
+</span></span><span style="display:flex;"><span>docker images <span style="color:#75715e"># 查看镜像</span>
+</span></span><span style="display:flex;"><span>docker images --filter reference<span style="color:#f92672">=</span>&lt;image_id_or_name&gt; <span style="color:#75715e"># 查看镜像</span>
+</span></span><span style="display:flex;"><span>docker rmi -f &lt;image_id_or_name&gt;  <span style="color:#75715e"># 删除镜像：如果镜像正在被使用，则需要加-f强制删除</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Containers</span>
+</span></span><span style="display:flex;"><span>docker containers ls -a <span style="color:#75715e"># 查看所有容器，包括停止的容器</span>
+</span></span><span style="display:flex;"><span>docker start/stop/rm &lt;container_id_or_name&gt;
+</span></span><span style="display:flex;"><span>docker exec -it &lt;container_id_or_name&gt; bash <span style="color:#75715e"># 进入容器：-it表示交互式终端</span>
+</span></span></code></pre></div><h2 id="openai-api-proxy">Openai API Proxy</h2>
+<p>参考仓库：<a href="https://github.com/x-dr/chatgptProxyAPI">chatgptProxyAPI</a>(已经被Archive了)</p>
+<p>使用Cloudflare的方法，在我这里似乎有些问题；所以我就采用了作者不推荐的Docker部署。我没有<strong>VPS(Virtual Private Server)</strong>，所以就同样使用了一年免费的AWS EC2，并在开放端口上做了限制，即用即开。更好的解决方案应该是只对我的IP开放端口，但我没法长期稳定使用一个节点，IP老是变，所以就暂时设的是使用时开放0.0.0.0/0，使用完后关闭。此外还有一个不推荐的原因是<strong>不支持SSE</strong>(Server-Sent Events，实时聊天常用)，原因我也不是很清楚，目前自用好像也没啥问题，所以暂时先不管了。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 将容器内3000端口映射到主机的4000端口</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># README里都是3000，但我3000被open-webui占用了，所以改成4000</span>
+</span></span><span style="display:flex;"><span>docker run -itd --name openaiproxy <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>            -p 4000:3000 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>            --restart<span style="color:#f92672">=</span>always <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>           gindex/openaiproxy:latest
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 使用：</span>
+</span></span><span style="display:flex;"><span>curl --location <span style="color:#e6db74">&#39;http://[YOUR_SERVER_IP]:4000/proxy/v1/chat/completions&#39;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>--header <span style="color:#e6db74">&#39;Authorization: Bearer sk-xxxxxxxxxxxxxxx&#39;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>--header <span style="color:#e6db74">&#39;Content-Type: application/json&#39;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>--data <span style="color:#e6db74">&#39;{
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">   &#34;model&#34;: &#34;gpt-3.5-turbo&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  &#34;messages&#34;: [{&#34;role&#34;: &#34;user&#34;, &#34;content&#34;: &#34;Hello!&#34;}]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"> }&#39;</span>
+</span></span></code></pre></div><h2 id="aws-docker-private-registry">AWS Docker Private Registry</h2>
+<h3 id="手动搭建">手动搭建</h3>
+<p>我在使用国内镜像源下载Open-Webui Docker镜像时，发现速度依然很慢，所以就考虑用AWS在美国的EC2上搭建一个私有Registry，然后国内的阿里云服务器从AWS上拉取镜像。实测，速度比之前镜像快很多，但还是比不上国外直接从Docker Hub拉取的速度。</p>
+<p>AWS似乎还提供了<a href="/zh/posts/server/docker/#%e4%bd%bf%e7%94%a8-aws-ecr">AWS ECR(Elastic Container Registry)</a>服务，也可以直接拿来用。</p>
+<blockquote>
+<p>注：以下命令中，我AWS的实际公网ip用<code>[aws]</code>替换。</p></blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 在 AWS EC2 上手动从 Docker Hub 拉取镜像，以hello-world为例</span>
+</span></span><span style="display:flex;"><span>docker pull hello-world
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 运行私有 Registry</span>
+</span></span><span style="display:flex;"><span>docker run -d -p 5000:5000 --name registry registry:2
+</span></span><span style="display:flex;"><span>docker ps <span style="color:#75715e"># 应看到STATUS为Up的registry容器</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 为hello-world镜像打上标签</span>
+</span></span><span style="display:flex;"><span>docker tag hello-world:latest <span style="color:#f92672">[</span>aws<span style="color:#f92672">]</span>:5000/chesszyh987/hello-world:latest
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 检查registry是否能够在另一台主机上访问</span>
+</span></span><span style="display:flex;"><span>curl http://<span style="color:#f92672">[</span>aws<span style="color:#f92672">]</span>:5000/v2/_catalog <span style="color:#75715e"># 如果返回{&#34;repositories&#34;:[]}，说明registry正常工作</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 修改配置文件，使用 HTTP 协议连接到你的私有 Registry</span>
+</span></span><span style="display:flex;"><span>sudo vim /etc/docker/daemon.json
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 添加以下选项</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;insecure-registries&#34;</span>: <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;[aws]:5000&#34;</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>sudo systemctl daemon-reexec    <span style="color:#75715e"># 重新加载配置文件</span>
+</span></span><span style="display:flex;"><span>sudo systemctl restart docker   <span style="color:#75715e"># 重启docker服务</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 推送镜像到私有 Registry</span>
+</span></span><span style="display:flex;"><span>docker push <span style="color:#f92672">[</span>aws<span style="color:#f92672">]</span>:5000/chesszyh987/hello-world:latest
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 在另一台主机上拉取镜像</span>
+</span></span><span style="display:flex;"><span>docker pull <span style="color:#f92672">[</span>aws<span style="color:#f92672">]</span>:5000/chesszyh987/hello-world:latest
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 运行镜像</span>
+</span></span><span style="display:flex;"><span>docker run -d -p 80:80 <span style="color:#f92672">[</span>aws<span style="color:#f92672">]</span>:5000/chesszyh987/hello-world:latest <span style="color:#75715e"># 输出Hello World!</span>
+</span></span></code></pre></div><h3 id="使用-aws-ecr">使用 AWS ECR</h3>
+<p>接下来，我们将从头开始创建一个Docker镜像，并将其推送到AWS ECR。</p>
+<h4 id="aws认证">AWS认证</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 配置AWS凭证</span>
+</span></span><span style="display:flex;"><span>aws configure
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># AWS Access Key ID：AWS 的访问密钥 ID。</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># AWS Secret Access Key：AWS 的秘密访问密钥。</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Default region name：设置你使用的区域（比如 us-east-2）。</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Default output format：通常选择 json。</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 登录 AWS ECR</span>
+</span></span><span style="display:flex;"><span>aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 412381757149.dkr.ecr.us-east-2.amazonaws.com
+</span></span></code></pre></div><h4 id="生成docker镜像">生成Docker镜像</h4>
+<p>参考资源：<a href="https://docs.aws.amazon.com/zh_cn/AmazonECS/latest/developerguide/create-container-image.html">创建容器镜像以在 Amazon ECS 上使用</a>和<a href="https://docs.aws.amazon.com/zh_cn/AmazonECR/latest/userguide/getting-started-cli.html">在 Amazon ECR 中移动映像的整个生命周期</a></p>
+<p>首先，编写Dockerfile文件。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dockerfile" data-lang="dockerfile"><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> public.ecr.aws/amazonlinux/amazonlinux:latest  # 使用 Amazon ECR Public 上托管的 Amazon Linux 2 公有映像</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># Update installed packages and install Apache</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> yum update -y <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span> yum install -y httpd<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># Write hello world message</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> echo <span style="color:#e6db74">&#39;Hello World!&#39;</span> &gt; /var/www/html/index.html<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># Configure Apache</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> echo <span style="color:#e6db74">&#39;mkdir -p /var/run/httpd&#39;</span> &gt;&gt; /root/run_apache.sh <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span> echo <span style="color:#e6db74">&#39;mkdir -p /var/lock/httpd&#39;</span> &gt;&gt; /root/run_apache.sh <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span> echo <span style="color:#e6db74">&#39;/usr/sbin/httpd -D FOREGROUND&#39;</span> &gt;&gt; /root/run_apache.sh <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span> chmod <span style="color:#ae81ff">755</span> /root/run_apache.sh<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">EXPOSE</span><span style="color:#e6db74"> 80   # Expose port 80 for the web server</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">CMD</span> /root/run_apache.sh <span style="color:#75715e"># Start Apache in the foreground</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><p>然后执行以下命令来构建镜像。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 构建镜像</span>
+</span></span><span style="display:flex;"><span>docker build -t hello-world .
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 检查镜像</span>
+</span></span><span style="display:flex;"><span>docker images --filter reference<span style="color:#f92672">=</span>hello-world
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 运行镜像</span>
+</span></span><span style="display:flex;"><span>docker run -t -i -p 80:80 hello-world <span style="color:#75715e"># -p 80:80 将容器的80端口映射到主机的80端口</span>
+</span></span></code></pre></div><p>访问<code>http://[aws]:80</code>，应该能看到Hello World!</p>
+<h4 id="推送镜像到aws">推送镜像到AWS</h4>
+<p>首先通过AWS ECR创建一个存储库，访问Amazon ECR - Private registry - Repositories，或者CLI命令行创建：<code>aws ecr create-repository --repository-name hello-repository --region region</code></p>
+<p>其实接下来的步骤跟着AWS的提示走就行了。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e"># 给镜像打标签，假设你的AWS账号ID是412381757149，区域是us-east-2，存储库命令空间/命名为cloudserver/docker</span>
+</span></span><span style="display:flex;"><span>docker tag hello-world:latest 412381757149.dkr.ecr.us-east-2.amazonaws.com/cloudserver/docker:latest
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 推送镜像到AWS ECR</span>
+</span></span><span style="display:flex;"><span>docker push 412381757149.dkr.ecr.us-east-2.amazonaws.com/cloudserver/docker:latest
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 清除ECR中的镜像</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># aws ecr delete-repository --repository-name cloudserver/docker --region region --force</span>
+</span></span></code></pre></div><p>创建后的结果：<img src="../../../img/AWS-ECR.png" alt="AWS-ECR"></p>
+<h4 id="从aws-ecr拉取镜像">从AWS ECR拉取镜像</h4>
+<p>先决条件：另一台主机也需要安装AWS CLI并配置好凭证。Amazon Linux自带了AWS CLI，但是其他操作系统均需要手动安装。</p>
+<p>安装CLI参考：<a href="https://docs.aws.amazon.com/zh_cn/cli/latest/userguide/getting-started-install.html">安装或更新最新版本的 AWS CLI</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker pull 412381757149.dkr.ecr.us-east-2.amazonaws.com/cloudserver/docker:latest
+</span></span></code></pre></div>
+        </div>
+    </div>
+    <div class="text-gray-500 text-base">
+        文章链接:&nbsp;<a href="http://localhost:1313/zh/posts/server/docker/"
+            class="border-b border-b-gray-500 hover:text-gray-400">http://localhost:1313/zh/posts/server/docker/</a>
+    </div>
+    
+    
+    
+</article>
+
+
+        </main>
+
+        <aside id="sidebar" class="aside-container">
+
+    
+    <div class="aside-section-title">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+            class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+        </svg>
+        关于我
+    </div>
+
+    
+    <img src="/image/logo.jpg?v=1743346669" class="w-80 self-center" alt="Logo" />
+
+    <p class="leading-8 text-center text-lg font-light mt-3">
+        
+    </p>
+
+    
+    <div class="aside-section-title">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+            class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z" />
+        </svg>
+        最近发布
+    </div>
+
+    <ul class="text-lg">
+        
+        
+        <li class="leading-10 line-clamp-1 mb-3 font-light border-b border-b-white/10 border-dashed">
+            <a href="/zh/posts/server/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%A8%B3%E5%AE%9A%E6%80%A7%E9%85%8D%E7%BD%AE/" class="py-5 hover:text-gray-300">云服务器稳定性配置</a>
+        </li>
+        
+        
+        
+        <li class="leading-10 line-clamp-1 mb-3 font-light border-b border-b-white/10 border-dashed">
+            <a href="/zh/posts/server/docker/" class="py-5 hover:text-gray-300">Docker</a>
+        </li>
+        
+        
+        
+        <li class="leading-10 line-clamp-1 mb-3 font-light border-b border-b-white/10 border-dashed">
+            <a href="/zh/posts/security/ddos/" class="py-5 hover:text-gray-300">Ddos</a>
+        </li>
+        
+        
+        
+        <li class="leading-10 line-clamp-1 mb-3 font-light border-b border-b-white/10 border-dashed">
+            <a href="/zh/posts/llm/open-webui/" class="py-5 hover:text-gray-300">Open Webui</a>
+        </li>
+        
+        
+        
+        <li class="leading-10 line-clamp-1 mb-3 font-light border-b border-b-white/10 border-dashed">
+            <a href="/zh/posts/change_log/" class="py-5 hover:text-gray-300">Change_log</a>
+        </li>
+        
+        
+    </ul>
+
+    
+    <div class="aside-section-title">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+            class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                d="M2.25 7.125C2.25 6.504 2.754 6 3.375 6h6c.621 0 1.125.504 1.125 1.125v3.75c0 .621-.504 1.125-1.125 1.125h-6a1.125 1.125 0 0 1-1.125-1.125v-3.75ZM14.25 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v8.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 0 1-1.125-1.125v-8.25ZM3.75 16.125c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 0 1-1.125-1.125v-2.25Z" />
+        </svg>
+        热门分类
+    </div>
+    <ul class="leading-10 text-lg">
+        
+        
+        
+        
+        
+        <li class="mb-1 border-b border-b-gray-900 border-dashed font-light">
+            <a href="/zh/categories/web/" class="hover:text-gray-300">Web <span
+                    class="ml-2 px-2 bg-gray-800 rounded-full text-gray-500">2</span></a>
+        </li>
+        
+        
+        
+        
+        
+        <li class="mb-1 border-b border-b-gray-900 border-dashed font-light">
+            <a href="/zh/categories/cloud-server/" class="hover:text-gray-300">Cloud Server <span
+                    class="ml-2 px-2 bg-gray-800 rounded-full text-gray-500">1</span></a>
+        </li>
+        
+        
+        
+        
+        
+        <li class="mb-1 border-b border-b-gray-900 border-dashed font-light">
+            <a href="/zh/categories/go/" class="hover:text-gray-300">Go <span
+                    class="ml-2 px-2 bg-gray-800 rounded-full text-gray-500">1</span></a>
+        </li>
+        
+        
+        
+        
+        
+        <li class="mb-1 border-b border-b-gray-900 border-dashed font-light">
+            <a href="/zh/categories/llm/" class="hover:text-gray-300">LLM <span
+                    class="ml-2 px-2 bg-gray-800 rounded-full text-gray-500">1</span></a>
+        </li>
+        
+        
+        
+        
+        
+        <li class="mb-1 border-b border-b-gray-900 border-dashed font-light">
+            <a href="/zh/categories/programming/" class="hover:text-gray-300">Programming <span
+                    class="ml-2 px-2 bg-gray-800 rounded-full text-gray-500">1</span></a>
+        </li>
+        
+        
+        
+        
+
+    </ul>
+
+    
+    <div class="aside-section-title">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+            class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6Z" />
+        </svg>
+        热门标签
+    </div>
+    <div class="flex flex-wrap gap-2 text-lg leading-8 pt-3 pl-1">
+        
+        
+        
+        
+        <a href="/zh/tags/linux/"><span
+                class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">Linux&nbsp;&nbsp;1</span></a>
+        
+        
+        
+        <a href="/zh/tags/llm/"><span
+                class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">LLM&nbsp;&nbsp;1</span></a>
+        
+        
+        
+        <a href="/zh/tags/server/"><span
+                class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">Server&nbsp;&nbsp;1</span></a>
+        
+        
+        
+        <a href="/zh/tags/ai/"><span
+                class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">AI&nbsp;&nbsp;1</span></a>
+        
+        
+        
+        <a href="/zh/tags/aws/"><span
+                class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">AWS&nbsp;&nbsp;1</span></a>
+        
+        
+        
+        <a href="/zh/tags/deepspeed/"><span
+                class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">DeepSpeed&nbsp;&nbsp;1</span></a>
+        
+        
+        
+        <a href="/zh/tags/huggingface/"><span
+                class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">Huggingface&nbsp;&nbsp;1</span></a>
+        
+        
+        
+        
+    </div>
+
+    
+    <div class="aside-section-title">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+            class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                d="m20.25 7.5-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" />
+        </svg>
+        归档统计
+    </div>
+    <ul class="leading-10 text-lg font-light">
+        
+        
+        
+        
+        
+        
+        
+        
+        <li class="mb-1 border-b border-b-white/10 border-dashed">
+            <a href="/zh/archives">2025年03月<span
+                    class="ml-2 px-2 bg-gray-800 rounded-full text-gray-500">8</span></a>
+        </li>
+        
+        
+        
+        <li class="mb-1 border-b border-b-white/10 border-dashed">
+            <a href="/zh/archives">2025年02月<span
+                    class="ml-2 px-2 bg-gray-800 rounded-full text-gray-500">1</span></a>
+        </li>
+        
+        
+        
+    </ul>
+
+    
+    <div class="aside-section-title">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+            class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+        </svg>
+        联系方式
+    </div>
+    <div class="flex flex-row gap-2">
+        Email：chesszyh987@gmail.com
+    </div>
+</aside>
+      </div>
+
+      <footer class="p-5 text-xl text-center mt-8 pt-8 pb-8 border-t border-gray-100/10">
+    <div class="text-gray-500">
+        
+        &#xA9; 2025 - now by <a class="hover:text-gray-100" href="https://github.com/Chesszyh"
+            target="_blank">Chesszyh</a>. All Rights
+        Reserved.
+        
+
+        
+        
+        | <a class="hover:text-gray-100" href=" /en ">🇺🇸EN</a>
+        
+        | <a class="hover:text-gray-100" href=" /zh ">🇨🇳CN</a>
+        
+    </div>
+</footer> <div class="cookie-container text-center py-12 text-2xl font-thin text-gray-500">
+  
+  <p>
+    We use cookies on this website to give you the best experience on our
+    site and show you relevant ads. To find out more, read our
+    <a href="/zh/privacy/" class="text-red-600">privacy policy</a> and <a href="/zh/terms/" class="text-red-600">cookie
+      policy</a>.
+  </p>
+  
+  
+  <button class="cookie-btn w-32 h-12 lg:h-22 mt-5 py-2 bg-red-600 text-white rounded-full hover:scale-110">
+    Okay
+  </button>
+</div>
+<script src="/js/cookie.js"></script>
+    </div>
+
+    
+    <link rel="stylesheet" href="/css/lava-lamp.css" />
+    <script src="/js/lava-lamp.js"></script>
+
+    
+    
+  </body>
+</html>

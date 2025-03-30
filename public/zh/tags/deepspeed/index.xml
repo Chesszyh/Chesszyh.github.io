@@ -10,9 +10,9 @@
     <atom:link href="http://localhost:1313/zh/tags/deepspeed/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>DeepSpeed实践笔记</title>
-      <link>http://localhost:1313/zh/posts/deepspeed%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/</link>
+      <link>http://localhost:1313/zh/posts/llm/deepspeed%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/</link>
       <pubDate>Fri, 28 Feb 2025 11:55:00 +0800</pubDate>
-      <guid>http://localhost:1313/zh/posts/deepspeed%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/</guid>
+      <guid>http://localhost:1313/zh/posts/llm/deepspeed%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/</guid>
       <description>&lt;h1 id=&#34;deepspeed实践笔记&#34;&gt;DeepSpeed实践笔记&lt;/h1&gt;&#xA;&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/deepspeedai/DeepSpeed&#34;&gt;DeepSpeed&lt;/a&gt;是微软开源的深度学习训练库，用于提高大规模模型训练的效率和速度。&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/deepspeedai/DeepSpeedExamples&#34;&gt;DeepSpeedExamples&lt;/a&gt;提供了DeepSpeed的各种代码示例，包括训练、推理、压缩、基准测试和应用程序等。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;本次使用的是&lt;a href=&#34;https://github.com/deepspeedai/DeepSpeedExamples/tree/master/applications/DeepSpeed-Chat&#34;&gt;DeepSpeed-Chat&lt;/a&gt;，可以帮助我们在预训练模型基础上快速训练一个高质量的聊天模型。&lt;/p&gt;&#xA;&lt;p&gt;TODO&amp;hellip;&lt;/p&gt;</description>
     </item>
   </channel>

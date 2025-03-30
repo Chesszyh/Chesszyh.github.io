@@ -20,7 +20,7 @@
     <meta name="keywords" content="Computer Science, AI, LLM, Deep Learning, C&#43;&#43;">
     <meta name="description" content="Chesszyh&#39;s Blog，提供CS/LLM等领域的学习笔记与技术分享。">
     <link rel="canonical" href="http://localhost:1313/zh/posts/" />
-    <link rel="icon" href="/favicon.ico?v=1743146542" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico?v=1743346669" type="image/x-icon">
     
 <link rel="stylesheet" href="/css/app.css">
     
@@ -59,7 +59,7 @@
     <nav class="flex flex-1 flex-col lg:flex-row items-center justify-between">
         <a href="/">
             
-            <img src="/image/logo.jpg?v=1743146542" alt="site logo" 
+            <img src="/image/logo.jpg?v=1743346669" alt="site logo" 
                 class="w-16 h-16 my-5 p-1 bg-gray-100 rounded-full cursor-pointer hover:scale-110" />
         </a>
         
@@ -239,7 +239,146 @@
         
         
         
-        <img src="/image/common-writing-empty.jpg?v=1743146542" alt=""
+        <img src="http://localhost:1313/image/attack.png?v=1743346669" alt=""
+            class="w-full h-48 rounded-2xl object-cover" />
+        
+
+    </div>
+    <div class="w-full lg:p-5 overflow-auto">
+        <h3 class="pt-2 lg:pt-0 line-clamp-1 text-2xl font-medium leading-10 text-gray-400 hover:text-gray-300">
+            <a href="/zh/posts/server/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%A8%B3%E5%AE%9A%E6%80%A7%E9%85%8D%E7%BD%AE/">
+                云服务器稳定性配置
+            </a>
+        </h3>
+        <div class="flex flex-row items-center justify-start py-1 text-lg">
+            
+            <time datetime="2025-03-16" class="text-gray-600">2025-03-29 21:43
+                |
+                2 minute read</time>
+            
+        </div>
+        <div class="line-clamp-3 text-xl font-light leading-8 lg:leading-9 text-gray-500">云服务器稳定性配置 服务检查 # 检查占用端口的进程 sudo lsof -i :8080 sudo netstat -tulnp | grep 8080 # tulnp: tcp udp listen port number # 干掉进程 sudo kill -9 $(lsof -t -i:8080) # -t: 只显示PID SSH 本机电脑意外锁屏后会导致SSH掉线，因此需要在本机/服务器上设置SSH保持连接。
+本机：在~/.ssh/config中添加以下内容，设置ServerAliveInterval表示每隔60秒向服务器发送一个心跳包，ServerAliveCountMax表示如果连续5次没有收到服务器的响应，则断开连接。
+Host * ServerAliveInterval 60 ServerAliveCountMax 5 服务器：在/etc/ssh/sshd_config中添加/修改/解除同样内容注释，然后重启SSH服务：sudo systemctl restart sshd。
+防止OOM 手动调整 # 1. 添加交换分区(一般将swap设置为内存的1-2倍) sudo fallocate -l 2G /swapfile sudo chmod 600 /swapfile sudo mkswap /swapfile sudo swapon /swapfile # AutoDL是不允许这一步的，内存炸了就老老实实有卡模式启动吧 # 使Swap永久生效 echo &#39;/swapfile swap swap defaults 0 0&#39; | sudo tee -a /etc/fstab # 检查 free -h # 2. 限制shell最大内存使用 ulimit -v 4194304 # 限制为 4GB（单位KB） # 3. 降低SSH优先级，避免OOM前被杀掉 echo -1000 | sudo tee /proc/$(pidof sshd | awk &#39;{print $1}&#39;)/oom_score_adj # oom_score_adj: -1000 ~ +1000；设置$1是因为ssh可能有多个进程，可通过pidof sshd查看 # 这个命令不是一直生效的，可创建系统服务： # vim /etc/systemd/system/sshd-oomprotect.service # [Unit] # Description=Set OOM score for sshd # After=sshd.service # [Service] # Type=oneshot # ExecStart=/bin/bash -c &#39;echo -1000 &gt; /proc/$(pidof sshd | awk &#34;{print \$1}&#34;)/oom_score_adj&#39; # [Install] # WantedBy=multi-user.target # 使生效 sudo systemctl daemon-reexec sudo systemctl daemon-reload sudo systemctl enable sshd-oomprotect # 4. 安装htop(进程查看，替代top) sudo yum install htop -y 开源工具 比如EarlyOOM。效果还没试，只看到star比较高就用了。
+</div>
+    </div>
+</article>
+
+    
+
+    
+    
+<article class="flex flex-col lg:flex-row items-center bg-gray-800/50 px-1 rounded-md">
+    <div class="flex-none w-full lg:w-64 h-48 rounded-lg shadow-md bg-gray-900 shadow-gray-800">
+        
+        
+        
+        <img src="http://localhost:1313/image/docker.png?v=1743346669" alt=""
+            class="w-full h-48 rounded-2xl object-cover" />
+        
+
+    </div>
+    <div class="w-full lg:p-5 overflow-auto">
+        <h3 class="pt-2 lg:pt-0 line-clamp-1 text-2xl font-medium leading-10 text-gray-400 hover:text-gray-300">
+            <a href="/zh/posts/server/docker/">
+                Docker
+            </a>
+        </h3>
+        <div class="flex flex-row items-center justify-start py-1 text-lg">
+            
+            <time datetime="2025-03-16" class="text-gray-600">2025-03-29 13:22
+                |
+                3 minute read</time>
+            
+        </div>
+        <div class="line-clamp-3 text-xl font-light leading-8 lg:leading-9 text-gray-500">Docker Content 基础 Images &amp;&amp; Containers Images: 镜像是一个只读的模板，用于创建容器。可以基于一个镜像启动多个容器。 Containers: 容器是镜像的一个实例。容器是一个轻量级、可执行的独立软件包，包含运行某个软件所需的所有代码、运行时、系统工具、库和设置。
+# Images docker pull &lt;image_id_or_name&gt; # 拉取镜像 docker run -d -p 80:80 &lt;image_id_or_name&gt; # 运行镜像：-d表示后台运行，-p表示端口映射 docker images # 查看镜像 docker images --filter reference=&lt;image_id_or_name&gt; # 查看镜像 docker rmi -f &lt;image_id_or_name&gt; # 删除镜像：如果镜像正在被使用，则需要加-f强制删除 # Containers docker containers ls -a # 查看所有容器，包括停止的容器 docker start/stop/rm &lt;container_id_or_name&gt; docker exec -it &lt;container_id_or_name&gt; bash # 进入容器：-it表示交互式终端 Openai API Proxy 参考仓库：chatgptProxyAPI(已经被Archive了)
+使用Cloudflare的方法，在我这里似乎有些问题；所以我就采用了作者不推荐的Docker部署。我没有VPS(Virtual Private Server)，所以就同样使用了一年免费的AWS EC2，并在开放端口上做了限制，即用即开。更好的解决方案应该是只对我的IP开放端口，但我没法长期稳定使用一个节点，IP老是变，所以就暂时设的是使用时开放0.0.0.0/0，使用完后关闭。此外还有一个不推荐的原因是不支持SSE(Server-Sent Events，实时聊天常用)，原因我也不是很清楚，目前自用好像也没啥问题，所以暂时先不管了。
+# 将容器内3000端口映射到主机的4000端口 # README里都是3000，但我3000被open-webui占用了，所以改成4000 docker run -itd --name openaiproxy \ -p 4000:3000 \ --restart=always \ gindex/openaiproxy:latest # 使用： curl --location &#39;http://[YOUR_SERVER_IP]:4000/proxy/v1/chat/completions&#39; \ --header &#39;Authorization: Bearer sk-xxxxxxxxxxxxxxx&#39; \ --header &#39;Content-Type: application/json&#39; \ --data &#39;{ &#34;model&#34;: &#34;gpt-3.5-turbo&#34;, &#34;messages&#34;: [{&#34;role&#34;: &#34;user&#34;, &#34;content&#34;: &#34;Hello!&#34;}] }&#39; AWS Docker Private Registry 手动搭建 我在使用国内镜像源下载Open-Webui Docker镜像时，发现速度依然很慢，所以就考虑用AWS在美国的EC2上搭建一个私有Registry，然后国内的阿里云服务器从AWS上拉取镜像。实测，速度比之前镜像快很多，但还是比不上国外直接从Docker Hub拉取的速度。
+</div>
+    </div>
+</article>
+
+    
+
+    
+    
+<article class="flex flex-col lg:flex-row items-center  px-1 rounded-md">
+    <div class="flex-none w-full lg:w-64 h-48 rounded-lg shadow-md bg-gray-900 shadow-gray-800">
+        
+        
+        
+        <img src="/image/common-writing-empty.jpg?v=1743346669" alt=""
+            class="w-full h-48 rounded-2xl object-cover" />
+        
+
+    </div>
+    <div class="w-full lg:p-5 overflow-auto">
+        <h3 class="pt-2 lg:pt-0 line-clamp-1 text-2xl font-medium leading-10 text-gray-400 hover:text-gray-300">
+            <a href="/zh/posts/security/ddos/">
+                Ddos
+            </a>
+        </h3>
+        <div class="flex flex-row items-center justify-start py-1 text-lg">
+            
+            <time datetime="2025-03-16" class="text-gray-600">2025-03-28 22:05
+                |
+                1 minute read</time>
+            
+        </div>
+        <div class="line-clamp-3 text-xl font-light leading-8 lg:leading-9 text-gray-500">Ref: https://www.cloudflare.com/zh-cn/learning/ddos/ddos-attack-tools/how-to-ddos/
+</div>
+    </div>
+</article>
+
+    
+
+    
+    
+<article class="flex flex-col lg:flex-row items-center bg-gray-800/50 px-1 rounded-md">
+    <div class="flex-none w-full lg:w-64 h-48 rounded-lg shadow-md bg-gray-900 shadow-gray-800">
+        
+        
+        
+        <img src="http://localhost:1313/image/open-webui.png?v=1743346669" alt=""
+            class="w-full h-48 rounded-2xl object-cover" />
+        
+
+    </div>
+    <div class="w-full lg:p-5 overflow-auto">
+        <h3 class="pt-2 lg:pt-0 line-clamp-1 text-2xl font-medium leading-10 text-gray-400 hover:text-gray-300">
+            <a href="/zh/posts/llm/open-webui/">
+                Open Webui
+            </a>
+        </h3>
+        <div class="flex flex-row items-center justify-start py-1 text-lg">
+            
+            <time datetime="2025-03-16" class="text-gray-600">2025-03-28 16:50
+                |
+                1 minute read</time>
+            
+        </div>
+        <div class="line-clamp-3 text-xl font-light leading-8 lg:leading-9 text-gray-500">Open Webui TODO：
+open-webui简介 ollama本地部署及经验 问题：open-webui还是在云服务器部署好，本地+内网穿透的话，不仅要克服GFW的问题，还要从学校内网穿出去，太麻烦了。
+部署 # Run Open-webui for OpenAI API Usage Only docker run -d -p 3000:8080 -e OPENAI_API_KEY=&#34;...&#34; -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main # Or: Run with Ollama docker run -d -p 3000:8080 --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:main # 启动后不要着急访问localhost:3000，容器需要一定时间初始化、下载hf模型等等，有一个从unhealthy变为healthy的过程 本地部署(结合cloudflare tunnel) 主要参考这篇文章：1。目前内网相互访问仍有一些问题，可能需要抛弃该方案。
+云端部署 也不难，注意端口开放规则+Nginx反向代理+避免OOM(可增加交换空间?)即可。
+模型配置 Openai: 除Openai外模型： Claude Gemini Deepseek HTTPS协议配置及问题 使用麦克风和摄像头时，必须通过HTTPS协议。参考该Issue。
+具体部署参考了本篇教程：在AWS EC2 (Amazon Linux 2023) 上结合nginx配置https
+</div>
+    </div>
+</article>
+
+    
+
+    
+    
+<article class="flex flex-col lg:flex-row items-center  px-1 rounded-md">
+    <div class="flex-none w-full lg:w-64 h-48 rounded-lg shadow-md bg-gray-900 shadow-gray-800">
+        
+        
+        
+        <img src="../../img/aliyun-oom.png?v=1743346669" alt="alt text"
             class="w-full h-48 rounded-2xl object-cover" />
         
 
@@ -257,7 +396,10 @@
                 1 minute read</time>
             
         </div>
-        <div class="line-clamp-3 text-xl font-light leading-8 lg:leading-9 text-gray-500">3.28</div>
+        <div class="line-clamp-3 text-xl font-light leading-8 lg:leading-9 text-gray-500">3.30 Openai-api-proxy(API中转) 参考Docker那篇博客。似乎不是很难。 Open-Webui部署+域名 3.29 喜报：昨天部署Open-webui导致AWS EC2实例OOM，今天在阿里云上编译Stockfish，把2核2G服务器也干OOM了；除此之外我还在自己Ubuntu 8G笔记本上编译了一下试试，结果也给卡死了，哈哈哈
+3.28 突然想出国了，国内这网络环境真受不了了。Docker拉不下来，git/curl有时候各种SSL之类的报错，Chatgpt有一阵子还老弹人机验证/莫名其妙报错，时间全浪费在网络上面了。 除此之外，校园网卡的感觉也比较严
+Open Webui云端部署 服务器太差，docker一起来就经常OOM，甚至卡到ssh都连不上 TODO：
+HTTPS/Openai API转发：用AWS做个机场/api中转站？ Cloudflare Tunnel内网穿透，用本地pc部署open-webui </div>
     </div>
 </article>
 
@@ -270,14 +412,14 @@
         
         
         
-        <img src="/image/common-writing-empty.jpg?v=1743146542" alt=""
+        <img src="http://localhost:1313/image/aws.png?v=1743346669" alt=""
             class="w-full h-48 rounded-2xl object-cover" />
         
 
     </div>
     <div class="w-full lg:p-5 overflow-auto">
         <h3 class="pt-2 lg:pt-0 line-clamp-1 text-2xl font-medium leading-10 text-gray-400 hover:text-gray-300">
-            <a href="/zh/posts/aws%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE/">
+            <a href="/zh/posts/server/aws%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE/">
                 AWS云服务器配置
             </a>
         </h3>
@@ -288,12 +430,12 @@
                 5 minute read</time>
             
         </div>
-        <div class="line-clamp-3 text-xl font-light leading-8 lg:leading-9 text-gray-500">我手头有一堆Linux设备，WSL2-Ubuntu24.04/Thinkpad-X270-Ubuntu22.04/AWS和阿里云服务器/Kali-Linux虚拟机，每次换新的都得重新配环境，有点烦
+        <div class="line-clamp-3 text-xl font-light leading-8 lg:leading-9 text-gray-500">我手头有一堆Linux设备，WSL2-Ubuntu24.04/Thinkpad-X270-Ubuntu22.04/AWS和阿里云服务器/Kali-Linux虚拟机，每次换新的都得重新配环境，有点烦。
 之前记过的笔记也是乱七八糟不知道去哪找，还是发在博客比较好。
 安装命令主要针对Ubuntu(apt)和Amazon Linux(dnf)。
-Content {{ .TableOfContents }}
-Amazon Web Services (AWS) Storage AWS Free Tier 通过 Amazon Elastic Block Store (EBS) 提供 30 GB 的存储、200 万 I/O 以及 1 GB 的快照存储。默认8G实在是太少了，想扩容发现控制台页面有点看不懂，参考了一下YouTube视频：How to increase EBS volume size in AWS EC2，该视频主要参考了AWS的官方文档。
-# 安装必要的工具 sudo apt install cloud-guest-utils gdisk -y # Ubuntu/Debian # 扩展分区 sudo growpart /dev/xvda 1 # 扩展文件系统 sudo resize2fs /dev/xvda1 # 对于 ext4 # 或 sudo xfs_growfs / # 对于 xfs # 验证扩展结果 df -h Connect SSH 通常我使用ssh -i &quot;AWS-Cloudserver.pem&quot; ubuntu@ec2-3-14-128-59.us-east-2.compute.amazonaws.com，自动登录到ubuntu普通用户。
+Content Storage Connect Network Shell Language Docker Check Storage AWS免费额度：在开设 AWS 账户的第一年，与免费套餐 AMI、每月 750 小时的公有 IPv4 地址用量、30 GiB 的 EBS 存储、200 万个 I/O、1 GB 快照和 100 GB 互联网带宽一起使用时，您每月可获得 750 小时的 t2.micro 实例用量（如果没有 t2.micro，则使用 t3.micro）。
+默认磁盘空间8G实在是太少了，想扩容发现控制台页面有点看不懂，参考了一下YouTube视频：How to increase EBS volume size in AWS EC2，该视频主要参考了AWS的官方文档。
+# 安装必要的工具 sudo apt install cloud-guest-utils gdisk -y # Ubuntu/Debian # 扩展分区 sudo growpart /dev/xvda 1 # 扩展文件系统 sudo resize2fs /dev/xvda1 # 对于 ext4 # 或 sudo xfs_growfs / # 对于 xfs # 验证扩展结果 df -h SSH Connect 通常我使用ssh -i &quot;AWS-Cloudserver.pem&quot; ubuntu@ec2-3-14-128-59.us-east-2.compute.amazonaws.com，自动登录到ubuntu普通用户。
 </div>
     </div>
 </article>
@@ -307,7 +449,7 @@ Amazon Web Services (AWS) Storage AWS Free Tier 通过 Amazon Elastic Block Stor
         
         
         
-        <img src="/image/common-writing-empty.jpg?v=1743146542" alt=""
+        <img src="/image/common-writing-empty.jpg?v=1743346669" alt=""
             class="w-full h-48 rounded-2xl object-cover" />
         
 
@@ -341,7 +483,7 @@ Language Color Go #00ADD8 C #555555 Assembly #6E4C13 C# #178600 JavaScript #f1e0
         
         
         
-        <img src="http://localhost:1313/image/neuro_cat.jpg?v=1743146542" alt=""
+        <img src="http://localhost:1313/image/neuro_cat.jpg?v=1743346669" alt=""
             class="w-full h-48 rounded-2xl object-cover" />
         
 
@@ -361,7 +503,8 @@ Language Color Go #00ADD8 C #555555 Assembly #6E4C13 C# #178600 JavaScript #f1e0
         </div>
         <div class="line-clamp-3 text-xl font-light leading-8 lg:leading-9 text-gray-500">Introduction 主题：基于Hugo的Niello主题。
 使用该主题可参考demo及theme-home-page。
-Extensions 评论系统参考
+Extensions Open-webui
+类似ChatGPT的LLM WebUI 评论系统参考
 TODO Github Issues评论系统
 TODO Google Analytics 4：用于Cookie追踪和网站分析
 Chess
@@ -379,14 +522,14 @@ Demo 只用于静态页面演示，后续会超链接跳转至装配了Stockfish
         
         
         
-        <img src="http://localhost:1313/image/deepspeed.png?v=1743146542" alt=""
+        <img src="http://localhost:1313/image/deepspeed.png?v=1743346669" alt=""
             class="w-full h-48 rounded-2xl object-cover" />
         
 
     </div>
     <div class="w-full lg:p-5 overflow-auto">
         <h3 class="pt-2 lg:pt-0 line-clamp-1 text-2xl font-medium leading-10 text-gray-400 hover:text-gray-300">
-            <a href="/zh/posts/deepspeed%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/">
+            <a href="/zh/posts/llm/deepspeed%E5%AE%9E%E8%B7%B5%E7%AC%94%E8%AE%B0/">
                 DeepSpeed实践笔记
             </a>
         </h3>
@@ -426,7 +569,7 @@ TODO&hellip;
     </div>
 
     
-    <img src="/image/logo.jpg?v=1743146542" class="w-80 self-center" alt="Logo" />
+    <img src="/image/logo.jpg?v=1743346669" class="w-80 self-center" alt="Logo" />
 
     <p class="leading-8 text-center text-lg font-light mt-3">
         
@@ -446,31 +589,31 @@ TODO&hellip;
         
         
         <li class="leading-10 line-clamp-1 mb-3 font-light border-b border-b-white/10 border-dashed">
-            <a href="/zh/draft/aws-ssh-connection-timeout-issue/" class="py-5 hover:text-gray-300">AWS Ssh Connection Timeout Issue</a>
+            <a href="/zh/posts/server/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%A8%B3%E5%AE%9A%E6%80%A7%E9%85%8D%E7%BD%AE/" class="py-5 hover:text-gray-300">云服务器稳定性配置</a>
+        </li>
+        
+        
+        
+        <li class="leading-10 line-clamp-1 mb-3 font-light border-b border-b-white/10 border-dashed">
+            <a href="/zh/posts/server/docker/" class="py-5 hover:text-gray-300">Docker</a>
+        </li>
+        
+        
+        
+        <li class="leading-10 line-clamp-1 mb-3 font-light border-b border-b-white/10 border-dashed">
+            <a href="/zh/posts/security/ddos/" class="py-5 hover:text-gray-300">Ddos</a>
+        </li>
+        
+        
+        
+        <li class="leading-10 line-clamp-1 mb-3 font-light border-b border-b-white/10 border-dashed">
+            <a href="/zh/posts/llm/open-webui/" class="py-5 hover:text-gray-300">Open Webui</a>
         </li>
         
         
         
         <li class="leading-10 line-clamp-1 mb-3 font-light border-b border-b-white/10 border-dashed">
             <a href="/zh/posts/change_log/" class="py-5 hover:text-gray-300">Change_log</a>
-        </li>
-        
-        
-        
-        <li class="leading-10 line-clamp-1 mb-3 font-light border-b border-b-white/10 border-dashed">
-            <a href="/zh/posts/aws%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE/" class="py-5 hover:text-gray-300">AWS云服务器配置</a>
-        </li>
-        
-        
-        
-        <li class="leading-10 line-clamp-1 mb-3 font-light border-b border-b-white/10 border-dashed">
-            <a href="/zh/posts/go%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" class="py-5 hover:text-gray-300">Go快速入门</a>
-        </li>
-        
-        
-        
-        <li class="leading-10 line-clamp-1 mb-3 font-light border-b border-b-white/10 border-dashed">
-            <a href="/zh/posts/%E6%9C%AC%E7%AB%99%E7%AE%80%E4%BB%8B/" class="py-5 hover:text-gray-300">本站简介</a>
         </li>
         
         
@@ -501,6 +644,15 @@ TODO&hellip;
         
         
         <li class="mb-1 border-b border-b-gray-900 border-dashed font-light">
+            <a href="/zh/categories/llm/" class="hover:text-gray-300">LLM <span
+                    class="ml-2 px-2 bg-gray-800 rounded-full text-gray-500">1</span></a>
+        </li>
+        
+        
+        
+        
+        
+        <li class="mb-1 border-b border-b-gray-900 border-dashed font-light">
             <a href="/zh/categories/programming/" class="hover:text-gray-300">Programming <span
                     class="ml-2 px-2 bg-gray-800 rounded-full text-gray-500">1</span></a>
         </li>
@@ -520,15 +672,6 @@ TODO&hellip;
         
         <li class="mb-1 border-b border-b-gray-900 border-dashed font-light">
             <a href="/zh/categories/go/" class="hover:text-gray-300">Go <span
-                    class="ml-2 px-2 bg-gray-800 rounded-full text-gray-500">1</span></a>
-        </li>
-        
-        
-        
-        
-        
-        <li class="mb-1 border-b border-b-gray-900 border-dashed font-light">
-            <a href="/zh/categories/llm/" class="hover:text-gray-300">LLM <span
                     class="ml-2 px-2 bg-gray-800 rounded-full text-gray-500">1</span></a>
         </li>
         
@@ -611,7 +754,7 @@ TODO&hellip;
         
         <li class="mb-1 border-b border-b-white/10 border-dashed">
             <a href="/zh/archives">2025年03月<span
-                    class="ml-2 px-2 bg-gray-800 rounded-full text-gray-500">5</span></a>
+                    class="ml-2 px-2 bg-gray-800 rounded-full text-gray-500">8</span></a>
         </li>
         
         

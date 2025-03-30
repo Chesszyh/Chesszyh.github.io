@@ -4,25 +4,25 @@
     <div class="group relative">
         <!-- 标题与元数据：标题使用 h1 标签显示，并链接到当前页面的相对永久链接（通过Hugo内置的.RelPermalink页面变量），
             自动为每个页面生成；标题使用灰色文本显示，并在鼠标悬停时变亮 -->
-        <h1 class="text-3xl font-medium leading-10 text-gray-400 hover:text-gray-100">
+        <h1 class="text-xl font-medium leading-10 text-gray-400 hover:text-gray-100">
             <a href="{{ .RelPermalink }}">
                 {{ .Title }}
             </a>
         </h1>
-        <time datetime="2025-03-16" class="flex items-center py-2 text-xl text-gray-600">golang</time>
+        <time datetime="2025-03-16" class="flex items-center py-2 text-lg text-gray-600">golang</time>
             {{ .PublishDate.Format "2006-01-02 15:04" }}
             &nbsp;&nbsp;|&nbsp;&nbsp;{{ .ReadingTime }} minute read <!-- 显示效果：2025-03-22 22:48 | 1 minute read -->
         </time>
         
         <!-- 文章主体内容放置在一个带有样式的 div 中，使用 .Content 变量检索内容并通过 safeHTML 函数渲染为安全的 HTML（防止 HTML 转义）-->
         <div
-            class="mt-1 lg:pb-10 px-2 text-2xl leading-10 font-thin text-gray-500 overflow-hidden break-words article-body">
+            class="mt-1 lg:pb-10 px-2 text-xl leading-10 font-thin text-gray-500 overflow-hidden break-words article-body">
             {{
             .Content |
             safeHTML }}
         </div>
     </div>
-    <div class="text-gray-500 text-lg">
+    <div class="text-gray-500 text-base">
         {{ i18n "articlelink" }}:&nbsp;<a href="{{ .Permalink }}"
             class="border-b border-b-gray-500 hover:text-gray-400">{{
             .Permalink }}</a>
