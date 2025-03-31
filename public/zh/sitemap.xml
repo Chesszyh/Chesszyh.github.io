@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>http://localhost:1313/zh/</loc>
-    <lastmod>2025-03-31T11:22:29+08:00</lastmod>
+    <lastmod>2025-03-29T21:43:19+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-us"
@@ -15,11 +15,8 @@
                 href="http://localhost:1313/zh/"
                 />
   </url><url>
-    <loc>http://localhost:1313/zh/posts/server/blog/cusdis/</loc>
-    <lastmod>2025-03-31T11:22:29+08:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/zh/posts/</loc>
-    <lastmod>2025-03-31T11:22:29+08:00</lastmod>
+    <lastmod>2025-03-29T21:43:19+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en-us"

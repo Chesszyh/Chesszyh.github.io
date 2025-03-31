@@ -1,7 +1,3 @@
-[submodule "copilot/copilot-RE"]
-    path = copilot/copilot-RE
-    url = https://github.com/rohitaryal/copilot-RE
-
 [submodule "open-webui"]
     path = open-webui
     url = https://github.com/Chesszyh/open-webui
