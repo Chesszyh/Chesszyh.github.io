@@ -29,9 +29,34 @@
     </div>
     
     <!-- Disqus条件渲染 -->
-    {{ if .Site.Params.Disqus.Shortname }}
+    <!-- {{ if .Site.Params.Disqus.Shortname }}
         {{ partial "disqus.html" . }}
-    {{ end }}
+    {{ end }} -->
+
+    <!-- Comments by Cusdis -->
+    <h4 class="text-gray-300 mt-8 mb-4">Comments:</h4>
+    <div id="cusdis_thread" 
+        data-host="https://cusdis.com"
+        data-app-id="1d03ca2b-8748-4bd8-9a3f-52c7c195dd18"
+        data-page-id="{{ .File.UniqueID }}" 
+        data-page-url="{{ .Permalink }}"
+        data-page-title="{{ .Title }}"
+        data-theme="dark"></div>
+    <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+
+    <script>
+    // 等待Cusdis加载完成
+    document.addEventListener('DOMContentLoaded', () => {
+        // 给系统一些时间来加载iframe
+        setTimeout(() => {
+        // 强制设置主题为暗色
+        if (window.CUSDIS && window.CUSDIS.setTheme) {
+            window.CUSDIS.setTheme('dark');
+        }
+        }, 1000);
+    });
+    </script>
+
 </article>
 
 {{ end }}

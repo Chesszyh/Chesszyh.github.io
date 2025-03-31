@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1">
     <title>
     
-    AWS - CodeTrace
+    Cusdis - CodeTrace
     
 </title>
     
@@ -19,7 +19,7 @@
     
     <meta name="keywords" content="Computer Science, AI, LLM, Deep Learning, C&#43;&#43;">
     <meta name="description" content="Chesszyh&#39;s Blog，提供CS/LLM等领域的学习笔记与技术分享。">
-    <link rel="canonical" href="http://localhost:1313/zh/tags/aws/" />
+    <link rel="canonical" href="http://localhost:1313/zh/posts/server/blog/cusdis/" />
     <link rel="icon" href="/favicon.ico?v=1743434518" type="image/x-icon">
     
 <link rel="stylesheet" href="/css/app.css">
@@ -208,7 +208,7 @@
             
             
             <li>
-                &gt;&nbsp;&nbsp;<a href="/zh/tags/aws/" class="hover:text-gray-100">AWS</a>
+                &gt;&nbsp;&nbsp;<a href="/zh/posts/server/blog/cusdis/" class="hover:text-gray-100">Cusdis</a>
             </li>
             
         </ul>
@@ -227,58 +227,71 @@
         <main class="w-full overflow-hidden">
           
 
-
-
-
-
-<div class="list-container">
-    
-
-    
-    
-    
-<article class="flex flex-col lg:flex-row items-center  px-1 rounded-md">
-    <div class="flex-none w-full lg:w-64 h-48 rounded-lg shadow-md bg-gray-900 shadow-gray-800">
+<article class="single-article">
+    <div class="group relative">
         
-        
-        
-        <img src="http://localhost:1313/image/aws.png?v=1743434518" alt=""
-            class="w-full h-48 rounded-2xl object-cover" />
-        
-
-    </div>
-    <div class="w-full lg:p-5 overflow-auto">
-        <h3 class="pt-2 lg:pt-0 line-clamp-1 text-2xl font-medium leading-10 text-gray-400 hover:text-gray-300">
-            <a href="/zh/posts/server/aws%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE/">
-                AWS云服务器配置
+        <h1 class="text-xl font-medium leading-10 text-gray-400 hover:text-gray-100">
+            <a href="/zh/posts/server/blog/cusdis/">
+                Cusdis
             </a>
-        </h3>
-        <div class="flex flex-row items-center justify-start py-1 text-lg">
-            
-            <time datetime="2025-03-16" class="text-gray-600">2025-03-23 16:55
-                |
-                5 minute read</time>
-            
+        </h1>
+        <time datetime="2025-03-16" class="flex items-center py-2 text-lg text-gray-600">golang</time>
+            2025-03-31 11:22
+            &nbsp;&nbsp;|&nbsp;&nbsp;1 minute read 
+        </time>
+        
+        
+        <div
+            class="mt-1 lg:pb-10 px-2 text-xl leading-10 font-thin text-gray-500 overflow-hidden break-words article-body">
+            <h1 id="cusdis-部署">Cusdis 部署</h1>
+<h2 id="docker">Docker</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>docker run <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -d <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -e USERNAME<span style="color:#f92672">=</span>chesszyh <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -e PASSWORD<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;jn3K*9HGk1#fNI&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -e JWT_SECRET<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;jn3K*9HGk1#fNI&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -e DB_URL<span style="color:#f92672">=</span>file:/data/db.sqlite <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -e NEXTAUTH_URL<span style="color:#f92672">=</span>db-for-server.cvuia666kyfi.us-east-2.rds.amazonaws.com <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -p 6000:3000 <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -v /data:/data <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  djyde/cusdis
+</span></span></code></pre></div><h2 id="railway">Railway</h2>
+
         </div>
-        <div class="line-clamp-3 text-xl font-light leading-8 lg:leading-9 text-gray-500">我手头有一堆Linux设备，WSL2-Ubuntu24.04/Thinkpad-X270-Ubuntu22.04/AWS和阿里云服务器/Kali-Linux虚拟机，每次换新的都得重新配环境，有点烦。
-之前记过的笔记也是乱七八糟不知道去哪找，还是发在博客比较好。
-安装命令主要针对Ubuntu(apt)和Amazon Linux(dnf)。
-Content Storage Connect Network Shell Language Docker Check AWS Free Tier AWS提供了：
-12个月的EC2 3个月的VPShttps://aws.amazon.com/cn/rds/free/?loc=ft#Free_Tier Storage AWS免费额度：在开设 AWS 账户的第一年，与免费套餐 AMI、每月 750 小时的公有 IPv4 地址用量、30 GiB 的 EBS 存储、200 万个 I/O、1 GB 快照和 100 GB 互联网带宽一起使用时，您每月可获得 750 小时的 t2.micro 实例用量（如果没有 t2.micro，则使用 t3.micro）。
-默认磁盘空间8G实在是太少了，想扩容发现控制台页面有点看不懂，参考了一下YouTube视频：How to increase EBS volume size in AWS EC2，该视频主要参考了AWS的官方文档。
-# 安装必要的工具 sudo apt install cloud-guest-utils gdisk -y # Ubuntu/Debian # 扩展分区 sudo growpart /dev/xvda 1 # 扩展文件系统 sudo resize2fs /dev/xvda1 # 对于 ext4 # 或 sudo xfs_growfs / # 对于 xfs # 验证扩展结果 df -h SSH Connect 通常我使用ssh -i &quot;AWS-Cloudserver.pem&quot; ubuntu@ec2-3-14-128-59.us-east-2.compute.amazonaws.com，自动登录到ubuntu普通用户。
-</div>
     </div>
+    <div class="text-gray-500 text-base">
+        文章链接:&nbsp;<a href="http://localhost:1313/zh/posts/server/blog/cusdis/"
+            class="border-b border-b-gray-500 hover:text-gray-400">http://localhost:1313/zh/posts/server/blog/cusdis/</a>
+    </div>
+    
+    
+    
+
+    
+<h4 class="text-gray-300 mt-8 mb-4">Comments:</h4>
+<div id="cusdis_thread" 
+    data-host="https://cusdis.com"
+    data-app-id="1d03ca2b-8748-4bd8-9a3f-52c7c195dd18"
+    data-page-id="78512280bb2b3fd137d54bedee189ef1" 
+    data-page-url="http://localhost:1313/zh/posts/server/blog/cusdis/"
+    data-page-title="Cusdis"
+    data-theme="dark"></div>
+<script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+
+<script>
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    
+    setTimeout(() => {
+      
+      if (window.CUSDIS && window.CUSDIS.setTheme) {
+        window.CUSDIS.setTheme('dark');
+      }
+    }, 1000);
+  });
+</script>
+
 </article>
-    
-
-
-    
-    
-</div>
-
-
-
 
 
         </main>
@@ -423,21 +436,6 @@ Content Storage Connect Network Shell Language Docker Check AWS Free Tier AWS提
         
         
         
-        <a href="/zh/tags/aws/"><span
-                class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">AWS&nbsp;&nbsp;1</span></a>
-        
-        
-        
-        <a href="/zh/tags/deepspeed/"><span
-                class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">DeepSpeed&nbsp;&nbsp;1</span></a>
-        
-        
-        
-        <a href="/zh/tags/huggingface/"><span
-                class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">Huggingface&nbsp;&nbsp;1</span></a>
-        
-        
-        
         <a href="/zh/tags/linux/"><span
                 class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">Linux&nbsp;&nbsp;1</span></a>
         
@@ -455,6 +453,21 @@ Content Storage Connect Network Shell Language Docker Check AWS Free Tier AWS提
         
         <a href="/zh/tags/ai/"><span
                 class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">AI&nbsp;&nbsp;1</span></a>
+        
+        
+        
+        <a href="/zh/tags/aws/"><span
+                class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">AWS&nbsp;&nbsp;1</span></a>
+        
+        
+        
+        <a href="/zh/tags/deepspeed/"><span
+                class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">DeepSpeed&nbsp;&nbsp;1</span></a>
+        
+        
+        
+        <a href="/zh/tags/huggingface/"><span
+                class="inline-block p-0 bg-gray-800 hover:bg-gray-900 border border-gray-800 text-gray-500 hover:text-gray-300 font-light mb-1 px-5 rounded-full hover:scale-105">Huggingface&nbsp;&nbsp;1</span></a>
         
         
         

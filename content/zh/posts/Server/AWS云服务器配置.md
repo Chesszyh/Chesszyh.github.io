@@ -23,6 +23,12 @@ featuredImage: "/image/aws.png"
 - [Docker](AWS云服务器配置.md#docker)
 - [Check](AWS云服务器配置.md#check)
 
+## AWS Free Tier
+
+AWS提供了：
+
+1. 12个月的EC2
+2. 3个月的VPShttps://aws.amazon.com/cn/rds/free/?loc=ft#Free_Tier
 ## Storage
 
 > AWS免费额度：在开设 AWS 账户的第一年，与免费套餐 AMI、每月 750 小时的公有 IPv4 地址用量、30 GiB 的 EBS 存储、200 万个 I/O、1 GB 快照和 100 GB 互联网带宽一起使用时，您每月可获得 750 小时的 t2.micro 实例用量（如果没有 t2.micro，则使用 t3.micro）。
