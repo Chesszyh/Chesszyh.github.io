@@ -351,7 +351,7 @@ sudo apt install ncdu
 wget http://packages.eu-central-1.amazonaws.com/2018.03/main/c31535f74c6e/x86_64/Packages/ncdu-1.10-1.3.amzn1.x86_64.rpm
 sudo yum install ncdu-1.10-1.3.amzn1.x86_64.rpm
 
-# bat: cat的替代品，带有语法高亮和Git集成
+# [bat](https://github.com/sharkdp/bat): cat的替代品，带有语法高亮和Git集成
 sudo apt install bat
 # 设置别名
 mkdir -p ~/.local/bin

@@ -185,3 +185,19 @@ docker push 412381757149.dkr.ecr.us-east-2.amazonaws.com/cloudserver/docker:late
 ```shell
 docker pull 412381757149.dkr.ecr.us-east-2.amazonaws.com/cloudserver/docker:latest
 ```
+
+## 日志管理
+
+Docker日志默认存储在`/var/lib/docker/containers/[容器ID]/[容器ID]-json.log`中。可以修改`etc/docker/daemon.json`文件以配置日志轮转：
+
+```json
+{
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "10m",
+    "max-file": "3"
+  }
+}
+```
+
+然后重启服务：`sudo systemctl restart docker`。以后运行容器时，也可以使用`--log-opt max-size=10m --log-opt max-file=3`来覆盖默认设置。
