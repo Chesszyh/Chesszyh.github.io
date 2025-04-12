@@ -12,7 +12,132 @@ featuredImage: "/image/docker.png"
 
 ## Content
 
+目录 TODO
+
+## Download
+
+> 我经常被网络问题弄红温。最近看到一个有意思的项目：[OpenGFW](https://github.com/apernet/OpenGFW)，文档：<https://gfw.dev/docs/>。
+
+国外服务器基本秒下，参考文档：[Ubuntu](https://docs.docker.com/engine/install/ubuntu/)、[Amazon Linux](https://docs.aws.amazon.com/zh_cn/serverless-application-model/latest/developerguide/install-docker.html)和[Fedora](https://docs.docker.com/engine/install/fedora/)。
+
+### Ubuntu
+
+```shell
+# 1. Set up Docker's apt repository.
+
+# Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt-get update
+
+# 2. Install Docker packages.
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin\
+
+# 3. Verify that Docker Engine is installed correctly by running the hello-world image.
+docker run hello-world
+```
+
+### Amazon Linux
+
+虽然Amazon Linux 2023基于Fedora，但安装Docker时似乎无需根据Docker官方Fedora文档来，而是参考[Amazon Linux](https://docs.aws.amazon.com/zh_cn/serverless-application-model/latest/developerguide/install-docker.html)自己的文档。
+
+不知道两种方式是否有区别，后续有时间再测试。
+
+```shell
+sudo yum update -y
+sudo yum install -y docker
+# 添加ec2-user到docker组
+sudo usermod -a -G docker ec2-user
+# 启动Docker
+sudo service docker start
+```
+
+### Fedora
+
+```shell
+# 1. Uninstall old versions
+sudo dnf remove docker \
+                  docker-client \
+                  docker-client-latest \
+                  docker-common \
+                  docker-latest \
+                  docker-latest-logrotate \
+                  docker-logrotate \
+                  docker-selinux \
+                  docker-engine-selinux \
+                  docker-engine
+# 2. Set up the repository
+sudo dnf -y install dnf-plugins-core
+sudo dnf-3 config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+
+# 3. Install Docker Engine
+sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# 4. Start Docker
+sudo systemctl enable --now docker
+```
+
+### 国内服务器/自己电脑
+
+阿里云允许预装Docker，图省事的话直接在控制台安装就行。
+
+我自己测试时会出现源问题，所以参考这篇[知乎教程](https://zhuanlan.zhihu.com/p/588264423)，使用阿里镜像下载。
+
+```shell
+# 添加阿里的 Docker 镜像仓库证书
+curl -fsSL https://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/aliyun-docker.gpg
+# 添加仓库
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/aliyun-docker.gpg] https://mirrors.aliyun.com/docker-ce/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# 安装docker-ce
+sudo apt update
+sudo apt install -y docker-ce
+
+# 设置自启动
+sudo systemctl enable docker
+sudo systemctl start docker
+
+# 验证
+sudo docker info
+```
+
+后来又发现，按照官网的流程走似乎也可以，不过需要手动替换一下`Add the repository to Apt sources`步骤中的源，其他命令都不用变。
+
+```shell
+# 替换成阿里云的源
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://mirrors.aliyun.com/docker-ce/linux/ubuntu \
+  $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+```
+
+### 镜像源
+
+经常需要更新，比如可参考[Github](https://github.com/dongyubin/DockerHub)。直接google搜"docker最新可用镜像源"就行。
+
 ## 基础
+
+### Docker Desktop(已卸载)
+
+> Docker是让我第一次如此想用纯血Linux笔记本的开发软件。
+
+感觉这玩意并不是很好用，当然也不是必需的(headless服务器，你装一个GUI试试？)。今天想把docker images从C盘迁移到D盘，结果老是在文件移动的最后一步报错`文件被占用`，而此时`vhdx`文件都已经完整移动到D盘了。我先是点了“取消移动”，结果D盘的文件就没了；好嘛，那我重新试一下，这次剪切到D盘之后，我又复制了一份，再取消移动，这回文件被保留了，但C盘的文件还是删不掉。资源管理器找不到占用进程，在网上又搜了好多资料，有人推荐用[Lock-hunter](https://lockhunter.com/)去查找文件被占用的进程并解锁，但我发现`docker_data.vhdx`是被`System`占用的，没法解锁。Windows和WSL2下怎么强制删除也删不掉，最后气得把Docker Desktop卸载了，这回可以删除了。
+
+还有，这个破桌面软件不知道为什么老和wsl冲突，经常一起崩溃，或者一个崩溃，真受不了
+
+拜拜了您嘞
 
 ### Images && Containers
 
