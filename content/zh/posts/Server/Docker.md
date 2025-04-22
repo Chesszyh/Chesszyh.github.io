@@ -127,6 +127,49 @@ echo \
 
 经常需要更新，比如可参考[Github](https://github.com/dongyubin/DockerHub)。直接google搜"docker最新可用镜像源"就行。
 
+参考配置(`/etc/docker/daemon.json`)：
+
+```json
+{
+    "runtimes": {
+        "nvidia": {
+            "path": "nvidia-container-runtime",
+            "runtimeArgs": []
+        }
+    },
+    "registry-mirrors": [
+        "http://docker.domys.cc",
+        "http://hub.domys.cc",
+        "https://hub.fast360.xyz",
+        "https://hub.rat.dev",
+        "https://hub.littlediary.cn",
+        "https://docker.kejilion.pro",
+        "https://dockerpull.cn",
+        "https://docker-0.unsee.tech",
+        "https://docker.tbedu.top",
+        "https://docker.1panelproxy.com",
+        "https://docker.melikeme.cn",
+        "https://cr.laoyou.ip-ddns.com",
+        "https://hub.firefly.store",
+        "https://docker.hlmirror.com",
+        "https://docker.m.daocloud.io",
+        "https://docker.1panel.live",
+        "https://image.cloudlayer.icu",
+        "https://docker.1ms.run",
+        "https://docker.mybacc.com",
+        "https://dytt.online",
+        "https://lispy.org",
+        "https://docker.xiaogenban1993.com",
+        "https://docker.yomansunter.com",
+        "https://aicarbon.xyz",
+        "https://666860.xyz",
+        "https://docker.zhai.cm",
+        "https://a.ussh.net",
+        "https://dockerproxy.net"
+      ]
+}
+```
+
 ## 基础
 
 ### Docker Desktop(已卸载)
@@ -156,6 +199,19 @@ docker containers ls -a # 查看所有容器，包括停止的容器
 docker start/stop/rm <container_id_or_name>
 docker exec -it <container_id_or_name> bash # 进入容器：-it表示交互式终端
 ```
+
+### 启动设置
+
+- WSL2下的Docker Desktop默认是开机自启的，也可以在`/etc/wsl.conf`中设置WSL开机时自动执行的命令，参考：https://learn.microsoft.com/en-us/windows/wsl/wsl-config
+
+```ini
+# Set a command to run when a new WSL instance launches. This example starts the Docker container service.
+[boot]
+command = service docker start
+```
+
+- 禁止某容器开机自启动(修改容器的重启策略)：`docker update --restart no <container_id_or_name>`
+  - 手动关闭容器后，下次容器在 Docker 守护进程启动或容器退出时将不会自动重启。
 
 ## Openai API Proxy
 

@@ -7,7 +7,7 @@ tags: []
 ---
 
 <!-- 文章内容开始 -->
-# 在Windows11+WSL2(Ubuntu)+Docker Desktop环境下部署RAG-flow
+# 在Windows11+WSL2(Ubuntu)环境下部署RAG-flow
 
 [Github仓库](https://github.com/infiniflow/ragflow)
 
