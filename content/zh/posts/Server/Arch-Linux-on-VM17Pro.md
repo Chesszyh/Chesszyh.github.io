@@ -12,6 +12,6 @@ tags: []
 > Arch Linux + Neovim + Rush + ... = ?
 > 其实最近我比较功利，懒得折腾这些东西，因为在vmware里安装一个arch linux并不能让我找到工作
 
-TODO
+TODO: https://medium.com/@sydasif78/arch-linux-installation-virtual-machine-a188d028359
 
 - 下载iso镜像：https://mirrors.ustc.edu.cn/archlinux/iso/

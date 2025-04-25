@@ -31,11 +31,18 @@ Lichess 是一个复杂的分布式系统。在单台（尤其是资源有限的
 
 #### 准备工作
 
-先克隆仓库、拉取镜像、创建bot账户。Docker方式安装参考：https://github.com/lichess-bot-devs/lichess-bot/wiki/How-to-use-the-Docker-image。
+先克隆仓库、拉取镜像、创建bot账户。然后配置环境：
 
 ```bash
 git clone https://github.com/lichess-bot-devs/lichess-bot
+# Docker方式安装参考：https://github.com/lichess-bot-devs/lichess-bot/wiki/How-to-use-the-Docker-image。
 docker pull lichessbotdevs/lichess-bot # 大概1G
+# 或使用Ubuntu+Python 3.9+安装(便于调试)
+sudo apt install python3 python3-pip python3-virtualenv python3-venv
+python3 -m venv venv # If this fails you probably need to add Python3 to your PATH.
+virtualenv venv -p python3
+source ./venv/bin/activate
+python3 -m pip install -r requirements.txt
 ```
 
 - **创建bot**：参考https://lichess.org/api#tag/Bot/operation/botAccountUpgrade。
@@ -45,7 +52,7 @@ docker pull lichessbotdevs/lichess-bot # 大概1G
 3. 执行命令：`curl -d '' https://lichess.org/api/bot/account/upgrade -H "Authorization: Bearer <yourTokenHere>"`，预期返回`{"ok":true}`。
 4. 登录账户检查是否已有`bot`头衔。
 
-#### 项目配置
+#### 项目配置: Stockfish Bot
 
 配置文件`config.yml`解读参考：[Summary by AI](./lichess-bot-setting.md)。项目内(容器外)需要自己准备的文件：
 
@@ -70,7 +77,7 @@ TODO: https://github.com/lichess-bot-devs/lichess-bot/wiki/Extra-customizations 
 
 原因分析：
 
-1. 文件路径找不到，可能是相对路径的锅。配置文件`engine`下键值原本是`"dir: ./engines"`。根据启动命令`docker run -d -v /root/lichess-bot:/lichess-bot/config --name myBot lichessbotdevs/lichess-bot`，这是将`/root/lichess-bot`挂载到容器的`/lichess-bot/config`。所以将配置文件路径改为**绝对路径**`"dir: /lichess-bot/config/engines"`即可。
+1. 文件路径找不到，可能是相对路径的锅。配置文件`engine`下键值原本是`"dir: ./engines"`。根据启动命令`docker run -d -v /root/lichess-bot:/lichess-bot/config --name myBot lichessbotdevs/lichess-bot`或`docker run -d -v /home/chesszyh/Develop/Chess/lichess-bot:/lichess-bot/config --name myBot lichessbotdevs/lichess-bot`，这是将`/root/lichess-bot`挂载到容器的`/lichess-bot/config`。所以将配置文件路径改为**绝对路径**`"dir: /lichess-bot/config/engines"`即可。
 
 或者在启动时限制日志文件大小：`docker run -d -v /root/lichess-bot:/lichess-bot/config --name myBot --log-driver=json-file --log-opt max-size=10m --log-opt max-file=3 lichessbotdevs/lichess-bot`。注意日志驱动程序选项`--log-driver`和`--log-opt`必须在镜像名称`lichessbotdevs/lichess-bot`之前指定，即由`docker run`命令本身解析，而不是传递给**容器内部**作为执行命令的一部分。
 
@@ -82,8 +89,6 @@ TODO: https://github.com/lichess-bot-devs/lichess-bot/wiki/Extra-customizations 
 
 > 新的问题：这个bot把我的云服务器炸了，应该也是内存耗尽了……
 > 之前的防OOM机制失败了吗？我现在又连SSH也上不去了……
-
-#### Stockfish Bot
 
 #### Lc0(Leela Chess Zero) Bot
 
