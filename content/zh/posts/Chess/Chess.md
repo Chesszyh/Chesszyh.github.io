@@ -15,6 +15,9 @@ tags: []
   - [Medium Code图片导出美化](https://carbon.now.sh/)
   - [文章提到的一个GPU平台](https://lightning.ai/)
 
+- [fishtest](https://tests.stockfishchess.org/)
+- [ ]
+
 ## Lichess
 
 ### Lichess Server
