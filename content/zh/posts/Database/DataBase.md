@@ -2,8 +2,8 @@
 title: 'DataBase'
 date: 2025-04-01T17:05:17+08:00
 draft: false
-categories: []
-tags: []
+categories: ["Database"]
+tags: ["Database", "Docker", "OceanBase", "Miniob"]
 ---
 
 <!-- 文章内容开始 -->
@@ -14,6 +14,7 @@ tags: []
 ### Issues
 
 - Vscode + WSL2 + Mysql无法连接？参考[Access denied for user 'root'@'localhost' 的解决](https://stackoverflow.com/questions/41645309/mysql-error-access-denied-for-user-rootlocalhost): `ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';`
+- Cmake安装依赖后编译，异常终止编译过程后再次执行编译命令报错：可以手动修改被污染的`.cmake`文件。以后可以在配置完依赖后执行`git commit`，保存一次当前环境；后续如果文件夹发生移动等问题，直接`git reset --hard`回到上次提交的状态即可。
 
 ### OceanBase
 
@@ -119,24 +120,4 @@ root      2177  0.0  0.0   9212  1044 pts/0    S+   13:03   0:00 grep --color=au
 
 ### Miniob
 
-[miniob](https://hub.docker.com/r/oceanbase/miniob) 是 OceanBase 与华中科技大学联合开发的、面向零基础数据库内核知识同学的一门数据库实现入门教程实践工具，设计目标是让不熟悉数据库设计和实现的同学能够快速的了解与深入学习数据库内核。
-
-> 体积较小，可以直接在AWS上运行。
-
-```shell
-# 1. Docker下载官方miniob镜像
-docker run -d --privileged --name=miniob oceanbase/miniob
-
-# 2. 进入容器内部，编译安装
-docker exec -it miniob bash
-git clone https://github.com/oceanbase/miniob.git
-cd miniob
-bash build.sh --make -j4 
-
-# 3. 编译后，进入build目录，运行
-cd build
-./bin/observer -s miniob.sock -f ../etc/observer.ini & # 在后台启动服务
-
-# 4. 连接数据库
-./bin/obclient -s miniob.sock # 启动miniOB
-```
+参考[Miniob](./Miniob.md)文档。

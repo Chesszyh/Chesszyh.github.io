@@ -7,7 +7,9 @@ tags: []
 ---
 
 <!-- 文章内容开始 -->
-# 在VMware 17 Pro 中安装 Arch Linux
+# Arch Linux
+
+## 在VMware 17 Pro 中安装 Arch Linux
 
 > Arch Linux + Neovim + Rush + ... = ?
 > 其实最近我比较功利，懒得折腾这些东西，因为在vmware里安装一个arch linux并不能让我找到工作

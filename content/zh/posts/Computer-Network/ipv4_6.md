@@ -2,7 +2,7 @@
 title: 'IPv4, IPv6'
 date: 2025-04-25T20:30:01+08:00
 draft: false
-categories: ["Web"]
+categories: ["Web", "Network"]
 tags: ["Web", "ipv4", "ipv6"]
 ---
 

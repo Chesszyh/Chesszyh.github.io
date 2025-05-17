@@ -140,7 +140,6 @@ sparseVhd=true
 ## Source
 
 - `apt`：`/etc/apt/sources.list.d/ubuntu.sources`
-- 
 
 ## Database
 

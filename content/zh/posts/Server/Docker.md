@@ -2,8 +2,8 @@
 title: 'Docker'
 date: 2025-03-29T13:22:49+08:00
 draft: false
-categories: []
-tags: []
+categories: ["Cloud Server", "Docker"]
+tags: ["Docker", "Docker-Compose", "AWS", "Docker-hub"]
 featuredImage: "/image/docker.png"
 ---
 
