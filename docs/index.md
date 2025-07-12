@@ -16,5 +16,5 @@
 ## Contact
 
 - GitHub: [Chesszyh](https://github.com/Chesszyh)
-- Lichess: [Chesszyh](https://lichess.org/@/Chesszyh)\
+- Lichess: [Chesszyh](https://lichess.org/@/Chesszyh)
 - Chess.com: [ilovecatgirl987](https://www.chess.com/member/ilovecatgirl987)
