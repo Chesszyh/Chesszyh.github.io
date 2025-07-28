@@ -1,13 +1,3 @@
----
-title: 'Open Webui'
-date: 2025-03-28T16:50:07+08:00
-draft: false
-categories: []
-tags: []
-featuredImage: "/image/open-webui.png"
----
-
-<!-- 文章内容开始 -->
 # Open Webui
 
 ## 部署

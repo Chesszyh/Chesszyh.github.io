@@ -2,7 +2,26 @@
 
 Docker文档，参考正在进行的[Docker文档翻译](https://github.com/Chesszyh/docker-docs-CN)。
 
-目前全是用Gemini 2.5 Pro翻译的，后续会人工校对和完善。
+## Docker Desktop vs Docker Engine?
+
+> 杂记：感觉Desktop这玩意并不是很好用，当然也不是必需的(headless服务器，你装一个GUI试试？)。今天想把docker images从C盘迁移到D盘，结果老是在文件移动的最后一步报错`文件被占用`，而此时`vhdx`文件都已经完整移动到D盘了。我先是点了“取消移动”，结果D盘的文件就没了；好嘛，那我重新试一下，这次剪切到D盘之后，我又复制了一份，再取消移动，这回文件被保留了，但C盘的文件还是删不掉。资源管理器找不到占用进程，在网上又搜了好多资料，有人推荐用[Lock-hunter](https://lockhunter.com/)去查找文件被占用的进程并解锁，但我发现`docker_data.vhdx`是被`System`占用的，没法解锁。Windows和WSL2下怎么强制删除也删不掉，最后气得把Docker Desktop卸载了，这回可以删除了。还有，这个破桌面软件不知道为什么老和wsl冲突，经常一起崩溃，或者一个崩溃，真受不了。
+
+### Docker Desktop
+
+参考：https://docs.docker.com/desktop/setup/install/linux/
+
+Docker Desktop会启动一个虚拟机，将容器和镜像存储在虚拟机内的独立存储位置，并提供资源限制控制。如果卸载Docker Desktop, 则对应的镜像和容器也会被删除。Desktop使用`desktop-linux`上下文来运行Docker Engine。**当Docker Desktop和Docker CE同时存在时，Desktop context会遮蔽CE context(default)**，也可能会导致端口冲突问题。可以选择停止Docker CE:
+
+```shell
+sudo systemctl stop docker docker.socket containerd
+sudo systemctl disable docker docker.socket containerd
+```
+
+或者使用`docker context`命令进行上下文切换。
+
+### 实践建议
+
+Windows想要使用docker，只能通过WSL2安装docker engine。如果想要图形化界面的话，再安装Docker Desktop（非必需）。Linux服务器只能安装Docker Engine，并且Linux桌面发行版实际上也不推荐两个一起装。只装docker CE就已经够用了。
 
 ## Hostname
 
@@ -117,6 +136,34 @@ echo \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 ```
 
+## Configuration
+
+### 系统代理与DNS配置
+
+国内使用Docker的第一课：`docker: Error response from daemon: Get "https://registry-1.docker.io/v2/": context deadline exceeded`
+
+被墙了，没办法，配置一下代理或者用国内镜像源（不稳定）吧。
+
+先检查自己系统是否能连上Docker Hub：
+
+```shell
+curl https://registry-1.docker.io/v2/
+```
+
+**配置代理**，以7897端口的clash-verge为例：
+
+```shell
+sudo mkdir -p /etc/systemd/system/docker.service.d
+sudo nano /etc/systemd/system/docker.service.d/http-proxy.conf
+```
+
+```ini
+[Service]
+Environment="HTTP_PROXY=http://127.0.0.1:7897"
+Environment="HTTPS_PROXY=http://127.0.0.1:7897"
+Environment="NO_PROXY=localhost,127.0.0.1"
+```
+
 ### 镜像源
 
 经常需要更新，比如可参考[Github](https://github.com/dongyubin/DockerHub)。直接google搜"docker最新可用镜像源"就行。
@@ -164,17 +211,59 @@ echo \
 }
 ```
 
+换DNS、镜像源：
+
+```shell
+sudo mkdir -p /etc/docker
+sudo nano /etc/docker/daemon.json
+```
+
+```json
+{
+  "dns": ["8.8.8.8", "1.1.1.1"],
+  "registry-mirrors": [
+    // 自己找找最新镜像源吧
+  ]
+}
+```
+
+然后重启Docker服务：
+
+```shell
+sudo systemctl daemon-reexec
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+```
+
+### Nvidia container toolkit
+
+**注意**：根据这篇[文档](https://forums.docker.com/t/cant-start-containers-with-gpu-access-on-linux-mint/144606)的描述：
+
+> Only Docker Desktop for Windows supports GPUs when the WSL2 backend is used, since WSL2 supports GPUs. Docker Desktop for Linux does not support it, but you can install Docker CE which does.
+
+所以，Fedora更是无需安装Docker Desktop，参考[官方文档](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)安装Nvidia container toolkit即可。
+
+```shell
+curl -s -L https://nvidia.github.io/libnvidia-container/stable/rpm/nvidia-container-toolkit.repo | \
+sudo tee /etc/yum.repos.d/nvidia-container-toolkit.repo
+export NVIDIA_CONTAINER_TOOLKIT_VERSION=1.17.8-1
+sudo dnf install -y \
+    nvidia-container-toolkit-${NVIDIA_CONTAINER_TOOLKIT_VERSION} \
+    nvidia-container-toolkit-base-${NVIDIA_CONTAINER_TOOLKIT_VERSION} \
+    libnvidia-container-tools-${NVIDIA_CONTAINER_TOOLKIT_VERSION} \
+    libnvidia-container1-${NVIDIA_CONTAINER_TOOLKIT_VERSION}
+
+sudo nvidia-ctk runtime configure --runtime=docker
+sudo systemctl restart docker
+# 测试
+docker run --rm --gpus all nvidia/cuda:12.2.0-base-ubuntu20.04 nvidia-smi
+```
+
+输出：![alt text](image.png)
+
+配置成功。
+
 ## 基础
-
-### Docker Desktop(已卸载)
-
-> Docker是让我第一次如此想用纯血Linux笔记本的开发软件。
-
-感觉这玩意并不是很好用，当然也不是必需的(headless服务器，你装一个GUI试试？)。今天想把docker images从C盘迁移到D盘，结果老是在文件移动的最后一步报错`文件被占用`，而此时`vhdx`文件都已经完整移动到D盘了。我先是点了“取消移动”，结果D盘的文件就没了；好嘛，那我重新试一下，这次剪切到D盘之后，我又复制了一份，再取消移动，这回文件被保留了，但C盘的文件还是删不掉。资源管理器找不到占用进程，在网上又搜了好多资料，有人推荐用[Lock-hunter](https://lockhunter.com/)去查找文件被占用的进程并解锁，但我发现`docker_data.vhdx`是被`System`占用的，没法解锁。Windows和WSL2下怎么强制删除也删不掉，最后气得把Docker Desktop卸载了，这回可以删除了。
-
-还有，这个破桌面软件不知道为什么老和wsl冲突，经常一起崩溃，或者一个崩溃，真受不了
-
-拜拜了您嘞
 
 ### Images && Containers
 

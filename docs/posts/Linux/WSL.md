@@ -2,6 +2,22 @@
 
 > “最好的Linux发行版”
 
+## Update
+
+2025-07-28 WSL2需要开启Hyper-V功能:
+
+```shell
+rem 以下代码用于激活Win10家庭版的Hyper-v功能，以便启用wsl2(支持GPU)，否则只能使用wsl1
+
+pushd "%~dp0"
+dir /b %SystemRoot%\servicing\Packages\*Hyper-V*.mum >hyper-v.txt
+for /f %%i in ('findstr /i . hyper-v.txt 2^>nul') do dism /online /norestart /add-package:"%SystemRoot%\servicing\Packages\%%i"
+del hyper-v.txt
+Dism /online /enable-feature /featurename:Microsoft-Hyper-V-All /LimitAccess /ALL
+```
+
+开启之后的弊端，就是明显感到电脑性能下降，莫名其妙会卡。种种原因之下我直接选择放弃Windows，投靠Fedora了。
+
 ## Setting
 
 参考：https://learn.microsoft.com/en-us/windows/wsl/wsl-config
