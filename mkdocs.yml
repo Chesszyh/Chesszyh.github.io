@@ -53,7 +53,6 @@ nav:
   - Home: index.md
   - Posts:
     - "Why Abandon Old Blog": posts/为什么放弃旧博客.md
-    - "": summary/2025-08-27.md
     - Blog Tech:
       - "Cusdis Comment System DIY": posts/Blog/cusdis-diy.md
       - "Plugin Development": posts/Blog/plugin.md
@@ -80,8 +79,11 @@ nav:
     - Web Development:
       - "Network Tunneling": posts/Web/内网穿透.md
       - "IPv4/IPv6": posts/Web/ipv4_6.md
+    - Misc:
+      - "Misc-Note": misc/Note.md
+      - "Exploration Journey": misc/Exploration.md
     - "TODO": posts/TODO.md
-    - "Exploration Journey": misc/Exploration.md
+    - "对大学前两年的失败总结": summary/2025-08-27.md
 
 # Plugins
 plugins:

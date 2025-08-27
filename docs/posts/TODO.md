@@ -9,13 +9,19 @@
 
 - [x] 移动热点dns劫持？
 
-Fedora:`sudo tailscale up`无反应，`nslookup controlplane.tailscale.com`解析到的IP是`198.18.0.10`（保留段），说明发生了DNS劫持。
+Fedora:`sudo tailscale up`无反应，`nslookup controlplane.tailscale.com`解析到的IP是`198.18.1.168`（保留段），说明发生了DNS劫持。
+
+```bash
+❯ nslookup controlplane.tailscale.com
+Server:         127.0.0.53
+Address:        127.0.0.53#53
+
+Non-authoritative answer:
+Name:   controlplane.tailscale.com
+Address: 198.18.1.168
+```
 
 尝试解决：`sudo nano /etc/resolv.conf`，将`nameserver 127.0.0.53`注释掉，改为`nameserver 8.8.8.8`，然后重启`tailscale`服务，但是`resolv.conf`文件会被自动重置。如果想解除其他程序对`resolv.conf`的控制，可以先删除再重建该文件。我选择手动管理。
-
-但是，现在DNS似乎无法正确解析了：![alt text](image.png)
-
-可能后续还是得恢复原始配置。不过我是真想不通为什么无法解除DNS劫持状态？
 
 相关讨论：https://stackoverflow.com/questions/19432026/how-do-i-edit-resolv-conf
 
@@ -23,7 +29,7 @@ ipad连接热点之后不会发生DNS劫持，可以正常登录tailscale。考�
 
 ---
 
-问题已解决，应该是开了clash verge tun模式的原因, tun后DNS变为了198.18.0.2，接管了所有网络流量。
+问题已解决，应该是开了clash verge tun模式的原因, tun后DNS变为了198.18.1.0，接管了所有网络流量。
 
 所以如果需要正常解析DNS，要关闭clash verge tun模式。
 
@@ -49,3 +55,31 @@ AppImage 的核心特点是“自包含”。它会把自己需要的大部分�
 
 已知的是Snipaste对Wayland的支持不佳，issue也没看到类似的问题，暂时不用snipaste截图了。
 
+---
+
+- [!] Linux QQ启动黑屏/无法输入中文
+
+Linux kernel: 6.15.10-200.fc42.x86_64
+
+* **官方 Linux QQ**（3.2.19 x86_64）无法输入中文。并且尝试截图时会直接闪退。
+  * 官方版是 **Qt + 封装程序/Wine 内核混合**。
+  * 优势：界面美观、功能更全面丰富，但bug也更多
+  * Linux 输入法（fcitx/ibus）通过 `QT_IM_MODULE` 注入，但 QQ 内部封装后 **不识别这些环境变量**。
+  * 官方 QQ 对中文输入支持似乎 **本身就很差**，属于已知限制。
+* **Flatpak 版 QQ**启动后黑屏，无法正常使用。
+  * Flatpak 包含自己的运行环境，和宿主系统的库、GPU 驱动隔离。
+  * 我将Fedora 42 Linux内核从6.15.9更新到10之后，才出现的黑屏问题。可能是GPU 渲染/Qt runtime 与系统库不兼容
+
+* 已尝试的解决方案
+
+1. 修改 `/usr/share/applications/qq.desktop`：
+
+```ini
+Exec=env QT_IM_MODULE=fcitx XMODIFIERS=@im=fcitx GTK_IM_MODULE=fcitx /opt/QQ/qq %U
+```
+
+之后仍然无法输入中文。
+
+2. 尝试禁用flatpak启动时gpu渲染等，也无效。
+
+目前大概只能等更新了，我懒得用wine或者自己修了。这大概就是换Linux，以及更新较为激进的发行版的代价吧。
