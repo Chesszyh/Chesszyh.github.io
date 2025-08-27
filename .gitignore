@@ -1,2 +1,5 @@
 private/
 *.env
+# Obsidian
+.obsidian/
+copilot-custom-prompts/

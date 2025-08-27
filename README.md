@@ -2,9 +2,9 @@
 
 Chesszyh's Personal Blog.
 
-Site: https://blog.neurosama.uk
+Site: https://blog.neurosama.uk or https://Chesszyh.github.io
 
-## Getting Started
+## Deployment
 
 ```bash
 python -m pip install -r requirements.txt

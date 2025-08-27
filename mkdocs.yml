@@ -53,7 +53,8 @@ nav:
   - Home: index.md
   - Posts:
     - "Why Abandon Old Blog": posts/为什么放弃旧博客.md
-    - "Exploration Journey": posts/Exploration.md
+    - "TODO": posts/TODO.md
+    - "Exploration Journey": posts/misc/Exploration.md
     - Blog Tech:
       - "Cusdis Comment System DIY": posts/Blog/cusdis-diy.md
       - "Plugin Development": posts/Blog/plugin.md
@@ -70,6 +71,7 @@ nav:
       - "Virtual Machine": posts/Linux/VirtualMachine.md
       - "WSL Usage": posts/Linux/WSL.md
     - LLM:
+      - "AI Agent": posts/LLM/AI-Agent.md
       - "DeepSpeed": posts/LLM/DeepSpeed.md
       - "MCP Protocol": posts/LLM/MCP.md
       - "Open WebUI": posts/LLM/open-webui.md

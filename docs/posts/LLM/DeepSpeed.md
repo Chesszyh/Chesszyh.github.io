@@ -7,9 +7,6 @@
 
 本次使用的是[DeepSpeed-Chat](https://github.com/deepspeedai/DeepSpeedExamples/tree/master/applications/DeepSpeed-Chat)，可以帮助我们在预训练模型基础上快速训练一个高质量的聊天模型。
 
-TODO...
-
-- [ ] Deepspeed
-- [ ] WeClone
+TODO... <--- 上次更新已是6月
 
 

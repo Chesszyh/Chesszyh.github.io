@@ -2,7 +2,9 @@
 
 ## 参考资源
 
-[MCP](https://www.anthropic.com/news/model-context-protocol)
+[MCP-Anthropic](https://www.anthropic.com/news/model-context-protocol)
+
+[MCP-for-beginners]
 
 [Doc](https://modelcontextprotocol.io/docs)
 
