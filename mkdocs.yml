@@ -53,8 +53,7 @@ nav:
   - Home: index.md
   - Posts:
     - "Why Abandon Old Blog": posts/为什么放弃旧博客.md
-    - "TODO": posts/TODO.md
-    - "Exploration Journey": posts/misc/Exploration.md
+    - "": summary/2025-08-27.md
     - Blog Tech:
       - "Cusdis Comment System DIY": posts/Blog/cusdis-diy.md
       - "Plugin Development": posts/Blog/plugin.md
@@ -81,6 +80,8 @@ nav:
     - Web Development:
       - "Network Tunneling": posts/Web/内网穿透.md
       - "IPv4/IPv6": posts/Web/ipv4_6.md
+    - "TODO": posts/TODO.md
+    - "Exploration Journey": misc/Exploration.md
 
 # Plugins
 plugins:
@@ -125,4 +126,4 @@ extra_css:
   - stylesheets/extra.css
 
 # Copyright
-copyright: "Copyright &copy; 2024 Chesszyh"
+copyright: "Copyright &copy; 2025 Chesszyh"

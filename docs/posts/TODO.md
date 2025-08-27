@@ -1,9 +1,9 @@
 # 待解决问题
 
-- [x]: 已解决
-- [?]: 不可稳定复现，最近暂时没有遇到的问题
-- [!]: 待解决，影响使用
-- [ ]: 待解决，不影响使用
+- `[x]`: 已解决
+- `[?]`: 不可稳定复现，最近暂时没有遇到的问题
+- `[!]`: 待解决，影响使用
+- `[ ]`: 待解决，不影响使用
 
 ---
 
@@ -27,9 +27,7 @@ ipad连接热点之后不会发生DNS劫持，可以正常登录tailscale。考�
 
 所以如果需要正常解析DNS，要关闭clash verge tun模式。
 
-- [?] Fedora dnf error
-
-官方源404，据说是官方问题……清华源403,阿里云可以正常下载。没明白为什么
+---
 
 - [!] 输入法fcitx5 rime
 
@@ -37,9 +35,11 @@ rime在输入中文时，如果按了大写锁定键，之后会一直保持西�
 
 配置文件在`~/.local/share/fcitx5/rime`.
 
+---
+
 - [ ] Snipaste AppImageLauncher error
 
-AppImageLauncher的.desktop文件位于`~/.local/share/applications/`。
+AppImageLauncher的`.desktop`文件位于`~/.local/share/applications/`。
 
 目前无法通过rofi启动Snipaste，直接启动appimage会报错：`qt.qpa.plugin: Could not find the Qt platform plugin "wayland" in ""`。
 
