@@ -62,8 +62,6 @@ docker run -p 2881:2881 --name oceanbase-ce -e MODE=slim -d oceanbase/oceanbase-
 
 或者利用[nginx-proxy](https://github.com/nginx-proxy/nginx-proxy)仓库提供的解决方案：
 
-TODO 用miniob做实验
-
 ```shell
 docker run --detach --name nginx-proxy --publish 80:80 --volume /var/run/docker.sock:/tmp/docker.sock:ro nginxproxy/nginx-proxy:1.7
 # 启动你的应用容器，并设置VIRTUAL_HOST环境变量
