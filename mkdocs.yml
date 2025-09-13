@@ -72,6 +72,8 @@ nav:
       - "Network": posts/VirtualMachine/Network.md
     - Deployment:
       - "GitHub Actions": posts/Deployment/github-actions.md
+    - Javascript&Typescript:
+      - "React": posts/Javascript&Typescript/React.md
     - Blog Tech:
       - "Cusdis Comment System DIY": posts/Blog/cusdis-diy.md
       - "Plugin Development": posts/Blog/plugin.md
