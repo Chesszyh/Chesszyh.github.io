@@ -70,6 +70,8 @@ nav:
       - "Windows": posts/VirtualMachine/Windows.md
       - "VMware": posts/VirtualMachine/VMware.md
       - "Network": posts/VirtualMachine/Network.md
+    - Deployment:
+      - "GitHub Actions": posts/Deployment/github-actions.md
     - Blog Tech:
       - "Cusdis Comment System DIY": posts/Blog/cusdis-diy.md
       - "Plugin Development": posts/Blog/plugin.md
@@ -94,6 +96,7 @@ nav:
     - Misc:
       - "Misc-Note": misc/Note.md
       - "Exploration Journey": misc/Exploration.md
+      - "Thoughts": misc/Thoughts.md
     - "TODO": posts/TODO.md
     - "对大学前两年的失败总结": summary/2025-08-27.md
 
