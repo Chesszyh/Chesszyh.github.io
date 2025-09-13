@@ -1,0 +1,4 @@
+{
+  "editor.tabSize": 4, // mkdocs默认markdown列表缩进似乎为4个空格，为了避免显示问题此处设置为4
+  "editor.insertSpaces": true
+}

@@ -7,6 +7,9 @@ site_url: "https://blog.neurosama.uk"
 repo_name: "Chesszyh"
 repo_url: "https://github.com/Chesszyh"
 
+# Docs root path
+docs_dir: docs
+
 # Theme
 theme:
   name: material
@@ -53,12 +56,15 @@ nav:
   - Home: index.md
   - Posts:
     - "Why Abandon Old Blog": posts/为什么放弃旧博客.md
+    - Plugins:
+      - "Blog Plugins": plugins/index.md
     - Linux:
       - "Arch Linux": posts/Linux/Arch-Linux.md
       - "Linux Practice": posts/Linux/Linux实践.md
       - "WSL Usage": posts/Linux/WSL.md
     - Fedora:
       - "Intro": posts/Host-Fedora/Intro.md
+      - "Setup": posts/Host-Fedora/Setup.md
       - "Swap": posts/Host-Fedora/Swap.md
     - VirtualMachine:
       - "Windows": posts/VirtualMachine/Windows.md
@@ -98,6 +104,7 @@ plugins:
         - zh
         - en
   - tags
+  - include-markdown
 
 # Markdown extensions
 markdown_extensions:

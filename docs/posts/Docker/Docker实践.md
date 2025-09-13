@@ -294,7 +294,7 @@ command = service docker start
 ```
 
 - 禁止某容器开机自启动(修改容器的重启策略)：`docker update --restart no <container_id_or_name>`
-  - 手动关闭容器后，下次容器在 Docker 守护进程启动或容器退出时将不会自动重启。
+    - 手动关闭容器后，下次容器在 Docker 守护进程启动或容器退出时将不会自动重启。
 
 ## Openai API Proxy
 
@@ -399,9 +399,9 @@ RUN echo 'Hello World!' > /var/www/html/index.html
 
 # Configure Apache
 RUN echo 'mkdir -p /var/run/httpd' >> /root/run_apache.sh && \
- echo 'mkdir -p /var/lock/httpd' >> /root/run_apache.sh && \
- echo '/usr/sbin/httpd -D FOREGROUND' >> /root/run_apache.sh && \
- chmod 755 /root/run_apache.sh
+echo 'mkdir -p /var/lock/httpd' >> /root/run_apache.sh && \
+echo '/usr/sbin/httpd -D FOREGROUND' >> /root/run_apache.sh && \
+chmod 755 /root/run_apache.sh
 
 EXPOSE 80   # Expose port 80 for the web server
 

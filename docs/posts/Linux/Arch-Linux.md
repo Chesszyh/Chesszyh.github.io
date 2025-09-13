@@ -159,10 +159,6 @@ systemctl enable sddm
 systemctl start sddm
 ```
 
-### 成功安装！
-
-![fastfetch](fastfetch.png)
-
 ## 其他问题
 
 ### 调整分区大小
