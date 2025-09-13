@@ -43,7 +43,7 @@ obclient -h172.17.0.2 -P2881 -uroot -Doceanbase -A # 连接数据库(命令仅�
 show databases
 ```
 
-连接成功后，可以对container进行简单配置。做作业的时候，感觉手动敲SQL的各种命令和条目名实在是太麻烦了，tab也没有，自动补全也没有，于是就想找一些便捷的工具。JetBrains提供了DataGrip，我下载了但还没用，如果vscode能行的话我就不打算用重型IDE了。我的个人PC开启了Hyper-v虚拟化+VMWare+WSL2+Docker，多个虚拟化环境同时运行，感觉对windows本身的性能还是有一些影响的(有时仅开一个vscode+chrome就会把内存吃到90%以上，更别提JB家的IDE了)。[虚拟化技术](../Linux/VirtualMachine.md)也许以后可以专门学习，现在只是让AI总结了一下作为了解。
+连接成功后，可以对container进行简单配置。做作业的时候，感觉手动敲SQL的各种命令和条目名实在是太麻烦了，tab也没有，自动补全也没有，于是就想找一些便捷的工具。JetBrains提供了DataGrip，我下载了但还没用，如果vscode能行的话我就不打算用重型IDE了。我的个人PC开启了Hyper-v虚拟化+VMWare+WSL2+Docker，多个虚拟化环境同时运行，感觉对windows本身的性能还是有一些影响的(有时仅开一个vscode+chrome就会把内存吃到90%以上，更别提JB家的IDE了)。
 
 #### 为运行中的无端口映射容器添加端口映射
 
