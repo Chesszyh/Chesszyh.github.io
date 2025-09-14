@@ -16,3 +16,14 @@
 TCPKeepAlive yes # IMPORTANT!!
 ServerAliveInterval 30
 ```
+
+## Change Screen Lightness
+
+https://www.reddit.com/r/Fedora/comments/k81o5j/touchpad_and_screen_brightness_issues_with_lenovo/?tl=zh-hans
+
+```bash
+grubby --default-kernel # 获取当前内核版本
+grubby --args="amdgpu.backlight=0" --update-kernel $(grubby --default-kernel)
+```
+
+Then reboot.

@@ -91,7 +91,8 @@ nav:
       - "Open WebUI": posts/LLM/open-webui.md
     - Server:
       - "Cloud Server Config": posts/Server/云服务器配置.md
-      - "Code Server": posts/Server/Code-server.md
+      - "Code Server": posts/Server/Code-server/Code-server.md
+      - "Nginx": posts/Server/Nginx/Nginx.md
     - Web Development:
       - "Network Tunneling": posts/Web/内网穿透.md
       - "IPv4/IPv6": posts/Web/ipv4_6.md
