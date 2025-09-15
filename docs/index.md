@@ -3,18 +3,24 @@
 ## Overview
 
 - **Linux**
-    - Hyper-V、WSL
-    - Fedora、Ubuntu
+    - Arch Linux, Fedora（主力系统）
+        - Hyprland is great
+    - WSL
+    - Ubuntu, Debian
 - **Web**
-    - Frontend：React、Vue
-    - Backend：Node.js
-- **运维**
-    - 容器：Podman、Docker、Apple container、Kubernetes
-    - 服务器
+    - Frontend：React
+    - Backend：Node.js, python
+    - VPS
+- **DevOps**
+    - Container：Podman、Docker、Apple container、Kubernetes
+    - Cloud service：AWS、GCP、Azure、Cloudflare
+    - CI/CD：GitHub Actions
 - **LLM**
     - RAG
     - MCP
-- **Chess** - Chess AI、Lichess Bot
+- **Chess**
+    - Chess AI(Not the same as Stockfish)
+    - Lichess Bot
 
 个人笔记还是很多的，但大多都散落在各个项目中，一般不会单独整理成文章
 

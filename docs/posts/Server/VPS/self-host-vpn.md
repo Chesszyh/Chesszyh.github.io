@@ -13,13 +13,7 @@
 
 ### 安装
 
-看视频就行。一次安装之后可以多次迁移，参考[s-ui迁移](#s-ui迁移)。
-
-```bash
-for d in www.xilinx.com www.apple.com c.6sc.co sisu.xboxlive.com amd.com electronics.sony.com www.sony.com ds-aksb-a.akamaihd.net images.nvidia.com xp.apple.com ; do t1=$(date +%s%3N); timeout 1 openssl s_client -connect $d:443 -servername $d </dev/null &>/dev/null && t2=$(date +%s%3N) && echo "$d: $((t2 - t1)) ms" || echo "$d: timeout"; done
-```
-
-### s-ui迁移
+看视频就行。一次安装之后可以多次迁移。
 
 s-ui提供了存档/恢复数据库功能，可以直接从旧服务器web面板导出数据库，然后在新服务器web面板导入。注意导入之后，**TLS设置里的公私钥需要重新生成**（也就是真正把vps流量从旧ip迁移到新ip），否则新服务器走的依然是旧服务器的证书。
 

@@ -155,7 +155,7 @@ if [[ "$1" == "test" ]]; then
         -v "$SCRIPT_DIR":/workspace \
         --name ubuntu-init-test \
         ubuntu:22.04 \
-        bash -c "apt update && apt install -y sudo curl git wget build-essential whiptail && cd /workspace && bash ubuntu-server-init.sh"
+        bash -c "apt update && apt install -y sudo curl git wget build-essential whiptail && cd /workspace && bash ubuntu-init.sh"
     
     yellow "Enter the Docker container?"
     read -rp "(y/n): " answer

@@ -186,10 +186,13 @@ sudo pacman -U clash-verge-rev-bin-2.4.2-1-x86_64.pkg.tar.zst
 sh <(curl -L https://raw.githubusercontent.com/JaKooLit/Arch-Hyprland/main/auto-install.sh)
 ```
 
-把所有的全选上就可以了。这个脚本可以执行大部分的系统配置工作，下面的部分可能会与脚本重复。
+这个脚本可以执行大部分的系统配置工作，下面的部分可能会与脚本重复。
 
 !!!note
     安装步骤支持缓存，但有的步骤在老机器上依然会卡很久，比如`quickshell`（基于Qt/QML的现代shell工具包，需要编译Qt组件）。
+
+!!!danger
+    脚本选项不能盲目全选。比如`rog`，这是专门针对华硕笔记本的配置，你是华硕吗？
 
 #### 字体
 
@@ -200,7 +203,17 @@ sudo pacman -S noto-fonts-cjk noto-fonts-emoji wqy-zenhei wqy-microhei
 fc-cache -fv
 ```
 
-霞鹜文楷：TODO
+霞鹜文楷：TODO 设置成主字体？
+
+#### 进一步配置
+
+<details>  
+<summary>Click to expand</summary>
+
+```bash
+{% include "../../../scripts/arch-init.sh" %}
+```
+</details>
 
 ## Installation on WSL2
 

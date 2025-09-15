@@ -66,6 +66,11 @@ nav:
       - "Intro": posts/Host-Fedora/Intro.md
       - "Setup": posts/Host-Fedora/Setup.md
       - "Swap": posts/Host-Fedora/Swap.md
+    - Server:
+      - "Cloud Server Config": posts/Server/云服务器配置.md
+      - "VPS": posts/Server/VPS/self-host-vpn.md
+      - "Code Server": posts/Server/Code-server/Code-server.md
+      - "Nginx": posts/Server/Nginx/Nginx.md
     - VirtualMachine:
       - "Windows": posts/VirtualMachine/Windows.md
       - "VMware": posts/VirtualMachine/VMware.md
@@ -89,15 +94,12 @@ nav:
       - "DeepSpeed": posts/LLM/DeepSpeed.md
       - "MCP Protocol": posts/LLM/MCP.md
       - "Open WebUI": posts/LLM/open-webui.md
-    - Server:
-      - "Cloud Server Config": posts/Server/云服务器配置.md
-      - "Code Server": posts/Server/Code-server/Code-server.md
-      - "Nginx": posts/Server/Nginx/Nginx.md
     - Web Development:
       - "Network Tunneling": posts/Web/内网穿透.md
       - "IPv4/IPv6": posts/Web/ipv4_6.md
     - Misc:
       - "Misc-Note": misc/Note.md
+      - "How-to-save-my-usb-driver??": misc/拯救无法识别u盘.md
       - "Exploration Journey": misc/Exploration.md
       - "Thoughts": misc/Thoughts.md
     - "TODO": posts/TODO.md
