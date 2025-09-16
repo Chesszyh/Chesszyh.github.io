@@ -94,14 +94,16 @@ nav:
       - "DeepSpeed": posts/LLM/DeepSpeed.md
       - "MCP Protocol": posts/LLM/MCP.md
       - "Open WebUI": posts/LLM/open-webui.md
-    - Web Development:
+    - OS:
+      - "CS162": posts/OS/CS162-note.md
+    - Network:
       - "Network Tunneling": posts/Web/内网穿透.md
       - "IPv4/IPv6": posts/Web/ipv4_6.md
     - Misc:
-      - "Misc-Note": misc/Note.md
-      - "How-to-save-my-usb-driver??": misc/拯救无法识别u盘.md
-      - "Exploration Journey": misc/Exploration.md
+      - "Recently Viewed/Thoughts": misc/Recently.md
+      - "My status": misc/Status.md
       - "Thoughts": misc/Thoughts.md
+      - "Exploration": misc/Exploration.md
     - "TODO": posts/TODO.md
     - "对大学前两年的失败总结": summary/2025-08-27.md
 

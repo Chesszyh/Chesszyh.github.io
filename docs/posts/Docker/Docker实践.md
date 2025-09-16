@@ -25,7 +25,9 @@ Windows想要使用docker，只能通过WSL2安装docker engine。如果想要�
 
 ## Hostname
 
-`host.docker.internal`：由容器内部自动解析为宿主机的IP地址。
+!!!note
+    `host.docker.internal`：由容器内部自动解析为宿主机的IP地址。
+    可以在容器内`export http_proxy=http://host.docker.internal:7897 && export https_proxy=http://host.docker.internal:7897`来使用宿主机的代理。
 
 ## Download
 
