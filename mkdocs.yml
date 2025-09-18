@@ -78,6 +78,7 @@ nav:
     - Deployment:
       - "GitHub Actions": posts/Deployment/github-actions.md
     - Javascript&Typescript:
+      - "Javascript": posts/Javascript&Typescript/Javascript.md
       - "React": posts/Javascript&Typescript/React.md
     - Blog Tech:
       - "Cusdis Comment System DIY": posts/Blog/cusdis-diy.md

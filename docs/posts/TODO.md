@@ -86,7 +86,7 @@ Exec=env QT_IM_MODULE=fcitx XMODIFIERS=@im=fcitx GTK_IM_MODULE=fcitx /opt/QQ/qq 
 
 ---
 
-- [ ] 拯救固件程序破坏导致无法识别的u盘
+## [ ] 拯救固件程序破坏导致无法识别的u盘
 
 - U盘：Thinkplus 128G
 - 错误表现：插入电脑后无法识别
@@ -166,3 +166,38 @@ Exec=env QT_IM_MODULE=fcitx XMODIFIERS=@im=fcitx GTK_IM_MODULE=fcitx /opt/QQ/qq 
 所以：TODO：找一台别人的Windows电脑试试
 
 参考：https://gemini.google.com/app/749ba8d6be7a984c
+
+---
+
+- [ ] 换启动壁纸
+
+即使更换了Hyprland，默认启动时依然是Fedora的祖传壁纸，并不太好看。假设你想使用的壁纸是`mizuki-gdm.jpg`：
+
+我第一次尝试以下修改方案，发现没用，应该是针对GDM而不是SDDM的。
+
+```bash
+# All these commands need sudo
+cd /usr/share/backgrounds # 这是壁纸存放目录
+# 备份原始壁纸
+sudo cp /usr/share/backgrounds/f42/default/f42-01-day.jxl ~/f42-01-day.bak.jxl
+sudo cp /usr/share/backgrounds/f42/default/f42-01-night.jxl ~/f42-01-night.bak.jxl
+
+# Fedora 默认用的是 jxl 格式的图片，jpg 也能识别
+sudo cp mizuki-gdm.jpg /usr/share/backgrounds/f42/default/f42-01-day.jxl
+sudo cp mizuki-gdm.jpg /usr/share/backgrounds/f42/default/f42-01-night.jxl
+
+# 更新链接
+sudo ln -sf ./f42/default/f42-01-day.jxl default.jxl
+sudo ln -sf ./f42/default/f42-01-night.jxl default-dark.jxl
+
+# 重启 GDM，或者下次登录时生效
+sudo systemctl restart gdm
+```
+
+SDDM:
+
+```bash
+cat /etc/sddm.conf | grep "Current=" # 查看当前主题
+```
+
+参考资源：https://cn.linux-terminal.com/?p=7826
