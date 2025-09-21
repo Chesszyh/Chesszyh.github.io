@@ -8,14 +8,14 @@
 
 1. NAT 技术可以很大程度上缓解 IPv4 的地址短缺问题并且能够保护私有内部的网络，提供防火墙的功能；
 
-NAT：通过转换表进行IP映射，减少公网IP使用：![alt text](image.png)
+NAT：通过转换表进行IP映射，减少公网IP使用。
 
 2. IPv4 与 IPv6 协议完全不兼容，我们需要引入双协议栈、隧道技术或者 NAT64 解决兼容性问题，而应用这些技术也需要额外的成本；
 
 3. 通过对资源的细粒度管控并回收不再使用的 IP 地址，可以延缓 IP 地址耗尽的时间；
 
-    1. 分类网络架构（Classful Network Architecture）：![alt text](image-1.png)
-    2. 无类别域间路由（Classless Inter-Domain Routing、CIDR），基于**可变长子网掩码**（Variable-length Subnet Masking、VLSM）：![alt text](image-2.png)
+    1. 分类网络架构（Classful Network Architecture）：![alt text](images/分类网络架构.png)
+    2. 无类别域间路由（Classless Inter-Domain Routing、CIDR），基于**可变长子网掩码**（Variable-length Subnet Masking、VLSM）：![alt text](images/无类别域间路由.png)
 
 ## ipv6
 

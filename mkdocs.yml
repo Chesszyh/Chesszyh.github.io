@@ -77,9 +77,10 @@ nav:
       - "Network": posts/VirtualMachine/Network.md
     - Deployment:
       - "GitHub Actions": posts/Deployment/github-actions.md
-    - Javascript&Typescript:
-      - "Javascript": posts/Javascript&Typescript/Javascript.md
-      - "React": posts/Javascript&Typescript/React.md
+    - Web:
+      - "Javascript": posts/Web/Javascript.md
+      - "React": posts/Web/React.md
+      - "Vue": posts/Web/Vue.md
     - Blog Tech:
       - "Cusdis Comment System DIY": posts/Blog/cusdis-diy.md
       - "Plugin Development": posts/Blog/plugin.md
@@ -98,14 +99,18 @@ nav:
     - OS:
       - "CS162": posts/OS/CS162-note.md
     - Network:
-      - "Network Tunneling": posts/Web/内网穿透.md
-      - "IPv4/IPv6": posts/Web/ipv4_6.md
-    - Misc:
-      - "Recently Viewed/Thoughts": misc/Recently.md
-      - "My status": misc/Status.md
-      - "Thoughts": misc/Thoughts.md
-      - "Exploration": misc/Exploration.md
+      - "Network Tunneling": posts/Network/内网穿透.md
+      - "IPv4/IPv6": posts/Network/ipv4_6.md
     - "TODO": posts/TODO.md
+  - Thoughts:
+    - Index: thoughts/index.md
+    - "Is Vibe coding good for me?": thoughts/Is-vibe-coding-good-for-me.md
+  - Misc:
+    - "Recently Viewed": misc/Recently.md
+    - "My status": misc/Status.md
+    - "Exploration": misc/Exploration.md
+    - "USB Stick Recovery": misc/usb-stick-recovery-and-reformat.md
+  - Summary:
     - "对大学前两年的失败总结": summary/2025-08-27.md
 
 # Plugins
