@@ -66,6 +66,20 @@ nav:
       - "Intro": posts/Host-Fedora/Intro.md
       - "Setup": posts/Host-Fedora/Setup.md
       - "Swap": posts/Host-Fedora/Swap.md
+    - Network:
+      - "CS144 Writeup": posts/Network/CS144-Writeup.md
+      - "Network Tunneling": posts/Network/内网穿透.md
+      - "IPv4/IPv6": posts/Network/ipv4_6.md
+    - Deployment:
+      - "GitHub Actions": posts/Deployment/github-actions.md
+    - OS:
+      - "CS162": posts/OS/CS162-note.md
+    - VSCode:
+      - "Clangd Miss std-lib": posts/VSCode/clangd-cant-find-std-lib.md
+    - Web:
+      - "Javascript": posts/Web/Javascript.md
+      - "React": posts/Web/React.md
+      - "Vue": posts/Web/Vue.md
     - Server:
       - "Cloud Server Config": posts/Server/云服务器配置.md
       - "VPS": posts/Server/VPS/self-host-vpn.md
@@ -75,12 +89,6 @@ nav:
       - "Windows": posts/VirtualMachine/Windows.md
       - "VMware": posts/VirtualMachine/VMware.md
       - "Network": posts/VirtualMachine/Network.md
-    - Deployment:
-      - "GitHub Actions": posts/Deployment/github-actions.md
-    - Web:
-      - "Javascript": posts/Web/Javascript.md
-      - "React": posts/Web/React.md
-      - "Vue": posts/Web/Vue.md
     - Blog Tech:
       - "Cusdis Comment System DIY": posts/Blog/cusdis-diy.md
       - "Plugin Development": posts/Blog/plugin.md
@@ -96,11 +104,6 @@ nav:
       - "DeepSpeed": posts/LLM/DeepSpeed.md
       - "MCP Protocol": posts/LLM/MCP.md
       - "Open WebUI": posts/LLM/open-webui.md
-    - OS:
-      - "CS162": posts/OS/CS162-note.md
-    - Network:
-      - "Network Tunneling": posts/Network/内网穿透.md
-      - "IPv4/IPv6": posts/Network/ipv4_6.md
     - "TODO": posts/TODO.md
   - Thoughts:
     - Index: thoughts/index.md
