@@ -1,4 +1,4 @@
-# VPS
+# Self-host-VPN
 
 主要参考不良林的[教程](https://bulianglin.com/archives/nicename.html)和[视频](https://youtu.be/MgtOAVOXBWo)。
 
@@ -34,3 +34,107 @@ s-ui提供了存档/恢复数据库功能，可以直接从旧服务器web面板
 - 带宽：200Mbps
 - 丢包率：0%
 - 中国大陆跳数过多（20跳以上），延迟大
+
+## Clash(-verge) 配置
+
+我使用[Clash-verge-rev](https://github.com/clash-verge-rev/clash-verge-rev)，配置文件位于`~/.local/share/io.github.clash-verge-rev.clash-verge-rev`。
+
+配置文件在`profiles/`下，从s-ui面板默认导入的是不带分流规则（国内直连、国外代理）的，这样会造成不必要的流量浪费，而且最主要的问题是，国内部分网站反而卡顿/打不开。
+
+找到自建节点的配置文件后，从已有机场的配置文件中直接复制代理组规则(`proxy-groups`)和分流规则(`rules`)即可。
+
+目前问题：每次节点更新都会覆盖配置文件。我暂时不知道怎么解决，所以直接将更新间隔设置成了99999min。
+
+以下是我使用机场的分流规则：
+
+### 1. **本地 & 局域网直连**
+
+避免本地流量走代理：
+
+```yaml
+- DOMAIN-SUFFIX,local,🎯 全球直连
+- IP-CIDR,192.168.0.0/16,🎯 全球直连,no-resolve
+- IP-CIDR,10.0.0.0/8,🎯 全球直连,no-resolve
+- IP-CIDR,172.16.0.0/12,🎯 全球直连,no-resolve
+- IP-CIDR,127.0.0.0/8,🎯 全球直连,no-resolve
+- IP-CIDR,100.64.0.0/10,🎯 全球直连,no-resolve
+- IP-CIDR6,::1/128,🎯 全球直连,no-resolve
+- IP-CIDR6,fc00::/7,🎯 全球直连,no-resolve
+- IP-CIDR6,fe80::/10,🎯 全球直连,no-resolve
+- IP-CIDR6,fd00::/8,🎯 全球直连,no-resolve
+```
+
+### 2. **广告 & 恶意域名拦截**
+
+拦截跟踪、广告、恶意网站：
+
+```yaml
+- DOMAIN-SUFFIX,adservice.google.com,🛑 全球拦截
+- DOMAIN-SUFFIX,doubleclick.net,🛑 全球拦截
+- DOMAIN-SUFFIX,ss.subo.me,🛑 全球拦截
+```
+
+### 3. **常用服务分流**
+
+不同服务单独分组，用户可以选择直连还是代理：
+
+* 微软服务：
+
+```yaml
+- DOMAIN-KEYWORD,microsoft,Ⓜ️ 微软服务
+- DOMAIN-SUFFIX,onedrive.live.com,Ⓜ️ 微软服务
+- DOMAIN-SUFFIX,office.com,Ⓜ️ 微软服务
+- DOMAIN-SUFFIX,azure.com,Ⓜ️ 微软服务
+```
+
+* 苹果服务：
+
+```yaml
+- DOMAIN-SUFFIX,apple.com,🍎 苹果服务
+- DOMAIN-SUFFIX,icloud.com,🍎 苹果服务
+- DOMAIN-SUFFIX,me.com,🍎 苹果服务
+```
+
+* Telegram：
+
+```yaml
+- DOMAIN-SUFFIX,t.me,📲 电报信息
+- DOMAIN-SUFFIX,telegram.org,📲 电报信息
+```
+
+* 国外流媒体（Netflix / Disney+ / YouTube / Spotify）：
+
+```yaml
+- DOMAIN-SUFFIX,netflix.com,🎥 NETFLIX
+- DOMAIN-SUFFIX,disneyplus.com,🌍 国外媒体
+- DOMAIN-SUFFIX,youtube.com,🌍 国外媒体
+- DOMAIN-SUFFIX,spotify.com,🌍 国外媒体
+```
+
+* 国内流媒体（B站 / 爱奇艺 / 腾讯视频）：
+
+```yaml
+- DOMAIN-SUFFIX,bilibili.com,🌏 国内媒体
+- DOMAIN-SUFFIX,iqiyi.com,🌏 国内媒体
+- DOMAIN-SUFFIX,v.qq.com,🌏 国内媒体
+```
+
+### 4. **国内外分流**
+
+利用 GeoIP 规则：
+
+```yaml
+- GEOIP,CN,🎯 全球直连
+```
+
+表示 IP 属于中国 → 直连。
+
+### 5. **兜底规则**
+
+最后一条规则通常是：
+
+```yaml
+- MATCH,🐟 漏网之鱼
+```
+
+所有未匹配到的流量，都交给 `🐟 漏网之鱼` 分组（一般默认代理）。
