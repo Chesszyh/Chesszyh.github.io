@@ -83,7 +83,7 @@ Link: https://gemini.google.com/app/749ba8d6be7a984c
 
 ### 解决方法
 
-Windows下载DiskGenius软件，插入U盘后，软件可以识别到U盘：![dg截图](image.png)
+Windows下载DiskGenius软件，插入U盘后，软件可以识别到U盘：![dg截图](images/disk-genuis.png)
 
 容量识别、设备信息都正常，但是分区表显示“未分配空间 (Unallocated Space)”，说明之前我把分区表搞坏了。当前U盘状态就像一块刚刚出厂的硬盘，已经被初始化（建立了GPT分区表），但没有任何分区。
 
