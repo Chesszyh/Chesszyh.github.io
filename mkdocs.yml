@@ -93,8 +93,9 @@ nav:
       - "Cusdis Comment System DIY": posts/Blog/cusdis-diy.md
       - "Plugin Development": posts/Blog/plugin.md
     - Chess:
-      - "Chess Technical Notes": posts/Chess/chess.md
-      - "Lichess Bot Setup": posts/Chess/lichess-bot-setting.md
+      - "Lichess Bot": posts/Chess/lichess-bot.md
+      - "Stockfish": posts/Chess/Stockfish.md
+      - "Lc0": posts/Chess/lc0.md
     - Database:
       - "Database Learning": posts/Database/DataBase.md
     - Docker:
