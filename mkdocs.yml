@@ -72,8 +72,13 @@ nav:
       - "IPv4/IPv6": posts/Network/ipv4_6.md
     - Deployment:
       - "GitHub Actions": posts/Deployment/github-actions.md
-    - OS:
-      - "CS162": posts/OS/CS162-note.md
+    - OS(CS162):
+      - "Course Intro": posts/OS/CS162/README.md
+      - "Lecture 1": posts/OS/CS162/note/lec1.md
+      - "Lecture 2": posts/OS/CS162/note/lec2.md
+      - "Lecture 3": posts/OS/CS162/note/lec3.md
+      - "HW0": posts/OS/CS162/homework/hw0.md
+      - "HW1": posts/OS/CS162/homework/hw1.md
     - VSCode:
       - "Clangd Miss std-lib": posts/VSCode/clangd-cant-find-std-lib.md
     - Web:
@@ -114,6 +119,7 @@ nav:
     - "My status": misc/Status.md
     - "Exploration": misc/Exploration.md
     - "USB Stick Recovery": misc/usb-stick-recovery-and-reformat.md
+    - "GitHub Student Verification": misc/github学生验证以及代理问题.md
   - Summary:
     - "对大学前两年的失败总结": summary/2025-08-27.md
 
@@ -157,8 +163,13 @@ extra:
       link: https://github.com/Chesszyh
   generator: false
 
+# extra_javascript:
+  # - assets/llm-search/llm-search.js
+  # - javascripts/llm-search-config.js
+
 extra_css:
   - stylesheets/extra.css
+  # - assets/llm-search/llm-search.css
 
 # Copyright
 copyright: "Copyright &copy; 2025 Chesszyh"
