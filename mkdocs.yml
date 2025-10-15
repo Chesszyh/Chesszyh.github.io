@@ -66,6 +66,7 @@ nav:
       - "Intro": posts/Host-Fedora/Intro.md
       - "Setup": posts/Host-Fedora/Setup.md
       - "Swap": posts/Host-Fedora/Swap.md
+      - "Problems & Solutions": posts/Host-Fedora/Problem-shooting.md
     - Network:
       - "CS144 Writeup": posts/Network/CS144-Writeup.md
       - "Network Tunneling": posts/Network/内网穿透.md
@@ -110,6 +111,8 @@ nav:
       - "DeepSpeed": posts/LLM/DeepSpeed.md
       - "MCP Protocol": posts/LLM/MCP.md
       - "Open WebUI": posts/LLM/open-webui.md
+    - Machine-learning:
+      - "TODO": posts/Machine-learning/TODO.md 
     - "TODO": posts/TODO.md
   - Thoughts:
     - Index: thoughts/index.md
