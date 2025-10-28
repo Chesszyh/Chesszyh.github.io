@@ -71,6 +71,8 @@ nav:
       - "CS144 Writeup": posts/Network/CS144-Writeup.md
       - "Network Tunneling": posts/Network/内网穿透.md
       - "IPv4/IPv6": posts/Network/ipv4_6.md
+    - SoftwareEngineering:
+      - "Telegram": posts/SoftwareEngineering/Telegram.md
     - Deployment:
       - "GitHub Actions": posts/Deployment/github-actions.md
     - OS(CS162):
@@ -93,7 +95,6 @@ nav:
       - "Nginx": posts/Server/Nginx/Nginx.md
     - VirtualMachine:
       - "Windows": posts/VirtualMachine/Windows.md
-      - "VMware": posts/VirtualMachine/VMware.md
       - "Network": posts/VirtualMachine/Network.md
     - Blog Tech:
       - "Cusdis Comment System DIY": posts/Blog/cusdis-diy.md
