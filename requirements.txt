@@ -3,3 +3,4 @@ mkdocs-material>=9.6.0
 mkdocs-include-markdown-plugin
 pymdown-extensions>=10.2.0
 pyyaml>=6.0
+mkdocs-mermaid2-plugin

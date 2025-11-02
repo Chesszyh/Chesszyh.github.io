@@ -70,6 +70,7 @@ nav:
     - Network:
       - "CS144 Writeup": posts/Network/CS144-Writeup.md
       - "Network Tunneling": posts/Network/内网穿透.md
+      - "Modern Network Protocols": posts/Network/现代规避协议.md
       - "IPv4/IPv6": posts/Network/ipv4_6.md
     - SoftwareEngineering:
       - "Telegram": posts/SoftwareEngineering/Telegram.md
@@ -124,18 +125,17 @@ nav:
     - "Exploration": misc/Exploration.md
     - "USB Stick Recovery": misc/usb-stick-recovery-and-reformat.md
     - "GitHub Student Verification": misc/github学生验证以及代理问题.md
+    - "Mermaid": misc/Mermaid.md
   - Summary:
     - "对大学前两年的失败总结": summary/2025-08-27.md
 
 # Plugins
 plugins:
-  - search:
-      lang: 
-        - zh
-        - en
+  - search
+  - mermaid2
   - tags
   - include-markdown
-
+  
 # Markdown extensions
 markdown_extensions:
   - admonition
@@ -167,13 +167,12 @@ extra:
       link: https://github.com/Chesszyh
   generator: false
 
-# extra_javascript:
-  # - assets/llm-search/llm-search.js
-  # - javascripts/llm-search-config.js
+extra_javascript:
+  - https://unpkg.com/mermaid@10.9.0/dist/mermaid.min.js # mermaid dependency
+  - javascripts/init-mermaid.js
 
 extra_css:
   - stylesheets/extra.css
-  # - assets/llm-search/llm-search.css
 
 # Copyright
 copyright: "Copyright &copy; 2025 Chesszyh"
