@@ -64,7 +64,10 @@ sudo grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg
 
 ### NVIDIA驱动更新
 
-TODO1：持久化解决升级系统时带来的亮度失效一类的小问题？https://gemini.google.com/app/c9dbbb054e918c5f
+TODO1：持久化解决升级系统时带来的亮度失效一类的小问题？
+
+1. https://gemini.google.com/app/c9dbbb054e918c5f
+2. https://claude.ai/chat/21bd2d09-46b9-436a-af75-e0d4a5a9178b
 
 ## VPN
 

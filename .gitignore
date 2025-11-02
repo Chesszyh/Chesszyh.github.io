@@ -1,7 +1,15 @@
+# Secrets
 *.env
+
+# Garbage
 *.log
+
 # Obsidian
 .obsidian/
 copilot-custom-prompts/
 
+# Personal plugins
 llm-search/
+
+# mkdocs build files
+/site/
