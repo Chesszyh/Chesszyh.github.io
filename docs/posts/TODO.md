@@ -134,3 +134,11 @@ cat /etc/sddm.conf | grep "Current=" # 查看当前主题
 可参考：https://github.com/microsoft/playwright/issues/29559
 
 应该是要用到虚拟机
+
+---
+
+- [ ] mkdocs mermaid2 plugin无法使用
+
+---
+
+- [ ] Fedora一系列问题，参考`docs/posts/Host-Fedora/Problem-shooting.md`中的TODO部分

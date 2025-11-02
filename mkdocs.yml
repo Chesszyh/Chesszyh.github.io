@@ -167,8 +167,9 @@ extra:
       link: https://github.com/Chesszyh
   generator: false
 
-extra_javascript:
-  - https://unpkg.com/mermaid@10.9.0/dist/mermaid.min.js # mermaid dependency
+# WTF is this not working?
+mermaid:javascript:
+  - https://unpkg.com/mermaid@10.9.0/dist/mermaid.min.js
   - javascripts/init-mermaid.js
 
 extra_css:

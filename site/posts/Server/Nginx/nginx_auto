@@ -1,0 +1,36 @@
+#!/bin/bash
+
+NGINX_SITES_AVAILABLE="/etc/nginx/sites-available"
+NGINX_SITES_ENABLED="/etc/nginx/sites-enabled"
+TEMPLATE_FILE="/etc/nginx/sites-available/template.conf"
+
+while getopts "d:p:" opt; do
+  case $opt in
+    d) DOMAIN="$OPTARG" ;;
+    p) PORT="$OPTARG" ;;
+    *) echo "Usage: $0 -d [domain] -p [port]"; exit 1 ;;
+  esac
+done
+
+CONFIG_FILE="$NGINX_SITES_AVAILABLE/$DOMAIN"
+WWW_DOMAIN="www.$DOMAIN"
+
+sed -e "s/\[site_name\]/$DOMAIN/g" \
+   -e "s/\[www.site_name\]/$WWW_DOMAIN/g" \
+   -e "s/\[port\]/$PORT/g" \
+   "$TEMPLATE_FILE" > "$CONFIG_FILE"
+
+ln -s "$CONFIG_FILE" "$NGINX_SITES_ENABLED/$DOMAIN"
+
+nginx -t
+if [ $? -ne 0 ]; then
+  echo "Nginx configuration test failed. Please check your configuration."
+  rm "$CONFIG_FILE"
+  exit 1
+fi
+
+systemctl reload nginx
+
+echo "Nginx configuration for $DOMAIN created and enabled."
+
+certbot --nginx -d "$DOMAIN" -d "$WWW_DOMAIN"

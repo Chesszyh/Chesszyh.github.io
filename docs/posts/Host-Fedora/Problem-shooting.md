@@ -1,10 +1,82 @@
 # Problem Shooting
 
+## Upgrade
+
+2025.10.28，Fedora发布最新版本43。
+
+升级命令：`sudo dnf system-upgrade download --releasever=43`
+
+### dnf源问题
+
+升级的时候遇到了一些源上的问题，即使开了梯子，连接Redhat官方源也有些困难。之前偶尔也会遇到源403的问题。
+
+在AI指导下对源进行了多次调整：
+
+当前的`fedora.repo`：
+
+```ini
+[fedora]
+name=Fedora $releasever - $basearch
+baseurl=https://mirrors.tuna.tsinghua.edu.cn/fedora/releases/$releasever/Everything/$basearch/os/
+# baseurl=https://mirrors.fedoraproject.org/fedora/releases/$releasever/Everything/$basearch/os/
+# metalink=https://mirrors.fedoraproject.org/metalink?repo=fedora-$releasever&arch=$basearch
+enabled=1
+countme=1
+metadata_expire=7d
+repo_gpgcheck=0
+type=rpm
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$releasever-$basearch
+skip_if_unavailable=False
+```
+
+- `baseurl`: 指定软件源的基本 URL 地址，若提供多个，则从上到下依次尝试直到找到能用的。
+- `metalink`：提供一个元数据链接，允许包管理器自动选择最快的镜像源。
+  - `baseurl`和`metalink`冲突，如需使用国内镜像，只开启`baseurl`即可
+- `enabled`：表示该仓库是否启用。通常，`fedora-debuginfo`(主要用于开发者调试程序时安装带有调试符号的包)和`fedora-source`(提供所有发行版软件包的源码，方便用户查看、修改或自行编译)默认是禁用的。
+
+### 系统更新、但是内核未更新
+
+我的系统已经升级到Fedora 43(`cat /etc/fedora-release`输出`Fedora release 43 (Forty Three)`)，但是内核依然是6.17.4(42)。尝试使用如下命令设置默认内核：
+
+```bash
+# 查看所有已安装的内核
+sudo grubby --info=ALL
+
+# 设置 fc43 内核为默认
+sudo grubby --set-default /boot/vmlinuz-6.17.5-300.fc43.x86_64
+
+# 验证设置
+sudo grubby --default-kernel
+```
+
+或者重新生成 GRUB 配置，但是这个方法第一次似乎并不成功：
+
+```bash
+# 更新 GRUB 配置
+sudo grub2-mkconfig -o /boot/grub2/grub.cfg
+
+# 对于 EFI 系统
+sudo grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg
+```
+
+重启后确实变成了6.17.5(43)内核，但是，又出现了Fedora早在安装时就出现的老毛病：亮度调节失效，并且我的Hyprland几乎也处于完全不可用状态。再次重启，在 GRUB 启动菜单选择了 Fedora 42 的内核后，又恢复正常了。
+
+### NVIDIA驱动更新
+
+TODO1：持久化解决升级系统时带来的亮度失效一类的小问题？https://gemini.google.com/app/c9dbbb054e918c5f
+
 ## VPN
 
 本学期部分课程需要用到VPN访问校内资源，Fedora下使用`MotionPro`([下载链接](https://client.arraynetworks.com.cn:8080/zh/troubleshooting)，“适用于CentOS”的也支持Fedora)连接VPN。**注意**，可能是因为Clash开启了全局代理模式，即使改成直连模式，开启MotionPro后依然无法连接校内资源，必须彻底关闭Clash才能连接成功。启动命令：`export QT_QPA_PLATFORM=xcb && MotionPro`。
 
 ## VMware Workstation
+
+VMware作为商业闭源软件，在Fedora比较激进的更新策略下，几乎每次执行`sudo dnf upgrade --refresh`后都会出现问题，比如`vmnet`和`vmmon`安装不上。
+
+可以通过下文提到的各种补丁包解决，或者，我最近新发现一个对VMware进行补丁支持的[仓库](https://github.com/Hyphaed/vmware-vmmon-vmnet-linux-6.17.x)，似乎还有对VMware的性能提升。
+
+TODO2: Kali Linux虚拟机登录界面无限重复，开启/关闭3D加速均无效。搜索：`vmware kali stuck on login`。
 
 ### Kernel 6.15.6
 
@@ -20,9 +92,9 @@ VMware Workstation 17.6.4对Linux 6.15.6内核支持稍有问题，安装后初�
 
 Vmware初次配置好后，以后基本就能自动更新和编译模块了。
 
-## Kernel 6.16.4
+### Kernel 6.16.4
 
-VMware作为商业闭源软件，在Fedora比较激进的更新策略下经常出现问题，比如`vmnet`和`vmmon`安装不上。这次遇到的报错是VM 17.6.4与内核6.16.4不兼容。
+这次遇到的报错是VM 17.6.4与内核6.16.4不兼容。
 
 通用的解决方案是参考[Patches Repo](https://github.com/mkubecek/vmware-host-modules)中的不同分支和Issue区的最新社区补丁。本次参考的补丁是2周前非常活跃的、有20个comments的[Issue](https://github.com/mkubecek/vmware-host-modules/issues/319)补丁：https://github.com/arizvisa/mkubecek.vmware-host-modules. 该补丁也有一点小问题，是`VMMON`的版本号不对，在`vmnet-only/include/iocontrols.h`中修改416为417即可。然后执行以下命令（也是通用的）：
 
@@ -41,15 +113,6 @@ sudo systemctl restart vmware.service
 ### Kernel 6.16.10
 
 使用[补丁](https://github.com/Technogeezer50/vmware-host-modules)的workstation-17.6.4分支。步骤同上。
-
-### Kernel 6.17.4
-
-TODO
-
----
-
-总是需要编译内核模块挺烦的……我已经有点想用Fedora自带的boxes了。
-
 
 ## X11兼容
 

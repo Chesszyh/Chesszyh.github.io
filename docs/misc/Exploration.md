@@ -4,34 +4,7 @@
 
 ### Tmux
 
-`tmux` 是一个强大的终端复用器 (terminal multiplexer)，它允许你在单个终端窗口中创建、访问和控制多个终端会话。即使你断开 SSH 连接或关闭了本地终端，`tmux` 中的会话和正在运行的程序也会继续在后台运行。
-
-#### 概念层级
-
-*   **服务器 (Server)**：当你第一次启动 `tmux` 时，它会在后台启动一个服务器进程。所有会话、窗口和窗格都由这个**服务器**管理。
-*   **会话 (Session)**：**一个会话是一组窗口的集合**。你可以创建多个会话，并在它们之间切换。会话可以在你断开连接后继续存在。
-*   **窗口 (Window)**：一个**窗口**占据整个终端屏幕，可以看作是浏览器中的一个标签页。
-*   **窗格 (Pane)**：一个窗口可以被分割成多个独立的**窗格**，每个窗格都是一个独立的伪终端。
-
-#### 常用命令
-
-- `tmux new -s <session_name>`：创建一个新的会话并命名
-- `tmux attach`：附加到最近的会话(进入之前的会话)
-- `tmux detach`：分离当前会话，返回到普通终端
-    - 或者在 `tmux` 环境内使用快捷键 `Ctrl+b` + `d`
-- `tmux kill-session -t <session_name>`：杀死指定的会话
-    - `tmux kill-server`：杀死所有会话(即杀死“服务器”)
-
-- `ctrl+b`组合键：
-    - `c`：创建新窗口
-    - `n`：下一个窗口(next)
-    - `n(数字)`：切换到第 n 个窗口
-    - `p`：上一个窗口(previous)
-    - `w`：列出所有窗口(window list)
-
-### Claude Code
-
-https://docs.anthropic.com/zh-CN/docs/claude-code/tutorials#mcp-2
+参考[Tmux](./tools/tmux.md)。
 
 ### 终端录制:asciinema vs vhs
 
