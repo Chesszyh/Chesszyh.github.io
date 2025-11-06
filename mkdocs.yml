@@ -92,6 +92,7 @@ nav:
     - Server:
       - "Cloud Server Config": posts/Server/云服务器配置.md
       - "VPS": posts/Server/VPS/self-host-vpn.md
+      - "Problem Shooting": posts/Server/Problem-shooting.md
       - "Code Server": posts/Server/Code-server/Code-server.md
       - "Nginx": posts/Server/Nginx/Nginx.md
     - VirtualMachine:
