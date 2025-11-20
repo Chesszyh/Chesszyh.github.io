@@ -8,11 +8,15 @@
 
 ### dnf源问题
 
-升级的时候遇到了一些源上的问题，即使开了梯子，连接Redhat官方源也有些困难。之前偶尔也会遇到源403的问题。
+升级的时候遇到了一些源上的问题，即使开了梯子，连接Redhat官方源也有些困难。之前偶尔也会遇到清华源403的问题。
 
-在AI指导下对源进行了多次调整：
+---
 
-当前的`fedora.repo`：
+Update: 403 状态码表示服务器理解了请求但拒绝访问。我的dnf和conda都使用清华源。某次我在将`/etc/dnf/dnf.conf`中`max_parallel_downloads=5`改成10之后，再次`sudo dnf update`时，开始速度非常快，但很快就遇到限速，直接到了1mb/s以下，而且我同步执行`conda create`环境的时候, conda直接返回403，提示`抱歉，您目前无法访问此页面`。这时我才意识到问题：应该是我并发连接数过多，触发了清华源的限速机制。我关掉clash-verge-rev，改回5之后直连清华源，这次没有再遇到dnf的403问题，但是conda依然403。
+
+#### 当前配置
+
+`/etc/yum.repos.d/fedora.repo`：
 
 ```ini
 [fedora]
@@ -34,6 +38,29 @@ skip_if_unavailable=False
 - `metalink`：提供一个元数据链接，允许包管理器自动选择最快的镜像源。
   - `baseurl`和`metalink`冲突，如需使用国内镜像，只开启`baseurl`即可
 - `enabled`：表示该仓库是否启用。通常，`fedora-debuginfo`(主要用于开发者调试程序时安装带有调试符号的包)和`fedora-source`(提供所有发行版软件包的源码，方便用户查看、修改或自行编译)默认是禁用的。
+
+---
+
+`/etc/dnf/dnf.conf`：
+
+```ini
+[main]
+installonly_limit=2
+max_parallel_downloads=5
+fastestmirror=True
+defaultyes=True
+keepcache=True
+ip_resolve=4
+exclude=kernel* kernel-modules* kernel-core* kernel-modules-core*
+```
+
+- `installonly_limit=2`：限制系统中同时保留的内核版本数量为2。Fedora `/boot`默认分区给的不够大，我电脑似乎只分配了1G，dnf更新的时候老是因为空间不足无法安装新内核。
+    - 并且，如果因为`/boot`空间不足导致内核更新失败，整个系统更新(`dnf update`)也会失败(**事务的原子性**)。如果没有设置`keepcache=True`的话，下载`dnf update`依然会重新下载这次的所有包，浪费流量和时间。
+- `max_parallel_downloads=5`：并行下载，不要开太高，可能反而被限速。
+- `fastestmirror=True`：自动选择响应最快的镜像源进行下载。
+- `ip_resolve=4`：强制使用IPv4进行网络连接，避免IPv6可能带来的连接问题。
+- `keepcache=True`：保留已下载的软件包缓存，方便以后重新安装或回滚。
+- `exclude=kernel* kernel-modules* kernel-core* kernel-modules-core*`：排除内核相关的软件包更新，防止自动更新内核。
 
 ### 系统更新、但是内核未更新
 
@@ -60,14 +87,22 @@ sudo grub2-mkconfig -o /boot/grub2/grub.cfg
 sudo grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg
 ```
 
-重启后确实变成了6.17.5(43)内核，但是，又出现了Fedora早在安装时就出现的老毛病：亮度调节失效，并且我的Hyprland几乎也处于完全不可用状态。再次重启，在 GRUB 启动菜单选择了 Fedora 42 的内核后，又恢复正常了。
+重启后确实变成了6.17.5(43)内核，但是，又出现了Fedora早在安装时就出现的老毛病：亮度调节失效、Hyprland卡死（完全无法启动）。再次重启，在 GRUB 启动菜单选择了 Fedora 42 的内核后，又恢复正常了。原因大概率是NVIDIA驱动和新内核不兼容。
 
-### NVIDIA驱动更新
-
-TODO1：持久化解决升级系统时带来的亮度失效一类的小问题？
+关于该问题，我与AI的一些讨论：
 
 1. https://gemini.google.com/app/c9dbbb054e918c5f
 2. https://claude.ai/chat/21bd2d09-46b9-436a-af75-e0d4a5a9178b
+
+### 解决方案：内核版本锁定
+
+在`/etc/dnf/dnf.conf`中添加：
+
+```ini
+exclude=kernel* kernel-modules* kernel-core* kernel-modules-core*
+```
+
+这样就不会自动更新内核了，而且也能正常更新其他软件包。锁定内核之后也能避免很多其他问题，比如VMware Workstation的内核模块编译问题、Linux QQ的兼容性问题等等（更新内核后导致其他软件炸掉的问题）。
 
 ## VPN
 
