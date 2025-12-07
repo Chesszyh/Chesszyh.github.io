@@ -91,7 +91,8 @@ nav:
       - "Vue": posts/Web/Vue.md
     - Server:
       - "Cloud Server Config": posts/Server/云服务器配置.md
-      - "VPS": posts/Server/VPS/self-host-vpn.md
+      - "VPS": posts/Server/VPN/self-host-vpn.md
+      - "Tailscale": posts/Server/VPN/tailscale.md
       - "Problem Shooting": posts/Server/Problem-shooting.md
       - "Code Server": posts/Server/Code-server/Code-server.md
       - "Nginx": posts/Server/Nginx/Nginx.md
@@ -127,6 +128,7 @@ nav:
     - "USB Stick Recovery": misc/usb-stick-recovery-and-reformat.md
     - "GitHub Student Verification": misc/github学生验证以及代理问题.md
     - "Mermaid": misc/Mermaid.md
+    - "LLM Deep Research": misc/llm-deep-research.md
   - Summary:
     - "对大学前两年的失败总结": summary/2025-08-27.md
 
