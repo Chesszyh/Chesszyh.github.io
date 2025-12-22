@@ -104,6 +104,58 @@ exclude=kernel* kernel-modules* kernel-core* kernel-modules-core*
 
 这样就不会自动更新内核了，而且也能正常更新其他软件包。锁定内核之后也能避免很多其他问题，比如VMware Workstation的内核模块编译问题、Linux QQ的兼容性问题等等（更新内核后导致其他软件炸掉的问题）。
 
+### 如果后续需要更新内核
+
+`/boot`分区不足，可以移除旧的救援内核，然后将旧内核的`initramfs`文件移走，再更新内核：
+
+```bash
+sudo dnf upgrade --refresh kernel-core kernel-modules kernel-modules-extra
+```
+
+这一步会更新内核到最新版本，并且生成新的救援内核。
+
+然后重新编译NVIDIA内核模块：
+
+```bash
+sudo akmods --force
+# 或者指定新内核
+sudo akmods --kernels 6.17.12-300.fc43.x86_64 --force
+```
+
+然后重新生成`initramfs`：
+
+```bash
+sudo dracut --force
+```
+
+最后如果`/boot`还有空间，就把之前移走的旧内核`initramfs`文件移回来。
+
+重启前检查：
+
+```bash
+# 1️⃣ 当前仍在老内核（正常）
+uname -r
+# → 6.17.4-200.fc42.x86_64
+
+# 2️⃣ 新内核 NVIDIA 模块存在
+ls /usr/lib/modules/6.17.12-300.fc43.x86_64/extra/nvidia
+
+# 3️⃣ 新内核 initramfs 存在
+ls -lh /boot/initramfs-6.17.12-300.fc43.x86_64.img
+
+# 4️⃣ /boot 没满
+df -h /boot
+```
+
+如果重启后没有问题，可以修改默认内核：
+
+```bash
+sudo grubby --info=ALL | grep '^kernel='
+sudo grubby --set-default /boot/vmlinuz-6.17.12-300.fc43.x86_64
+# 查看默认内核
+sudo grubby --default-kernel
+```
+
 ## VPN
 
 本学期部分课程需要用到VPN访问校内资源，Fedora下使用`MotionPro`([下载链接](https://client.arraynetworks.com.cn:8080/zh/troubleshooting)，“适用于CentOS”的也支持Fedora)连接VPN。**注意**，可能是因为Clash开启了全局代理模式，即使改成直连模式，开启MotionPro后依然无法连接校内资源，必须彻底关闭Clash才能连接成功。启动命令：`export QT_QPA_PLATFORM=xcb && MotionPro`。

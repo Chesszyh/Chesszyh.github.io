@@ -14,3 +14,13 @@ The newest course record found on Youtube is around 2021.
 ## Before start
 
 I'm not sure if I can follow the course well...
+
+---
+
+Update after 2 months:
+
+Well, I gave up after the first lecture. Typically my behavior.
+
+![alt text](image.png)
+
+
