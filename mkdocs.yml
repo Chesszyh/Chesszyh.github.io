@@ -76,10 +76,12 @@ nav:
       - "Telegram": posts/SoftwareEngineering/Telegram.md
     - Deployment:
       - "GitHub Actions": posts/Deployment/github-actions.md
-    - OS(CS162):
+    - OS-CS162:
       - "Course Intro": posts/OS/CS162/README.md
       - "Lecture 1": posts/OS/CS162/note/lec1.md
       - "HW0": posts/OS/CS162/homework/hw0.md
+    - OS-Unix:
+      - "FreeBSD": posts/OS/Unix/FreeBSD.md
     - VSCode:
       - "Clangd Miss std-lib": posts/VSCode/clangd-cant-find-std-lib.md
     - Web:
