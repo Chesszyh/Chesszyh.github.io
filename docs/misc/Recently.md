@@ -11,3 +11,13 @@
 而且这个项目涉及到很多语音、动画输入输出，我在公共场合（图书馆、教室）调试也不是很方便。宿舍更是一点都待不了的。
 
 所以，算了吧，不如先搞搞gemini-cli这种纯命令行工具项目，学一学React+TypeScript。
+
+## LLM Deep Research
+
+今天注意到了Gemini Deep research中数据源不可获取问题，导致research结果本质还是llm的已有知识
+
+- ChatGPT
+    - W: Huggingface, github
+    - WO: Kaggle
+- Gemini
+    - WO: Kaggle(只能通过第三方博客等获取kaggle赛题), github(有时无法获取代码)

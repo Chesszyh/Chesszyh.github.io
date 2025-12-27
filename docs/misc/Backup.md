@@ -1,15 +1,17 @@
-# 手机文件备份
+# 文件备份
 
-## 视频、图片等备份到谷歌云盘
+## 手机文件备份
+
+### 视频、图片等备份到谷歌云盘
 
 比如批量备份视频、图片等大文件到谷歌云盘。
 
-### TL;DR
+#### TL;DR
 
 1. 连接手机到电脑，把大文件拷贝到电脑。
 2. `rclone copy /path/to/large/files remote-name:backup-folder -P`，`-P`显示进度。
 
-### 详细说明
+#### 详细说明
 
 浏览器上传通常是单线程 TCP 连接。在跨国高延迟（High Latency）网络下，TCP 的握手和确认机制会导致吞吐量上不去，上传大文件非常慢。我用`https://speed.cloudflare.com/`测速，上传速度有150MB/s，但是浏览器上传谷歌云盘只有1.5MB/s。所以，我们选择`rclone`多线程上传工具。
 
@@ -27,6 +29,12 @@ rclone copy ~/Videos my-photos:CameraBackup -P
 
 这样速度就会快很多，大概15MB/s。
 
-## 微信聊天记录备份到电脑
+### 微信聊天记录备份到电脑
 
 手机QQ聊天记录备份支持Linux QQ，但是微信只支持Windows。如果在`vmnet-8`虚拟网卡下的Windows系统中登录微信的话，会因为手机和电脑不在`同一局域网`而无法备份。所以，要么临时将VMware的网络适配器改为桥接模式，要么就用U盘等其他备份方式。
+
+## 电脑文件备份
+
+同样使用`rclone`，可配置多种云存储服务作为远程端，并执行`exclude`和`include`规则+`sync`命令实现增量备份。
+
+TODO https://chatgpt.com/g/g-p-694aca4727bc819189127140cd786d7f-misc/c/694abf9f-d9e4-8324-828e-505ea4694ce0

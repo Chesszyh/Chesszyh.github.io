@@ -119,16 +119,16 @@ nav:
     - "TODO": posts/TODO.md
   - Thoughts:
     - Index: thoughts/index.md
-    - "Is Vibe coding good for me?": thoughts/Is-vibe-coding-good-for-me.md
   - Misc:
+    - "Backup": misc/Backup.md
+    - "Better Vibe Coding": misc/Better-vibe-coding.md
+    - "AppImage": misc/AppImage.md
     - "Recently Viewed": misc/Recently.md
-    - "My status": misc/Status.md
     - "Exploration": misc/Exploration.md
     - "USB Stick Recovery": misc/usb-stick-recovery-and-reformat.md
     - "GitHub Student Verification": misc/github学生验证以及代理问题.md
     - "Mermaid": misc/Mermaid.md
-    - "Mobile Phone Backup": misc/Mobilephone-backup.md
-    - "LLM Deep Research": misc/llm-deep-research.md
+    - "Tmux": misc/tools/tmux.md
   - Summary:
     - "对大学前两年的失败总结": summary/2025-08-27.md
 
@@ -171,9 +171,9 @@ extra:
   generator: false
 
 # WTF is this not working?
-mermaid:javascript:
-  - https://unpkg.com/mermaid@10.9.0/dist/mermaid.min.js
-  - javascripts/init-mermaid.js
+# mermaid:javascript:
+#   - https://unpkg.com/mermaid@10.9.0/dist/mermaid.min.js
+#   - javascripts/init-mermaid.js
 
 extra_css:
   - stylesheets/extra.css
