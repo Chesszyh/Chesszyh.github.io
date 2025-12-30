@@ -55,6 +55,7 @@ theme:
 nav:
   - Home: index.md
   - Posts:
+    - "Index": posts/index.md
     - "Why Abandon Old Blog": posts/为什么放弃旧博客.md
     - Plugins:
       - "Blog Plugins": plugins/index.md
@@ -68,20 +69,13 @@ nav:
       - "Swap": posts/Host-Fedora/Swap.md
       - "Problems & Solutions": posts/Host-Fedora/Problem-shooting.md
     - Network:
-      - "CS144 Writeup": posts/Network/CS144-Writeup.md
       - "Network Tunneling": posts/Network/内网穿透.md
       - "Modern Network Protocols": posts/Network/现代规避协议.md
       - "IPv4/IPv6": posts/Network/ipv4_6.md
-    - SoftwareEngineering:
-      - "Telegram": posts/SoftwareEngineering/Telegram.md
     - Deployment:
       - "GitHub Actions": posts/Deployment/github-actions.md
-    - OS-CS162:
-      - "Course Intro": posts/OS/CS162/README.md
-      - "Lecture 1": posts/OS/CS162/note/lec1.md
-      - "HW0": posts/OS/CS162/homework/hw0.md
-    - OS-Unix:
-      - "FreeBSD": posts/OS/Unix/FreeBSD.md
+    - OS:
+      - "Unix": posts/OS/Unix.md
     - VSCode:
       - "Clangd Miss std-lib": posts/VSCode/clangd-cant-find-std-lib.md
     - Web:
@@ -114,12 +108,14 @@ nav:
       - "DeepSpeed": posts/LLM/DeepSpeed.md
       - "MCP Protocol": posts/LLM/MCP.md
       - "Open WebUI": posts/LLM/open-webui.md
-    - Machine-learning:
-      - "TODO": posts/Machine-learning/TODO.md 
     - "TODO": posts/TODO.md
-  - Thoughts:
-    - Index: thoughts/index.md
+  - Courses:
+    - "Index": courses/index.md
+    - Machine-learning:
+      - "Intro": courses/Machine-learning/index.md
+      - "复习大纲": courses/Machine-learning/复习大纲.md
   - Misc:
+    - "Index": misc/index.md
     - "Backup": misc/Backup.md
     - "Better Vibe Coding": misc/Better-vibe-coding.md
     - "AppImage": misc/AppImage.md
@@ -129,8 +125,14 @@ nav:
     - "GitHub Student Verification": misc/github学生验证以及代理问题.md
     - "Mermaid": misc/Mermaid.md
     - "Tmux": misc/tools/tmux.md
+  - Thoughts:
+    - Index: thoughts/index.md
   - Summary:
     - "对大学前两年的失败总结": summary/2025-08-27.md
+  - Duplicated:
+    - "Index": duplicated/index.md
+    - "CS162": duplicated/CS162.md
+    - "CS144 Writeup": duplicated/CS144-Writeup.md
 
 # Plugins
 plugins:
@@ -155,6 +157,8 @@ markdown_extensions:
   - pymdownx.emoji:
       emoji_index: !!python/name:pymdownx.emoji.twemoji
       emoji_generator: !!python/name:pymdownx.emoji.to_svg
+  - pymdownx.arithmatex: # For LaTeX support
+      generic: true
   - toc:
       permalink: true
   - tables
@@ -170,13 +174,11 @@ extra:
       link: https://github.com/Chesszyh
   generator: false
 
-# WTF is this not working?
-# mermaid:javascript:
-#   - https://unpkg.com/mermaid@10.9.0/dist/mermaid.min.js
-#   - javascripts/init-mermaid.js
-
 extra_css:
   - stylesheets/extra.css
 
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  - https://unpkg.com/mermaid@10.9.0/dist/mermaid.min.js
 # Copyright
 copyright: "Copyright &copy; 2025 Chesszyh"

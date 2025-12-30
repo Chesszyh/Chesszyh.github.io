@@ -2,6 +2,8 @@
 
 Last Sync: 2025-09-26, Checkpoint 0
 
+> 已放弃。
+
 # Checkpoint 0
 
 用时2h左右，本次作业主要涉及环境配置、`telnet`和`netcat`模拟简单的Client/Server交互，以及对无限字节流`ByteStream`的理解和实现。

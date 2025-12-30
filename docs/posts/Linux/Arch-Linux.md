@@ -15,7 +15,6 @@
 
 !!! warning
     这个命令会**清空U盘**，请确认`/dev/sda`是U盘设备而不是硬盘设备。并且，执行该命令前无须手动格式化U盘（即使该U盘之前做过启动盘）。
-    我的上一个Thinkplus 128G U盘启动盘，因为我错误的格式化操作直接报废了，非常可惜
 
 然后启动电脑，按F1进入BIOS，UEFI/Legacy Boot → `UEFI Only`，Secure Boot → `Disabled`。
 
