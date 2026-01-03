@@ -54,84 +54,87 @@ theme:
 # Navigation
 nav:
   - Home: index.md
+  - Plugins:
+      - "i18n": plugins/mkdocs-static-i18n.md
   - Posts:
-    - "Index": posts/index.md
-    - "Why Abandon Old Blog": posts/为什么放弃旧博客.md
-    - Plugins:
-      - "Blog Plugins": plugins/index.md
-    - Linux:
-      - "Arch Linux": posts/Linux/Arch-Linux.md
-      - "Linux Practice": posts/Linux/Linux实践.md
-      - "WSL Usage": posts/Linux/WSL.md
-    - Fedora:
-      - "Intro": posts/Host-Fedora/Intro.md
-      - "Setup": posts/Host-Fedora/Setup.md
-      - "Swap": posts/Host-Fedora/Swap.md
-      - "Problems & Solutions": posts/Host-Fedora/Problem-shooting.md
-    - Network:
-      - "Network Tunneling": posts/Network/内网穿透.md
-      - "Modern Network Protocols": posts/Network/现代规避协议.md
-      - "IPv4/IPv6": posts/Network/ipv4_6.md
-    - Deployment:
-      - "GitHub Actions": posts/Deployment/github-actions.md
-    - OS:
-      - "Unix": posts/OS/Unix.md
-    - VSCode:
-      - "Clangd Miss std-lib": posts/VSCode/clangd-cant-find-std-lib.md
-    - Web:
-      - "Javascript": posts/Web/Javascript.md
-      - "React": posts/Web/React.md
-      - "Vue": posts/Web/Vue.md
-    - Server:
-      - "Cloud Server Config": posts/Server/云服务器配置.md
-      - "VPS": posts/Server/VPN/self-host-vpn.md
-      - "Tailscale": posts/Server/VPN/tailscale.md
-      - "Problem Shooting": posts/Server/Problem-shooting.md
-      - "Code Server": posts/Server/Code-server/Code-server.md
-      - "Nginx": posts/Server/Nginx/Nginx.md
-    - VirtualMachine:
-      - "Windows": posts/VirtualMachine/Windows.md
-      - "Network": posts/VirtualMachine/Network.md
-    - Blog Tech:
-      - "Cusdis Comment System DIY": posts/Blog/cusdis-diy.md
-      - "Plugin Development": posts/Blog/plugin.md
-    - Chess:
-      - "Lichess Bot": posts/Chess/lichess-bot.md
-      - "Stockfish": posts/Chess/Stockfish.md
-      - "Lc0": posts/Chess/lc0.md
-    - Database:
-      - "Database Learning": posts/Database/DataBase.md
-    - Docker:
-      - "Docker Practice": posts/Docker/Docker实践.md
-    - "TODO": posts/TODO.md
+      - "Index": posts/index.md
+      - "Why Abandon Old Blog": posts/为什么放弃旧博客.md
+      - Plugins:
+          - "Blog Plugins": plugins/index.md
+          - "Static i18n": plugins/mkdocs-static-i18n.md
+      - Linux:
+          - "Arch Linux": posts/Linux/Arch-Linux.md
+          - "Linux Practice": posts/Linux/Linux实践.md
+          - "WSL Usage": posts/Linux/WSL.md
+      - Fedora:
+          - "Intro": posts/Host-Fedora/Intro.md
+          - "Setup": posts/Host-Fedora/Setup.md
+          - "Swap": posts/Host-Fedora/Swap.md
+          - "Problems & Solutions": posts/Host-Fedora/Problem-shooting.md
+      - Network:
+          - "Network Tunneling": posts/Network/内网穿透.md
+          - "Modern Network Protocols": posts/Network/现代规避协议.md
+          - "IPv4/IPv6": posts/Network/ipv4_6.md
+      - Deployment:
+          - "GitHub Actions": posts/Deployment/github-actions.md
+      - OS:
+          - "Unix": posts/OS/Unix.md
+      - VSCode:
+          - "Clangd Miss std-lib": posts/VSCode/clangd-cant-find-std-lib.md
+      - Web:
+          - "Javascript": posts/Web/Javascript.md
+          - "React": posts/Web/React.md
+          - "Vue": posts/Web/Vue.md
+      - Server:
+          - "Cloud Server Config": posts/Server/云服务器配置.md
+          - "VPS": posts/Server/VPN/self-host-vpn.md
+          - "Tailscale": posts/Server/VPN/tailscale.md
+          - "Problem Shooting": posts/Server/Problem-shooting.md
+          - "Code Server": posts/Server/Code-server/Code-server.md
+          - "Nginx": posts/Server/Nginx/Nginx.md
+      - VirtualMachine:
+          - "Windows": posts/VirtualMachine/Windows.md
+          - "Network": posts/VirtualMachine/Network.md
+      - Blog Tech:
+          - "Cusdis Comment System DIY": posts/Blog/cusdis-diy.md
+          - "Plugin Development": posts/Blog/plugin.md
+      - Chess:
+          - "Lichess Bot": posts/Chess/lichess-bot.md
+          - "Stockfish": posts/Chess/Stockfish.md
+          - "Lc0": posts/Chess/lc0.md
+      - Database:
+          - "Database Learning": posts/Database/DataBase.md
+      - Docker:
+          - "Docker Practice": posts/Docker/Docker实践.md
+      - "TODO": posts/TODO.md
   - Courses:
-    - "Index": courses/index.md
-    - Machine-learning:
-      - "Intro": courses/Machine-learning/index.md
-      - "复习大纲": courses/Machine-learning/复习大纲.md
-    - Software-Engineering:
-      - "Intro": courses/Software-Engineering/index.md
-      - "复习大纲": courses/Software-Engineering/复习大纲.md
+      - "Index": courses/index.md
+      - Machine-learning:
+          - "Intro": courses/Machine-learning/index.md
+          - "复习大纲": courses/Machine-learning/复习大纲.md
+      - Software-Engineering:
+          - "Intro": courses/Software-Engineering/index.md
+          - "期末速查笔记": courses/Software-Engineering/软件工程期末速查笔记.pdf
   - Misc:
-    - "Index": misc/index.md
-    - "Backup": misc/Backup.md
-    - "Better Vibe Coding": misc/Better-vibe-coding.md
-    - "AppImage": misc/AppImage.md
-    - "Recently Viewed": misc/Recently.md
-    - "Exploration": misc/Exploration.md
-    - "USB Stick Recovery": misc/usb-stick-recovery-and-reformat.md
-    - "GitHub Student Verification": misc/github学生验证以及代理问题.md
-    - "Mermaid": misc/Mermaid.md
-    - "Tmux": misc/tools/tmux.md
-    - "Open WebUI": misc/open-webui.md
+      - "Index": misc/index.md
+      - "Backup": misc/Backup.md
+      - "Better Vibe Coding": misc/Better-vibe-coding.md
+      - "AppImage": misc/AppImage.md
+      - "Recently Viewed": misc/Recently.md
+      - "Exploration": misc/Exploration.md
+      - "USB Stick Recovery": misc/usb-stick-recovery-and-reformat.md
+      - "GitHub Student Verification": misc/github学生验证以及代理问题.md
+      - "Mermaid": misc/Mermaid.md
+      - "Tmux": misc/tools/tmux.md
+      - "Open WebUI": misc/open-webui.md
   - Thoughts:
-    - Index: thoughts/index.md
+      - Index: thoughts/index.md
   - Summary:
-    - "对大学前两年的失败总结": summary/2025-08-27.md
+      - "对大学前两年的失败总结": summary/2025-08-27.md
   - Duplicated:
-    - "Index": duplicated/index.md
-    - "CS162": duplicated/CS162.md
-    - "CS144 Writeup": duplicated/CS144-Writeup.md
+      - "Index": duplicated/index.md
+      - "CS162": duplicated/CS162.md
+      - "CS144 Writeup": duplicated/CS144-Writeup.md
 
 # Plugins
 plugins:
@@ -139,7 +142,17 @@ plugins:
   - mermaid2
   - tags
   - include-markdown
-  
+  - awesome-pages
+  - markmap
+  - git-revision-date-localized:
+      enable_creation_date: true
+  - git-authors
+  - minify:
+      minify_html: true
+  - codeinclude
+  - meta-descriptions
+  - lightbox
+
 # Markdown extensions
 markdown_extensions:
   - admonition
@@ -178,7 +191,6 @@ extra_css:
 
 extra_javascript:
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
-  - https://unpkg.com/mermaid@10.9.0/dist/mermaid.min.js
 
 # Copyright
 copyright: "Copyright &copy; 2025 Chesszyh"

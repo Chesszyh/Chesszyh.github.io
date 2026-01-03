@@ -4,3 +4,11 @@ mkdocs-include-markdown-plugin
 pymdown-extensions>=10.2.0
 pyyaml>=6.0
 mkdocs-mermaid2-plugin
+mkdocs-awesome-pages-plugin
+mkdocs-markmap
+mkdocs-git-revision-date-localized-plugin
+mkdocs-git-authors-plugin
+mkdocs-minify-plugin
+mkdocs-codeinclude-plugin
+mkdocs-meta-descriptions-plugin
+mkdocs-lightbox

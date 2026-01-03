@@ -21,4 +21,6 @@
     - UML类图设计
     - 程序代码段优化（2选1选做题，另外一道忘记了，没细看）
 
-AI总结的[考前速查笔记](courses/Software-Engineering/软件工程期末速查笔记.pdf)
+AI总结的**考前速查笔记**：
+
+<iframe src="./软件工程期末速查笔记.pdf" width="100%" height="800px"></iframe>
