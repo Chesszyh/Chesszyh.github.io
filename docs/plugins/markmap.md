@@ -6,14 +6,14 @@
 
 在 Markdown 文件中，使用带有 `markmap` 类的代码块：
 
-    ```markmap
-    # Root
-    ## Branch 1
-    - Leaf 1.1
-    - Leaf 1.2
-    ## Branch 2
-    - Leaf 2.1
-    ```
+```plaintext
+# Root
+## Branch 1
+- Leaf 1.1
+- Leaf 1.2
+## Branch 2
+- Leaf 2.1
+```
 
 ## 效果演示
 

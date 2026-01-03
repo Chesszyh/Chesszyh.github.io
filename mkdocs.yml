@@ -57,6 +57,16 @@ nav:
   - Plugins:
       - "Blog Plugins": plugins/index.md
       - "i18n": plugins/i18n.md
+      - "Awesome Pages": plugins/awesome-pages.md
+      - "Code Include": plugins/codeinclude.md
+      - "Copy Button": plugins/copy-button.md
+      - "Git Authors": plugins/git-authors.md
+      - "Git Revision Date": plugins/git-revision-date.md
+      - "Include Markdown": plugins/include-markdown.md
+      - "Markmap": plugins/markmap.md
+      - "Mermaid2": plugins/mermaid.md
+      - "Meta Descriptions": plugins/meta-descriptions.md
+      - "Minify": plugins/minify.md
   - Posts:
       - "Index": posts/index.md
       - "Why Abandon Old Blog": posts/为什么放弃旧博客.md

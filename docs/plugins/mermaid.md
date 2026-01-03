@@ -6,19 +6,19 @@
 
 使用 `mermaid` 语言标识符的代码块：
 
-    ```mermaid
-    graph TD
-    A[Start] --> B{Is it?}
-    B -- Yes --> C[OK]
-    B -- No --> D[End]
-    ```
-
-## 效果演示
-
-```mermaid
+```plaintext
 graph TD
     A[开始] --> B{判断}
     B -- 是 --> C[执行操作]
     B -- 否 --> D[结束]
     C --> D
+```
+
+## 效果演示
+
+```mermaid
+graph TD
+A[Start] --> B{Is it?}
+B -- Yes --> C[OK]
+B -- No --> D[End]
 ```

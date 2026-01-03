@@ -21,4 +21,4 @@
 - [Minify](minify.md): 压缩 HTML、JS 和 CSS 文件，减小体积。
 
 ## 其他
-- [Static i18n](mkdocs-static-i18n.md): 静态国际化支持。
+- [Static i18n](i18n.md): 静态国际化支持。

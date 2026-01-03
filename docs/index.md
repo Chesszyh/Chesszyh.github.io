@@ -14,6 +14,10 @@ X: 已退推。原因：INTERNET OVERDOSE
 
 ## Content
 
+### Plugins
+
+本博客用到的 MkDocs 插件介绍。
+
 ### Courses
 
 学校课程的笔记和作业。
