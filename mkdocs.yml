@@ -103,17 +103,15 @@ nav:
       - "Database Learning": posts/Database/DataBase.md
     - Docker:
       - "Docker Practice": posts/Docker/Docker实践.md
-    - LLM:
-      - "AI Agent": posts/LLM/AI-Agent.md
-      - "DeepSpeed": posts/LLM/DeepSpeed.md
-      - "MCP Protocol": posts/LLM/MCP.md
-      - "Open WebUI": posts/LLM/open-webui.md
     - "TODO": posts/TODO.md
   - Courses:
     - "Index": courses/index.md
     - Machine-learning:
       - "Intro": courses/Machine-learning/index.md
       - "复习大纲": courses/Machine-learning/复习大纲.md
+    - Software-Engineering:
+      - "Intro": courses/Software-Engineering/index.md
+      - "复习大纲": courses/Software-Engineering/复习大纲.md
   - Misc:
     - "Index": misc/index.md
     - "Backup": misc/Backup.md
@@ -125,6 +123,7 @@ nav:
     - "GitHub Student Verification": misc/github学生验证以及代理问题.md
     - "Mermaid": misc/Mermaid.md
     - "Tmux": misc/tools/tmux.md
+    - "Open WebUI": misc/open-webui.md
   - Thoughts:
     - Index: thoughts/index.md
   - Summary:
@@ -180,5 +179,6 @@ extra_css:
 extra_javascript:
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
   - https://unpkg.com/mermaid@10.9.0/dist/mermaid.min.js
+
 # Copyright
 copyright: "Copyright &copy; 2025 Chesszyh"
