@@ -55,13 +55,11 @@ theme:
 nav:
   - Home: index.md
   - Plugins:
-      - "i18n": plugins/mkdocs-static-i18n.md
+      - "Blog Plugins": plugins/index.md
+      - "i18n": plugins/i18n.md
   - Posts:
       - "Index": posts/index.md
       - "Why Abandon Old Blog": posts/为什么放弃旧博客.md
-      - Plugins:
-          - "Blog Plugins": plugins/index.md
-          - "Static i18n": plugins/mkdocs-static-i18n.md
       - Linux:
           - "Arch Linux": posts/Linux/Arch-Linux.md
           - "Linux Practice": posts/Linux/Linux实践.md
@@ -151,7 +149,6 @@ plugins:
       minify_html: true
   - codeinclude
   - meta-descriptions
-  - lightbox
 
 # Markdown extensions
 markdown_extensions:

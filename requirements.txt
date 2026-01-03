@@ -11,4 +11,3 @@ mkdocs-git-authors-plugin
 mkdocs-minify-plugin
 mkdocs-codeinclude-plugin
 mkdocs-meta-descriptions-plugin
-mkdocs-lightbox
