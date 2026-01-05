@@ -1,7 +1,7 @@
 # Chesszyh's Blog
 
 <p align="center">
-  <img src="docs/image.png" alt="Blog Banner" style="max-width: 80%; border-radius: 12px; box-shadow: 0 2px 12px #7c3aed33;">
+  <img src="cover.png" alt="Blog Banner" style="max-width: 80%; border-radius: 12px; box-shadow: 0 2px 12px #7c3aed33;">
 </p>
 
 Chesszyh's Personal Blog.

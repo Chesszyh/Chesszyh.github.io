@@ -67,6 +67,8 @@ nav:
       - "Mermaid2": plugins/mermaid.md
       - "Meta Descriptions": plugins/meta-descriptions.md
       - "Minify": plugins/minify.md
+      - "cusdis": plugins/cusdis.md
+      - "Chess": plugins/chess.md
   - Posts:
       - "Index": posts/index.md
       - "Why Abandon Old Blog": posts/为什么放弃旧博客.md
@@ -103,9 +105,6 @@ nav:
       - VirtualMachine:
           - "Windows": posts/VirtualMachine/Windows.md
           - "Network": posts/VirtualMachine/Network.md
-      - Blog Tech:
-          - "Cusdis Comment System DIY": posts/Blog/cusdis-diy.md
-          - "Plugin Development": posts/Blog/plugin.md
       - Chess:
           - "Lichess Bot": posts/Chess/lichess-bot.md
           - "Stockfish": posts/Chess/Stockfish.md

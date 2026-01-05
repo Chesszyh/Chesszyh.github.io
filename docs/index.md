@@ -1,5 +1,7 @@
 # About Me
 
+![alt text](cover.png)
+
 ## Contact
 
 Email: `chesszyh987@gmail.com`
@@ -7,10 +9,6 @@ Email: `chesszyh987@gmail.com`
 Github: [Chesszyh](https://github.com/Chesszyh)
 
 Lichess: [Chesszyh](https://lichess.org/@/Chesszyh)
-
-X: 已退推。原因：INTERNET OVERDOSE
-
-![alt text](image.png)
 
 ## Content
 
@@ -38,8 +36,8 @@ X: 已退推。原因：INTERNET OVERDOSE
 
 ### Summary
 
-- [对大学前两年的失败总结](./summary/2025-08-27.md)
+[对大学前两年的失败总结](./summary/2025-08-27.md)
 
-### Hidden Content
+### Duplicated
 
-...(to be added)... :)
+已废弃的笔记。

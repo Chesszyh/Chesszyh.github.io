@@ -20,5 +20,11 @@
 ## 构建优化
 - [Minify](minify.md): 压缩 HTML、JS 和 CSS 文件，减小体积。
 
+## 评论系统
+- [Cusdis](cusdis.md): 集成 Cusdis 评论系统，支持自定义。
+
+> 注：这是之前博客用到的，目前已废弃。
+
 ## 其他
 - [Static i18n](i18n.md): 静态国际化支持。
+- [Chess](chess.md)
