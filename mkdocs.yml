@@ -122,6 +122,9 @@ nav:
       - Software-Engineering:
           - "Intro": courses/Software-Engineering/index.md
           - "期末速查笔记": courses/Software-Engineering/软件工程期末速查笔记.pdf
+      - FLFA:
+          - "Intro": courses/FLFA/index.md
+          - "期末速查笔记": courses/FLFA/复习大纲.md
   - Misc:
       - "Index": misc/index.md
       - "Backup": misc/Backup.md
