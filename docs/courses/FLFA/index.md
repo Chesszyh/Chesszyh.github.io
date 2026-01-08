@@ -33,4 +33,4 @@
 
 TJCS上的[救急笔记](https://github.com/kssamwang/Review-of-Formal-Language-and-Automata)。
 
-[复习大纲](./复习大纲.md)由ChatGPT根据所有PPT生成。我自己没看，只看了PPT。
+[复习大纲](./复习大纲.pdf)由ChatGPT根据所有PPT生成。我自己没看，只看了PPT。
