@@ -106,15 +106,64 @@ exclude=kernel* kernel-modules* kernel-core* kernel-modules-core*
 
 ### 如果后续需要更新内核
 
-`/boot`分区不足，可以移除旧的救援内核，然后将旧内核的`initramfs`文件移走，再更新内核：
+#### 更新前准备
+
+> 本部分以6.17.12升级到6.18.3为例。
+
+`/boot`分区不足，如果在`sudo dnf upgrade --refresh`时内核成功安装，但是rescue救援内核生成失败，则系统不会自动切换默认内核为新内核。
 
 ```bash
-sudo dnf upgrade --refresh kernel-core kernel-modules kernel-modules-extra
+sudo grubby --default-kernel # 仍然是旧内核
 ```
 
-这一步会更新内核到最新版本，并且生成新的救援内核。
+可以手动切换：
 
-然后重新编译NVIDIA内核模块：
+```bash
+sudo grubby --set-default /boot/vmlinuz-6.18.3-200.fc43.x86_64
+```
+
+当然，为了避免`/boot`空间不足，建议内核升级前先删除旧内核：
+
+```bash
+# 查看当前内核
+uname -r
+# 我的是6.17.12, 不要删这个。下面6.17.4是旧内核，可以删掉。
+
+# 查看已安装内核
+sudo dnf list installed kernel\*
+
+# 不要手动 rm /boot 里的文件，一定要用包管理器
+# 删除旧内核(以6.17.4-200.fc42为例)
+sudo dnf remove kernel-core-6.17.4-200.fc42.x86_64 \
+                kernel-modules-6.17.4-200.fc42.x86_64 \
+                kernel-6.17.4-200.fc42.x86_64
+
+# 删除后检查/boot空间
+df -h /boot
+
+# 再开始安装新内核
+sudo dnf upgrade --refresh
+```
+
+由于`/boot`空间实在太小，我选择禁用rescue内核的生成：
+
+```bash
+sudo mkdir -p /etc/kernel/install.conf.d
+sudo nano /etc/kernel/install.conf.d/51-no-rescue.conf
+```
+
+内容：
+
+```ini
+[install]
+rescue = false
+```
+
+#### NVIDIA内核模块重建
+
+> 本部分以6.17.4升级到6.17.12为例。
+
+如果需要，重新编译NVIDIA内核模块：
 
 ```bash
 sudo akmods --force
@@ -127,8 +176,6 @@ sudo akmods --kernels 6.17.12-300.fc43.x86_64 --force
 ```bash
 sudo dracut --force
 ```
-
-最后如果`/boot`还有空间，就把之前移走的旧内核`initramfs`文件移回来。
 
 重启前检查：
 
