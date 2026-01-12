@@ -6,3 +6,4 @@
 - [Software Engineering](./Software-Engineering/index.md)
 - [Formal Languages and Formal Automata](./FLFA/index.md)
 - [Operating Systems](./OS/index.md)
+- [Computer Networks](./Computer-Networks/index.md)

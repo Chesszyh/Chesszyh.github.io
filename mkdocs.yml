@@ -118,16 +118,20 @@ nav:
       - "Index": courses/index.md
       - Machine-learning:
           - "Intro": courses/Machine-learning/index.md
-          - "复习大纲": courses/Machine-learning/复习大纲.md
+          - "├─复习大纲": courses/Machine-learning/复习大纲.md
       - Software-Engineering:
           - "Intro": courses/Software-Engineering/index.md
-          - "期末速查笔记": courses/Software-Engineering/软件工程期末速查笔记.pdf
+          - "├─期末速查笔记": courses/Software-Engineering/软件工程期末速查笔记.pdf
       - FLFA:
           - "Intro": courses/FLFA/index.md
-          - "复习大纲": courses/FLFA/复习大纲.pdf
+          - "├─复习大纲": courses/FLFA/复习大纲.pdf
       - OS:
           - "Intro": courses/OS/index.md
-          - "Note": courses/OS/Note.md
+          - "├─Note": courses/OS/Note.md
+      - Computer-Networks:
+          - "Intro": courses/Computer-Networks/index.md
+          - "├─Note": courses/Computer-Networks/Note.md
+          - "├─复习大纲": courses/Computer-Networks/复习大纲.md
   - Misc:
       - "Index": misc/index.md
       - "Backup": misc/Backup.md
