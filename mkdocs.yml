@@ -72,6 +72,9 @@ nav:
   - Posts:
       - "Index": posts/index.md
       - "Why Abandon Old Blog": posts/为什么放弃旧博客.md
+      - Vibe-Coding:
+        - "Intro": posts/Vibe-coding/Intro.md
+        - "本地文档递归翻译任务": posts/Vibe-coding/本地文档递归翻译任务.md
       - Linux:
           - "Arch Linux": posts/Linux/Arch-Linux.md
           - "Linux Practice": posts/Linux/Linux实践.md
@@ -135,7 +138,6 @@ nav:
   - Misc:
       - "Index": misc/index.md
       - "Backup": misc/Backup.md
-      - "Better Vibe Coding": misc/Better-vibe-coding.md
       - "AppImage": misc/AppImage.md
       - "Clash crashed": misc/Clash-verge-rev-crashed.md
       - "Recently Viewed": misc/Recently.md

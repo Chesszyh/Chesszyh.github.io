@@ -42,6 +42,7 @@ Claude老是封号，所以需要一些中转api或路由来辅助使用。
 - [Claude-code Router](https://github.com/musistudio/claude-code-router)：可自定义api，中转其他模型
 - [Copilot API](https://github.com/ericc-ch/copilot-api)：可调用github copilot的api，充分利用每月300次高级模型额度和无限制的gpt-5-mini, gpt-4.1等额度。
 - [Antigravity API](https://github.com/ink1ing/anti-api)
+- [Antigravity 账号管理](https://github.com/lbjlaq/Antigravity-Manager)
 
 ## 不负责任的Vibe Coding
 
@@ -54,12 +55,6 @@ codex --sandbox workspace-write --ask-for-approval never
 
 gemini -m gemini-3-flash-preview  --yolo
 ```
-
-## Antigravity
-
-- [Antigravity 账号管理](https://github.com/lbjlaq/Antigravity-Manager)
-
-注意适量使用，避免账号被封禁。
 
 ## MCP(Model Context Protocol)
 
