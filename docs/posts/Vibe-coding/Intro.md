@@ -1,13 +1,17 @@
 # Better Vibe Coding
 
-> 2025年，基础模型没有太大突破，各大厂商都开始下场AI Agents应用了。IDE方向，几乎已经没有不能集成AI的了：Vscode, Cursor, Windsurf, Kiro(Amazon), Trae, Qoder(阿里)，我拥有github学生会员并且用vscode也用习惯了，就懒得换别的了，顶多尝下鲜。我还是挺希望能看到基础模型架构或能力有突破的，目前的llm，整多少花活，似乎都不是那么的“智能”。
+> 2025年，基础模型没有太大突破，各大厂商都开始下场AI Agents应用了。不过我还是挺希望能看到基础模型架构或能力有突破的，目前的llm，整多少花活，似乎都不是那么的“智能”。
+
+## IDE
+
+IDE几乎已经没有不能集成AI的了：Vscode, Cursor, Windsurf, Antigravity(Google), Kiro(Amazon), Trae(字节), Qoder(阿里)。Zed我没怎么用过，更别提什么neovim类的了。我拥有github学生会员并且用vscode也用习惯了，就懒得换别的了，顶多尝下鲜或者在copilot额度用完后换个IDE接着薅羊毛。
 
 ## CLI Agent
 
 日常我真正用的多的，其实只有这两个：
 
-- claude-code
-- codex
+- [claude-code](https://github.com/anthropics/claude-code)
+- [codex](https://github.com/openai/codex)
 
 Claude老是封号，所以需要一些中转api或路由来辅助使用。
 
@@ -34,6 +38,7 @@ Claude老是封号，所以需要一些中转api或路由来辅助使用。
 - cursor-agent
 - iflow：似乎有Deepseek之类模型的免费
 - qwen
+- kiro-cli
 
 ## Proxy 
 

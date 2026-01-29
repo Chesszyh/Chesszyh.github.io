@@ -139,6 +139,7 @@ nav:
       - "Index": misc/index.md
       - "Backup": misc/Backup.md
       - "AppImage": misc/AppImage.md
+      - "Kiro auth failure": misc/Kiro-auth-failure.md
       - "Clash crashed": misc/Clash-verge-rev-crashed.md
       - "Recently Viewed": misc/Recently.md
       - "Exploration": misc/Exploration.md
