@@ -1,6 +1,6 @@
 # About Me
 
-![alt text](cover.png)
+![alt text](./images/cover.png)
 
 ## Contact
 
@@ -13,6 +13,12 @@
 - [Report](https://report.chesszyh.xyz): Fedora下使用codex/claude-code/gemini-cli等工具解决问题后，使用自定义skill创建的问题报告汇总。
 - [Wiki](https://wiki.chesszyh.xyz): Deepwiki/Codewiki等下载后本地翻译并备份的知识库。
 - [Mail](https://mail.chesszyh.xyz): Cloudflare临时邮箱。可以注册ChatGPT。
+
+## Friends(友情链接)
+
+- [Palind's Blog](https://blog.palind-rome.top/)(2026-04-14)
+
+![alt text](./images/snapshot-palind-blog.png)
 
 ## Content
 
