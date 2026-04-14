@@ -6,7 +6,7 @@
 
 Chesszyh's Personal Blog.
 
-Site: https://blog.neurosama.uk or https://Chesszyh.github.io
+Site: https://blog.chesszyh.xyz
 
 ## Deployment
 

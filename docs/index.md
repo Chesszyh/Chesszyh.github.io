@@ -4,11 +4,15 @@
 
 ## Contact
 
-Email: `chesszyh987@gmail.com`
+- Email: `chesszyh987@gmail.com`
+- Github: [Chesszyh](https://github.com/Chesszyh)
+- Lichess: [Chesszyh](https://lichess.org/@/Chesszyh)
 
-Github: [Chesszyh](https://github.com/Chesszyh)
+## Other Sites
 
-Lichess: [Chesszyh](https://lichess.org/@/Chesszyh)
+- [Report](https://report.chesszyh.xyz): Fedora下使用codex/claude-code/gemini-cli等工具解决问题后，使用自定义skill创建的问题报告汇总。
+- [Wiki](https://wiki.chesszyh.xyz): Deepwiki/Codewiki等下载后本地翻译并备份的知识库。
+- [Mail](https://mail.chesszyh.xyz): Cloudflare临时邮箱。可以注册ChatGPT。
 
 ## Content
 
