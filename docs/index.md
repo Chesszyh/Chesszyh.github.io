@@ -8,7 +8,7 @@
 - Github: [Chesszyh](https://github.com/Chesszyh)
 - Lichess: [Chesszyh](https://lichess.org/@/Chesszyh)
 
-#62, #63 on [Chess.com](https://chess.com) China bullet leaderboard, global bullet #3313 (2026-06-07)
+\#62, #63 on [Chess.com](https://chess.com) China bullet leaderboard, global bullet #3313 (2026-06-07)
 
 ![alt text](./images/snapshot-chess-com.png)
 
