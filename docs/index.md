@@ -8,17 +8,27 @@
 - Github: [Chesszyh](https://github.com/Chesszyh)
 - Lichess: [Chesszyh](https://lichess.org/@/Chesszyh)
 
+#62, #63 on [Chess.com](https://chess.com) China bullet leaderboard, global bullet #3313 (2026-06-07)
+
+![alt text](./images/snapshot-chess-com.png)
+
 ## Other Sites
 
-- [Report](https://report.chesszyh.xyz): Fedora下使用codex/claude-code/gemini-cli等工具解决问题后，使用自定义skill创建的问题报告汇总。
-- [Wiki](https://wiki.chesszyh.xyz): Deepwiki/Codewiki等下载后本地翻译并备份的知识库。
-- [Mail](https://mail.chesszyh.xyz): Cloudflare临时邮箱。可以注册ChatGPT。
+- [Report](https://report.chesszyh.xyz): 使用codex/claude-code/gemini-cli等工具解决问题后，使用自定义skill创建的问题报告汇总。
+- [Mail](https://mail.chesszyh.xyz): Cloudflare临时邮箱。可以（批量）注册ChatGPT。
+- [CLIProxyAPI](https://ai.chesszyh.xyz)：将codex额度共享给朋友的神秘站点，基于Cloudflare Tunnel + [CLIProxyAPI](https://github.com/router-for-me/CLIProxyAPI)。
 
 ## Friends(友情链接)
 
 - [Palind's Blog](https://blog.palind-rome.top/)(2026-04-14)
 
 ![alt text](./images/snapshot-palind-blog.png)
+
+- [F1Justin's Blog](https://f1justin.com/)(2026-06-09)
+
+喵喵啊
+
+![alt text](./images/snapshot-f1justin-blog.png)
 
 ## Content
 
@@ -42,7 +52,7 @@
 
 ### Thoughts
 
-毫无价值的思考内容，目前依然懒得写。在期末复习。
+毫无价值的思考内容，目前依然懒得写。
 
 ### Summary
 
